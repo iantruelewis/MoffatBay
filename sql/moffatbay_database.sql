@@ -6,6 +6,8 @@ Date: June 11, 2025
 
 */
 
+USE moffat_bay_lodge;
+
 DROP TABLE IF EXISTS contact_form;
 DROP TABLE IF EXISTS newsletter;
 DROP TABLE IF EXISTS room_reservation;
