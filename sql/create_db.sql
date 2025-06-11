@@ -1,9 +1,17 @@
+/* 
+Project: Moffat Bay Lodge
+Team: Team 3
+Team Members: Ian Lewis, Robert Minkler, Kevin Ramirez
+Date: June 11, 2025
+
+*/
+
 -- Initialize Moffat Bay Lodge Database and user
 -- -------------------------------------------------
 -- Caution! This will drop the existing database! --
 -- -------------------------------------------------
 -- Run as ROOT
--- Run: source create_db.sql
+-- Run: source sql/create_db.sql
 
 -- Drop then recreate database
 DROP DATABASE moffat_bay_lodge;
