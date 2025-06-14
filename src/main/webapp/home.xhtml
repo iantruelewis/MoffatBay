@@ -18,20 +18,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       >
-<h:head><title>First Page</title></h:head>
 <h:body>
-<f:view>
-  <ui:include src="/templates/header.xhtml"/>
-  <h:form>
-    <h:outputText value="Type something here: "/>
-    <h:inputText value="#{aStringBean.str}"/>
-    <h:commandButton action="go2" value="Page 2"/>
-    <h:commandButton action="go3" value="Page 3"/>
-    <h:commandButton action="go4" value="Page 4"/>
-    </h:form>
-    
-    <a href="home.jsf">Home</a>
-  </f:view>
+
+	    <h:outputText value="Room Type: ${resMngrBean.roomType}" />
+	
 </h:body>
 </html>
 </jsp:root>
