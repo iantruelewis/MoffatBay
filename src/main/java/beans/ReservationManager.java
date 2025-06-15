@@ -21,4 +21,20 @@ public class ReservationManager implements Serializable {
 	public void setRoomType(String s) {
 		// Do nothing
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Reservation getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
 }
