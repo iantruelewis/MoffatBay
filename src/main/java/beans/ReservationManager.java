@@ -9,6 +9,9 @@ public class ReservationManager implements Serializable {
 	
 	private DataManager dm = new DataManager();
 	private String roomType;
+	private User user;
+	private Reservation reservation;
+	
 
 	public String getRoomType() {
 		roomType = dm.getRoomType(101);
