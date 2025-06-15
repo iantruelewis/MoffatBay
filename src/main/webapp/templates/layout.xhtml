@@ -23,6 +23,9 @@
     <h:outputText value="Page "/>
     <ui:insert name="pageNum"/>
     <h:outputText value=" has received &quot;#{aStringBean.str}&quot; "/>
+    	
+    
+    <h:outputText value="Room 101 type: #{resMngrBean.roomType}" />
     <h:commandButton action="goBack" value="Back to first page"/>
     </h:form>
 </f:view>

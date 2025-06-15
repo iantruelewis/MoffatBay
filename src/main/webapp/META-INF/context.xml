@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- MySQL database context -->
+<!DOCTYPE Context [<!ELEMENT Context ANY>
+	<!ATTLIST Context debug CDATA #IMPLIED 
+	reloadable CDATA #IMPLIED crossContext CDATA #IMPLIED>]>
+	
+<Context debug="5" reloadable="true" crossContext="true">
+
+	<Resource
+		    name="jdbc/mysql"
+		    auth="Container"
+		    type="javax.sql.DataSource"
+		    username="mblodge"
+		    password="4Yoi60UhMmZzGXaGRrlSJ2WDEYih3d99tEiC4PkYgAZlyA42s8hOIEZRNxJoI9N"
+		    driverClassName="com.mysql.cj.jdbc.Driver"
+		    url="jdbc:mysql://localhost:3306/moffat_bay_lodge"
+		    maxActive="8"
+		    maxIdle="4"
+		    />
+		    		    
+	<Valve
+		className="org.apache.catalina.valves.AccessLogValve"
+		directory="logs"
+		prefix="mbl-access."
+		suffix=".log"
+		pattern="common"
+		resolveHosts="false"
+		/>
+	
+</Context>
