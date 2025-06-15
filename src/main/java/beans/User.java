@@ -11,6 +11,7 @@ public class User implements Serializable{
 	private String email;
 	private String phone;
 	private String comments;
+	private String googleId;
 	
 
 	public int getUid() {
@@ -51,5 +52,13 @@ public class User implements Serializable{
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
+	}
+	
+	public String getGoogleId() {
+		return googleId;
 	}
 }
