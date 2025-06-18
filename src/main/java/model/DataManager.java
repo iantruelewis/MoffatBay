@@ -45,7 +45,7 @@ public class DataManager {
 
 			try {
 				conn.close();
-			} catch (SQLException _) {
+			} catch (SQLException e) {
 
 			}
 		}
