@@ -15,12 +15,12 @@
 			<div id="newsletter">
 				<h:form>
 					<h2>
-						<h:outputText class="" id="newsletterMessage"
+						<h:outputText id="newsletterMessage"
 							value="#{newsletterSignupBean.message}" />
 					</h2>
 					<h3>
-						<h:outputText
-							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
+						<h:outputText styleClass="sans"
+						value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</h3>
 
 					<h:inputText id="emailField" value="#{newsletterSignupBean.email}">
