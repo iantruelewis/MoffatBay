@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+
+
+	<ui:composition>
+		<div class="container">
+			<div id="newsletter">
+				<h:form>
+					<h2>
+						<h:outputText id="newsletterMessage"
+							value="#{newsletterSignupBean.message}" />
+					</h2>
+
+					<p class="sans">
+						<h:outputText styleClass="sans"
+							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
+					</p>
+					<h:inputText id="emailField" value="#{newsletterSignupBean.email}">
+					</h:inputText>
+					<h:commandButton value="signUp">
+						<f:ajax execute="emailField" render="newsletterMessage" />
+					</h:commandButton>
+				</h:form>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,1 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
 h1 { color:grey }
+
+body {
+	margin: 0px;
+	font-family: "Old Standard TT", serif;
+}
+
+.serif {
+	font-family: "Old Standard TT", serif;
+}
+
+.sans {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.container {
+	background-color: #ffffee;
+	margin: 0px;
+	padding: 50px;
+}
+
+#newsletter {
+	text-align: center;
+}

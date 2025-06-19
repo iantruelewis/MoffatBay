@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
 	version="2.3">
-	
-		
+
+
 	<managed-bean>
 		<managed-bean-name>resMngrBean</managed-bean-name>
 		<managed-bean-class>beans.ReservationManager</managed-bean-class>
@@ -15,7 +15,18 @@
 			<null-value></null-value>
 		</managed-property>
 	</managed-bean>
-	
+
+	<managed-bean>
+		<managed-bean-name>newsletterSignupBean</managed-bean-name>
+		<managed-bean-class>beans.NewsletterSignup</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>email</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+	</managed-bean>
+
 	<managed-bean>
 		<managed-bean-name>aStringBean</managed-bean-name>
 		<managed-bean-class>beans.AString</managed-bean-class>
