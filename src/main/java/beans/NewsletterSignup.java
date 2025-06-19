@@ -25,7 +25,7 @@ public class NewsletterSignup implements Serializable {
 		boolean saveEmail = dm.newsletterSignup(email);
 
 		if (saveEmail) {
-			this.message = "" + email + " has been set.";
+			this.message = "Welcome! " + email + " has been added to the our mailing list.";
 		}
 	}
 

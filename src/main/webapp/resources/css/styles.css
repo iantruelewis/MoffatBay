@@ -1,1 +1,15 @@
 h1 { color:grey }
+
+body {
+	margin: 0px;
+}
+
+.container {
+	background-color: #ffffee;
+	margin: 0px;
+	padding: 50px;
+}
+
+#newsletter {
+	text-align: center;
+}
