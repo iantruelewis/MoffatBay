@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -76,5 +77,33 @@ public class DataManager {
 			}
 		}		
 		return room;
+	}
+	
+	// Newsletter - Save Email
+	public boolean newsletterSignup(String email) {
+		
+		Connection conn = getConnection();
+		
+		boolean success = false;
+		
+
+		if (conn != null) {
+			try {
+				String sql = "INSERT INTO `newsletter` (`email`, `active`) VALUES (?, b'1')";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, email);      
+				
+				ps.executeUpdate();
+				
+				success = true;
+
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConnection(conn);
+			}
+		}		
+		return success;
 	}
 }
