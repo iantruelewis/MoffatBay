@@ -2,7 +2,7 @@
 ## Team 3
 ### Professor Woods
 ### Team Members
--  Botiwa Konan
+- ~Botiwa Konan~
 - Ian Lewis
 - Robert Minkler
 - Kevin Ramirez
