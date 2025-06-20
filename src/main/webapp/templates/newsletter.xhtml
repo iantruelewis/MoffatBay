@@ -22,10 +22,10 @@
 						<h:outputText
 							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</p>
-					<h:inputText id="emailField" value="#{newsletterSignupBean.email}">
+					<h:inputText id="newsletterField" styleClass="newsletterField" value="#{newsletterSignupBean.email}">
 					</h:inputText>
-					<h:commandButton value="signUp">
-						<f:ajax execute="emailField" render="newsletterMessage" />
+					<h:commandButton value="Sign Up" styleClass="solidbutton">
+						<f:ajax execute="newsletterField" render="newsletterMessage" />
 					</h:commandButton>
 				</h:form>
 			</div>
