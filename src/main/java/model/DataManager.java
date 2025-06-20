@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import beans.Register;
+
 public class DataManager {
 
 	/// Get and return database connection
@@ -96,6 +98,38 @@ public class DataManager {
 				ps.executeUpdate();
 				
 				success = true;
+
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConnection(conn);
+			}
+		}		
+		return success;
+	}
+	
+	// Register User
+	public String registerUser(Register user) {
+		
+		Connection conn = getConnection();
+		
+		String success = "Failed";
+		
+
+		if (conn != null) {
+			try {
+
+				String sql = "INSERT INTO `user` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?)";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, user.getName());  
+				ps.setString(2, user.getEmail());    
+				ps.setString(3, user.getPhone()); 
+				ps.setString(4, user.getPassword());
+				
+				ps.executeUpdate();
+				
+				success = "Success";
 
 			}
 			catch (SQLException e) {
