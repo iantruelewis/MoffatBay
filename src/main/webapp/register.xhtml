@@ -4,14 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title><ui:insert name="title">Registration</ui:insert></title>
-	
+
 	<!--  Import Project Styles -->
 	<h:outputStylesheet name="styles.css" library="css" />
-	
+
 	<!--  Import Google Fonts -->
 
 </h:head>
@@ -22,6 +23,54 @@
 		<ui:insert name="header">
 			<ui:include src="/templates/header.xhtml" />
 		</ui:insert>
+
+		<div class="row">
+			<div class="twocol" id="regform">
+
+				<div id="regforminner">
+
+					<h:form>
+						<h:outputText styleClass="title" value="Create An Account" /><br />
+						<h:outputText styleClass="subtext sans"
+							value="Welcome to Moffat Bay Lodge! Please enter your details for an unforgettable experience." /><br />
+
+						<h:panelGrid columns="1">
+							
+							<h:inputText id="name" pt:placeholder="Full Name..." value="#{registerBean.name}" />
+							<h:messages for="name" styleClass="message" />
+
+
+							<h:inputText id="email" pt:placeholder="Email..." value="#{registerBean.email}" />
+							<h:messages for="email" styleClass="message" />
+
+
+							<h:inputText id="password" pt:placeholder="Password..." value="#{registerBean.password}"
+								label="#{msgs.age}" required="true"
+								requiredMessage="#{msgs.required}">
+								<f:validateLength minimum="12" />
+							</h:inputText>
+							<h:messages for="password" styleClass="message" />
+
+
+							<h:inputText id="passwordConfirm" pt:placeholder="Password..."
+								value="#{registerBean.passwordConfirm}" />
+							<h:messages for="passwordConfirm" styleClass="message" />
+
+							<h:inputText id="phone" pt:placeholder="Phone..." value="#{registerBean.phone}" />
+							<h:messages for="phone" styleClass="message" />
+
+						</h:panelGrid>
+						
+						<h:commandButton action="register" value="Create" />
+					</h:form>
+
+				</div>
+
+			</div>
+			<div class="twocol">
+				<h:graphicImage library="images" name="regimage01.jpg" id="regimage" />
+			</div>
+		</div>
 
 
 		<ui:insert name="newsletter">

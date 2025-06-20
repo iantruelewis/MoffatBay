@@ -17,6 +17,37 @@
 	</managed-bean>
 
 	<managed-bean>
+		<managed-bean-name>registerBean</managed-bean-name>
+		<managed-bean-class>beans.Register</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>name</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+		<managed-property>
+			<property-name>phone</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+		<managed-property>
+			<property-name>email</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+		<managed-property>
+			<property-name>password</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+		<managed-property>
+			<property-name>passwordConfirm</property-name>
+			<property-class>java.lang.String</property-class>
+			<null-value></null-value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
 		<managed-bean-name>newsletterSignupBean</managed-bean-name>
 		<managed-bean-class>beans.NewsletterSignup</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
@@ -40,6 +71,16 @@
 
 
 
+	<navigation-rule>
+		<from-view-id>/register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/first.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
 	<navigation-rule>
 		<from-view-id>/first.xhtml</from-view-id>
 		<navigation-case>
