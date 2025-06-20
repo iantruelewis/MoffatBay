@@ -52,6 +52,7 @@ body {
 
 #regimage {
 	width: 100%;
+	height: 100%;
 	padding: 0px;
 	margin: 0px;
 	object-fit: cover;
