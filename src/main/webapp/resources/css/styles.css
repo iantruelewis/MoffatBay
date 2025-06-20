@@ -1,6 +1,4 @@
-@import
-	url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
 
 body {
 	margin: 0px;
@@ -59,8 +57,35 @@ body {
 	object-fit: cover;
 }
 
-input [type=text] {
+#regforminner input[type=text] {
 	font-family: inherit;
+	font-size: .9em;
 	border: none;
 	border-bottom: 1px solid #777777;
+	width: 480px;
+  	padding: 8px;
+	background-color: inherit;
+}
+
+.solidbutton {
+	background-color: black;
+	font-family: "IBM Plex Sans", sans-serif;
+	color: white;
+	border: none;
+	padding: 10px;
+	padding-right: 30px;
+	padding-left: 30px;
+	border-radius: 25px;
+}
+
+.outlinebutton {
+	background-color: #ffffff00;
+	font-family: "IBM Plex Sans", sans-serif;
+	color: black;
+	border: 1px solid #777777;
+	padding: 10px;
+	padding-right: 30px;
+	padding-left: 30px;
+	border-radius: 25px;
+	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.24);
 }
