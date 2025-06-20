@@ -11,16 +11,15 @@
 
 
 	<ui:composition>
-		<div class="container">
+		<div class="newscontainer">
 			<div id="newsletter">
 				<h:form>
-					<h2>
-						<h:outputText id="newsletterMessage"
-							value="#{newsletterSignupBean.message}" />
-					</h2>
+				
+					<h:outputText styleClass="title" id="newsletterMessage"
+						value="#{newsletterSignupBean.message}" />
 
-					<p class="sans">
-						<h:outputText styleClass="sans"
+					<p class="sans subtext">
+						<h:outputText
 							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</p>
 					<h:inputText id="emailField" value="#{newsletterSignupBean.email}">
