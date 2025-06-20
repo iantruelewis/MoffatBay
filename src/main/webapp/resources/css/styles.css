@@ -78,14 +78,24 @@ body {
 	border-radius: 25px;
 }
 
-.outlinebutton {
+.blackoutlinebutton {
 	background-color: #ffffff00;
 	font-family: "IBM Plex Sans", sans-serif;
 	color: black;
-	border: 1px solid #777777;
+	border: 1.5px solid #999999;
 	padding: 10px;
 	padding-right: 30px;
 	padding-left: 30px;
 	border-radius: 25px;
-	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.24);
+}
+
+.whiteoutlinebutton {
+	background-color: #ffffff00;
+	font-family: "IBM Plex Sans", sans-serif;
+	color: #ffffff;
+	border: 1.5px solid #ffffff;
+	padding: 10px;
+	padding-right: 30px;
+	padding-left: 30px;
+	border-radius: 25px;
 }
