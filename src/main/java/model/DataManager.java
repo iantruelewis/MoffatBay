@@ -140,4 +140,31 @@ public class DataManager {
 		}		
 		return success;
 	}
+	
+	public boolean validateLogin(String email, String password) {
+	    boolean valid = false;
+	    Connection conn = getConnection();
+
+	    if (conn != null) {
+	        try {
+	            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ps.setString(1, email);
+	            ps.setString(2, password);
+
+	            ResultSet rs = ps.executeQuery();
+	            if (rs.next()) {
+	                valid = true;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            closeConnection(conn);
+	        }
+	    }
+
+	    return valid;
+	}
 }
+
+
