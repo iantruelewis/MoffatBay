@@ -1,6 +1,10 @@
 package beans;
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
+import model.DataManager;
 
 
 public class Login implements Serializable {
@@ -27,9 +31,18 @@ public class Login implements Serializable {
         this.password = password;
     }
     
+   
     public String login() {
-        // Logic goes here
-        return "first.xhtml?faces-redirect=true";
+        DataManager dm = new DataManager();
+        boolean isValid = dm.validateLogin(this.email, this.password);
+
+        if (isValid) {
+            return "first.xhtml?faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed", "Incorrect Email or Password"));
+            return null;
+        }
     }
 
 }
