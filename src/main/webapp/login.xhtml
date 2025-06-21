@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+  <h:head>
+    <title><ui:insert name="title">Login</ui:insert></title>
+
+    <!-- Import Project Styles -->
+    <h:outputStylesheet name="styles.css" library="css" />
+  </h:head>
+
+  <h:body>
+    <f:view>
+
+      <h:outputStylesheet name="styles.css" library="css" />
+
+      <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+      </ui:insert>
+
+      <!-- Login Section Over Background -->
+      <div style="
+        height: 60vh;
+        width: 100%;
+        background-image: url('#{resource['images/hotel-image-login.png']}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      ">
+        <div style="
+          background-color: rgba(100, 100, 100, 0.75);
+          padding: 40px;
+          border-radius: 20px;
+          color: white;
+          width: 320px;
+          text-align: center;
+        ">
+          <h:form>
+            <h:outputText styleClass="title serif" value="Welcome Back!" /><br />
+            <h:outputText styleClass="subtext2 sans" value="Member Login" /><br /><br />
+
+            <h:panelGrid columns="1">
+              <h:inputText id="email-login"
+                pt:placeholder="Email..."
+                value="#{loginBean.email}"
+                style="
+                  display: block;
+                  margin: 10px auto;
+                  padding: 10px;
+                  border-radius: 12px;
+                  border: none;
+                  width: 280px;
+                  text-align: center;
+                  font-family: 'IBM Plex Sans', sans-serif;
+                " />
+
+              <h:inputSecret id="password-login"
+                pt:placeholder="Password..."
+                value="#{loginBean.password}"
+                style="
+                  display: block;
+                  margin: 10px auto;
+                  padding: 10px;
+                  border-radius: 12px;
+                  border: none;
+                  width: 280px;
+                  text-align: center;
+                  font-family: 'IBM Plex Sans', sans-serif;
+                " />
+            </h:panelGrid>
+
+            <br />
+
+            <h:commandButton value="Login" action="#{loginBean.login}"
+              style="
+                padding: 10px 20px;
+                border-radius: 12px;
+                border: none;
+                background-color: white;
+                color: black;
+                cursor: pointer;
+                font-family: 'IBM Plex Sans', sans-serif;
+              " />
+          </h:form>
+        </div>
+      </div>
+
+      <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+      </ui:insert>
+
+      <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+      </ui:insert>
+
+    </f:view>
+  </h:body>
+</html>
