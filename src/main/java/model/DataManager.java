@@ -156,14 +156,26 @@ public class DataManager {
 
 		if (conn != null) {
 			try {
-				String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+				String sql = "SELECT * FROM user WHERE email = ?";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, email);
-				ps.setString(2, password);
 
 				ResultSet rs = ps.executeQuery();
+				
 				if (rs.next()) {
-					valid = true;
+					
+					// Get the stored password from the database
+					String storedHash = rs.getString("password");
+					
+					// Get the Salt from stored password
+					String salt = storedHash.split("-")[0];
+					
+					// Hash the input with stored salt
+					String hashedInput = hashPassword(password, salt);
+					
+					// true if the hashes match.
+					valid = hashedInput.equals(storedHash);
+					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -175,7 +187,7 @@ public class DataManager {
 		return valid;
 	}
 
-	// Return Hex String salt + password string. 32 characters for the salt, 128 characters for the password hash
+	// Return Hex String salt + password string. - separator
 	private String hashPassword(String password) {
 
 		byte[] salt = new byte[16];
@@ -194,7 +206,7 @@ public class DataManager {
 			byte[] hash = factory.generateSecret(spec).getEncoded();
 			
 			// return hex string with salt and hashed password
-			return ("" + byteToHex(salt) + byteToHex(hash));
+			return ("" + byteToHex(salt) + "-" + byteToHex(hash));
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -205,7 +217,7 @@ public class DataManager {
 		return null;
 	}
 	
-	// Return Hex String salt + password string. 32 characters for the salt, 128 characters for the password hash
+	// Return Hex String salt + password string. - separator
 	private String hashPassword(String password, String salt) {
 
 		// convert salt to byte array
@@ -221,7 +233,7 @@ public class DataManager {
 			byte[] hash = factory.generateSecret(spec).getEncoded();
 			
 			// return hex string with salt and hashed password
-			return ("" + salt + byteToHex(hash));
+			return ("" + salt + "-" + byteToHex(hash));
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
