@@ -1,6 +1,6 @@
 package validators;
 
-// Password Confirmation code modified from
+// Dual Password field comparison from
 // https://mkyong.com/jsf2/multi-components-validator-in-jsf-2-0/
 
 import javax.faces.application.FacesMessage;
@@ -43,7 +43,7 @@ public class PasswordValidator implements Validator {
 			throw new ValidatorException(new FacesMessage("Password must be at least 10 characters long."));
 		}
 
-		// Enforce password character type
+		// Enforce password character types
 		else if (!hasCharType(password, UPPERCASE_LETTERS)) {
 			uiInputConfirmPassword.setValid(false);
 			throw new ValidatorException(new FacesMessage("Password must must contain an uppercase character."));
@@ -63,7 +63,7 @@ public class PasswordValidator implements Validator {
 		}
 	}
 
-	// Helper Method to validate that the password contains the required character type.
+	// Validate that the password contains the required character type. Character type is a string of valid characters.
 	private boolean hasCharType(String password, String charType) {
 
 		for (char ch : password.toCharArray()) {
