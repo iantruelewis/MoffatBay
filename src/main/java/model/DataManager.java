@@ -20,9 +20,9 @@ import beans.Register;
 
 public class DataManager {
 	
-	int passKeyLength = 512;
-	int passIterations = 100000;
-	String hashAlg = "PBKDF2WithHmacSHA1";
+	private final int passKeyLength = 512;
+	private final int passIterations = 100000;
+	private final String hashAlg = "PBKDF2WithHmacSHA256";
 
 	/// Get and return database connection
 	public Connection getConnection() {
@@ -205,7 +205,7 @@ public class DataManager {
 		return null;
 	}
 	
-	// Return 64 character salt + password string. 32 characters for the salt, 32 characters for the password hash
+	// Return Hex String salt + password string. 32 characters for the salt, 128 characters for the password hash
 	private String hashPassword(String password, String salt) {
 
 		// convert salt to byte array
