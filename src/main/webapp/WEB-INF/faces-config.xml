@@ -68,8 +68,12 @@
 			<null-value></null-value>
 		</managed-property>
 	</managed-bean>
-
-
+	
+	
+	<validator>
+		<validator-id>passwordValidator</validator-id>
+		<validator-class>validators.PasswordValidator</validator-class>
+	</validator>
 
 	<navigation-rule>
 		<from-view-id>/register.xhtml</from-view-id>
