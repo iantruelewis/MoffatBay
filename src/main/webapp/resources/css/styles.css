@@ -90,7 +90,7 @@ body {
 	object-fit: cover;
 }
 
-#regforminner input[type=text] {
+#regforminner input[type=text], #regforminner input[type=password] {
 	font-family: inherit;
 	font-size: .9em;
 	border: none;

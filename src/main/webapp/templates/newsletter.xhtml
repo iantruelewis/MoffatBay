@@ -25,6 +25,7 @@
 					</p>
 					<div id="email-entry-wrapper">
 						<h:inputText id="newsletterField" styleClass="newsletterField" value="#{newsletterSignupBean.email}" pt:placeholder="Enter your email address">
+						<f:validateRegex pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9]+" />
 						</h:inputText>
 						<h:commandButton value="Sign Up" styleClass="solidbutton">
 							<f:ajax execute="newsletterField" render="newsletterMessage" />
