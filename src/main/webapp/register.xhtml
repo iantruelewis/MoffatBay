@@ -30,45 +30,63 @@
 				<div id="regforminner">
 
 					<h:form>
-						<h:outputText styleClass="title" value="Create An Account" /><br />
+						<h:outputText styleClass="title" value="Create An Account" />
+						<br />
 						<h:outputText styleClass="subtext sans"
-							value="Welcome to Moffat Bay Lodge! Please enter your details for an unforgettable experience." /><br />
+							value="Welcome to Moffat Bay Lodge! Please enter your details for an unforgettable experience." />
+						<br />
 
 						<h:panelGrid columns="1">
-							
-							<h:inputText id="name" pt:placeholder="Full Name..." value="#{registerBean.name}" />
-							<h:messages for="name" styleClass="message" />
+
+							<h:inputText id="name" pt:placeholder="Full Name..."
+								value="#{registerBean.name}" required="true"
+								validatorMessage="Enter Your Full Name">
+								<f:validateLength minimum="6" />
+							</h:inputText>
 
 
-							<h:inputText id="email" pt:placeholder="Email..." value="#{registerBean.email}" />
-							<h:messages for="email" styleClass="message" />
+							<h:inputText id="email" pt:placeholder="Email..."
+								value="#{registerBean.email}" required="true"
+								validatorMessage="Enter A Valid Email Address">
+								<f:validateLength minimum="10" />
+							</h:inputText>
 
 
-							<h:inputText id="password" pt:placeholder="Password..." value="#{registerBean.password}"
-								label="#{msgs.age}" required="true"
-								requiredMessage="#{msgs.required}">
+							<h:inputText id="password" pt:placeholder="Password..."
+								value="#{registerBean.password}" required="true">
 								<f:validateLength minimum="12" />
 							</h:inputText>
-							<h:messages for="password" styleClass="message" />
 
 
 							<h:inputText id="passwordConfirm" pt:placeholder="Password..."
-								value="#{registerBean.passwordConfirm}" />
-							<h:messages for="passwordConfirm" styleClass="message" />
+								value="#{registerBean.passwordConfirm}" required="true" />
 
-							<h:inputText id="phone" pt:placeholder="Phone..." value="#{registerBean.phone}" />
-							<h:messages for="phone" styleClass="message" />
+							<h:inputText id="phone" pt:placeholder="Phone..."
+								value="#{registerBean.phone}" required="true"
+								validatorMessage="Enter A Phone Number">
+								<f:validateLength minimum="10" />
+							</h:inputText>
 
 						</h:panelGrid>
-						
-						<h:commandButton action="register" value="Create" />
+						<br />
+						<h:commandButton action="#{registerBean.register}" value="Create"
+							styleClass="solidbutton" />
+
+						<h:messages for="name" styleClass="message" />
+						<h:messages for="email" styleClass="message" />
+						<h:messages for="password" styleClass="message" />
+						<h:messages for="passwordConfirm" styleClass="message" />
+						<h:messages for="phone" styleClass="message" />
+
+
+
 					</h:form>
 
 				</div>
 
 			</div>
 			<div class="twocol">
-				<h:graphicImage library="images" name="regimage01.jpg" id="regimage" />
+				<h:graphicImage value="images/regimage01.jpg" id="regimage" alt="Moffat Bay Sunset"/>
 			</div>
 		</div>
 

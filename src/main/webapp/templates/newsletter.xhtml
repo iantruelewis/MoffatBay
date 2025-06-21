@@ -6,7 +6,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:body>
 
 
@@ -22,11 +23,13 @@
 						<h:outputText
 							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</p>
-					<h:inputText id="emailField" value="#{newsletterSignupBean.email}">
-					</h:inputText>
-					<h:commandButton value="signUp">
-						<f:ajax execute="emailField" render="newsletterMessage" />
-					</h:commandButton>
+					<div id="email-entry-wrapper">
+						<h:inputText id="newsletterField" styleClass="newsletterField" value="#{newsletterSignupBean.email}" pt:placeholder="Enter your email address">
+						</h:inputText>
+						<h:commandButton value="Sign Up" styleClass="solidbutton">
+							<f:ajax execute="newsletterField" render="newsletterMessage" />
+						</h:commandButton>
+					</div>
 				</h:form>
 			</div>
 		</div>
