@@ -68,6 +68,7 @@
 							<h:inputText id="phone" pt:placeholder="Phone..."
 								value="#{registerBean.phone}" required="true"
 								requiredMessage="A phone number is required"
+								validatorMessage="Enter a phone number"
 								>
 								<f:validateLength minimum="10" />
 							</h:inputText>
@@ -81,7 +82,7 @@
 						<h:messages for="email" styleClass="message" />
 						<h:messages for="password" styleClass="message" />
 						<h:messages for="passwordConfirm" styleClass="message" />
-						<h:messages for="phone" styleClass="message" validatorMessage="Enter a phone number" />
+						<h:messages for="phone" styleClass="message" />
 
 
 					</h:form>
