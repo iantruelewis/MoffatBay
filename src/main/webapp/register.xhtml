@@ -13,17 +13,19 @@
 	<!--  Import Project Styles -->
 	<h:outputStylesheet name="styles.css" library="css" />
 
-	<!--  Import Google Fonts -->
 
 </h:head>
 
 <h:body>
 	<f:view>
 
+<!--  Header  -->
+
 		<ui:insert name="header">
 			<ui:include src="/templates/header.xhtml" />
 		</ui:insert>
 
+<!--  Page Content  -->
 		<div class="row">
 			<div class="twocol" id="regform">
 
@@ -40,30 +42,33 @@
 
 							<h:inputText id="name" pt:placeholder="Full Name..."
 								value="#{registerBean.name}" required="true"
-								validatorMessage="Enter Your Full Name">
-								<f:validateLength minimum="6" />
+								requiredMessage="Enter your full name">
 							</h:inputText>
 
 
 							<h:inputText id="email" pt:placeholder="Email..."
 								value="#{registerBean.email}" required="true"
-								validatorMessage="Enter A Valid Email Address">
-								<f:validateLength minimum="10" />
+								requiredMessage="An email address is required"
+								validatorMessage="Enter a valid email address">
+								<f:validateRegex pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9]+" />
 							</h:inputText>
 
 
 							<h:inputText id="password" pt:placeholder="Password..."
-								value="#{registerBean.password}" required="true">
-								<f:validateLength minimum="12" />
+								value="#{registerBean.password}" required="true"
+								requiredMessage="Enter your Password">
+								<f:validateLength minimum="10" />
 							</h:inputText>
 
 
 							<h:inputText id="passwordConfirm" pt:placeholder="Password..."
-								value="#{registerBean.passwordConfirm}" required="true" />
+								value="#{registerBean.passwordConfirm}" required="true" 
+								requiredMessage="Re-enter your Password"/>
 
 							<h:inputText id="phone" pt:placeholder="Phone..."
 								value="#{registerBean.phone}" required="true"
-								validatorMessage="Enter A Phone Number">
+								requiredMessage="A phone number is required"
+								>
 								<f:validateLength minimum="10" />
 							</h:inputText>
 
@@ -76,8 +81,7 @@
 						<h:messages for="email" styleClass="message" />
 						<h:messages for="password" styleClass="message" />
 						<h:messages for="passwordConfirm" styleClass="message" />
-						<h:messages for="phone" styleClass="message" />
-
+						<h:messages for="phone" styleClass="message" validatorMessage="Enter a phone number" />
 
 
 					</h:form>
@@ -89,8 +93,8 @@
 				<h:graphicImage value="images/regimage01.jpg" id="regimage" alt="Moffat Bay Sunset"/>
 			</div>
 		</div>
-
-
+		
+<!--  Footer  -->
 		<ui:insert name="newsletter">
 			<ui:include src="/templates/newsletter.xhtml" />
 		</ui:insert>
