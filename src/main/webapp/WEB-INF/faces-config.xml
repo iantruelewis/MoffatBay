@@ -79,6 +79,23 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<managed-bean>
+  		<managed-bean-name>loginBean</managed-bean-name>
+ 		<managed-bean-class>beans.Login</managed-bean-class>
+  		<managed-bean-scope>session</managed-bean-scope>
+
+  	<managed-property>
+    	<property-name>email</property-name>
+    	<property-class>java.lang.String</property-class>
+    	<null-value></null-value>
+  	</managed-property>
+
+  	<managed-property>
+    	<property-name>password</property-name>
+   	 	<property-class>java.lang.String</property-class>
+   	 	<null-value></null-value>
+  	</managed-property>
+	</managed-bean>
 	
 	
 	<navigation-rule>
