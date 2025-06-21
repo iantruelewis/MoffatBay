@@ -183,3 +183,7 @@ Icon[]
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# JSF project files that may cause issues if they update
+.classpath
+.project
