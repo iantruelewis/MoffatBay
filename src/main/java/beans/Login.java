@@ -39,10 +39,11 @@ public class Login implements Serializable {
         if (isValid) {
             return "first.xhtml?faces-redirect=true";
         } else {
-            FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed", "Incorrect Email or Password"));
-            return null;
+        	FacesContext.getCurrentInstance().addMessage(null, 
+        		    new FacesMessage(FacesMessage.SEVERITY_ERROR, "*Login Failed*", "Incorrect Email or Password"));
+        	 return null;
         }
+        
     }
 
 }

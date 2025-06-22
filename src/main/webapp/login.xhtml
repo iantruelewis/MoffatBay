@@ -45,7 +45,11 @@
           text-align: center;
         ">
           <h:form>
-          	<h:messages globalOnly="true" style="color: white;" />
+
+			<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+  				<h:messages globalOnly="true"
+              style="color: red; list-style: none; text-align: center; padding: 0; margin: 0;" />
+			</div>
             <h:outputText styleClass="title serif" value="Welcome Back!" /><br />
             <h:outputText styleClass="subtext2 sans" value="Member Login" /><br /><br />
 
@@ -54,7 +58,7 @@
                 pt:placeholder="Email..."
                 value="#{loginBean.email}"
                 required="true"
-                validatormessage="Incorrect Email or Password"
+                requiredMessage="*Email is required*"
                 style="
                   display: block;
                   margin: 10px auto;
@@ -65,12 +69,13 @@
                   text-align: center;
                   font-family: 'IBM Plex Sans', sans-serif;
                 " />
+              <h:message for="email-login" style="color: red;" />
 
               <h:inputSecret id="password-login"
                 pt:placeholder="Password..."
                 value="#{loginBean.password}"
                 required="true"
-                validatormessage="Incorrect Email or Password"
+                requiredMessage="*Password is required*"
                 style="
                   display: block;
                   margin: 10px auto;
@@ -81,6 +86,7 @@
                   text-align: center;
                   font-family: 'IBM Plex Sans', sans-serif;
                 " />
+              <h:message for="password-login" style="color: red;" />
             </h:panelGrid>
 
             <br />
