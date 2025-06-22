@@ -12,6 +12,8 @@ import java.sql.Statement;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -19,7 +21,7 @@ import javax.sql.DataSource;
 import beans.Register;
 
 public class DataManager {
-	
+
 	private final int passKeyLength = 512;
 	private final int passIterations = 100000;
 	private final String hashAlg = "PBKDF2WithHmacSHA256";
@@ -122,14 +124,13 @@ public class DataManager {
 		Connection conn = getConnection();
 
 		String success = "Failed";
-		
+
 		// get the password and hash it with a random salt
 		String passwordHash = hashPassword(user.getPassword());
-		
 
 		if (conn != null) {
 			try {
-				
+
 				String sql = "INSERT INTO `user` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?)";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getName());
@@ -143,6 +144,22 @@ public class DataManager {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+
+				// Duplicate entry 1062 - send error that an account with that email address
+				// already exists.
+				if (e.getErrorCode() == 1062) {
+
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
+									"An account with that email address already exists.",
+									"Unable to create the user account."));
+
+				} else {
+					// Send other error.
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"ERROR. Unable to create account.", "Unable to create the user account."));
+				}
+
 			} finally {
 				closeConnection(conn);
 			}
@@ -161,21 +178,21 @@ public class DataManager {
 				ps.setString(1, email);
 
 				ResultSet rs = ps.executeQuery();
-				
+
 				if (rs.next()) {
-					
+
 					// Get the stored password from the database
 					String storedHash = rs.getString("password");
-					
+
 					// Get the Salt from stored password
 					String salt = storedHash.split("-")[0];
-					
+
 					// Hash the input with stored salt
 					String hashedInput = hashPassword(password, salt);
-					
+
 					// true if the hashes match.
 					valid = hashedInput.equals(storedHash);
-					
+
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -202,9 +219,8 @@ public class DataManager {
 
 			SecretKeyFactory factory = SecretKeyFactory.getInstance(hashAlg);
 
-			
 			byte[] hash = factory.generateSecret(spec).getEncoded();
-			
+
 			// return hex string with salt and hashed password
 			return ("" + byteToHex(salt) + "-" + byteToHex(hash));
 
@@ -216,13 +232,13 @@ public class DataManager {
 
 		return null;
 	}
-	
+
 	// Return Hex String salt + password string. - separator
 	private String hashPassword(String password, String salt) {
 
 		// convert salt to byte array
 		byte[] byteSalt = hexToByte(salt);
-				
+
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), byteSalt, passIterations, passKeyLength);
 
 		// hash the password with supplied salt
@@ -231,7 +247,7 @@ public class DataManager {
 			SecretKeyFactory factory = SecretKeyFactory.getInstance(hashAlg);
 
 			byte[] hash = factory.generateSecret(spec).getEncoded();
-			
+
 			// return hex string with salt and hashed password
 			return ("" + salt + "-" + byteToHex(hash));
 
