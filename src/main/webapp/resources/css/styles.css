@@ -197,3 +197,58 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 }
+
+.terms-container,
+.privacy-container,
+.cookies-container {
+  max-width: 960px;
+  margin: 80px auto;
+  padding: 48px;
+  background-color: #f5f5f5;
+  border-left: 6px solid #2d2d2d;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #1e1e1e;
+  line-height: 1.75;
+}
+
+.terms-container h1,
+.terms-container h2,
+.privacy-container h1,
+.privacy-container h2,
+.cookies-container h1,
+.cookies-container h2 {
+  font-family: 'Old Standard TT', serif;
+  margin-bottom: 24px;
+  color: #1c1c1c;
+}
+
+.terms-container ul,
+.privacy-container ul,
+.cookies-container ul {
+  padding-left: 24px;
+  list-style-type: disc;
+  margin-bottom: 20px;
+}
+
+.terms-container a,
+.privacy-container a,
+.cookies-container a {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+.privacy-container p,
+.cookies-container p {
+  margin-bottom: 20px;
+}
+
+.cookies-container code {
+  background-color: #e6e6e6;
+  padding: 4px 10px;
+  font-family: monospace;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
