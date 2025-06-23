@@ -10,24 +10,32 @@
 <h:head>
   <title>
     <ui:insert name="title">Default Title</ui:insert>
-    </title>
+  </title>
   <h:outputStylesheet name="styles.css" library="css"/>
 </h:head>
 
 <h:body>
-<f:view>
-  <ui:insert name="header">
-    <ui:include src="/templates/header.xhtml"/>
+  <f:view>
+    <ui:insert name="header">
+      <ui:include src="/templates/header.xhtml"/>
     </ui:insert>
-  <h:form>
-    <h:outputText value="Page "/>
-    <ui:insert name="pageNum"/>
-    <h:outputText value=" has received &quot;#{aStringBean.str}&quot; "/>
-    	
-    
-    <h:outputText value="Room 101 type: #{resMngrBean.roomType}" />
-    <h:commandButton action="goBack" value="Back to first page"/>
-    </h:form>
-</f:view>
+
+    <!-- New: main content area -->
+    <ui:insert name="content">
+      <!-- fallback content if none defined -->
+      <h:form>
+        <h:outputText value="Page "/>
+        <ui:insert name="pageNum"/>
+        <h:outputText value=" has received &quot;#{aStringBean.str}&quot; "/>
+
+        <h:outputText value="Room 101 type: #{resMngrBean.roomType}" />
+        <h:commandButton action="goBack" value="Back to first page"/>
+      </h:form>
+    </ui:insert>
+
+    <ui:insert name="footer">
+      <ui:include src="/templates/footer.xhtml" />
+    </ui:insert>
+  </f:view>
 </h:body>
 </html>

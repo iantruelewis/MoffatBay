@@ -1,28 +1,381 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jsp:root
-  xmlns:jsp="http://java.sun.com/JSP/Page"
-  version="2.1"
-  >
-<jsp:directive.page
-  language="java"
-  contentType="application/xhtml+xml;charset=UTF-8"
-  />
-<jsp:output omit-xml-declaration="false"/>
-<jsp:output
-  doctype-root-element="html"
-  doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
-  doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-  />
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      >
-<h:body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-	    <h:outputText value="Room Type: ${resMngrBean.roomType}" />
-	    
-	
-</h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+  <h:head>
+    <title><ui:insert name="title">Welcome to Moffat Bay Lodge</ui:insert></title>
+    <h:outputStylesheet name="styles.css" library="css" />
+  </h:head>
+
+  <h:body>
+    <f:view>
+
+      <!-- Header -->
+      <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+      </ui:insert>
+
+      <!-- Hero Section -->
+      <div style="
+        height: 80vh;
+        width: 100%;
+        background-image: url('#{resource['images/HP_01_Hero_Section.jpg']}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 80px;
+      ">
+        <!-- Overlay -->
+        <div style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.4);
+          z-index: 1;
+        "></div>
+
+        <!-- Content -->
+        <div style="
+          position: relative;
+          z-index: 2;
+          color: white;
+          text-align: left;
+          max-width: 700px;
+          padding: 20px;
+        ">
+          <h2 class="subtext2 sans" style="letter-spacing: 2px;">WHEN IT'S TIME TO ESCAPE</h2>
+          <h1 class="title serif" style="font-size: 2.5em; margin-top: 10px;">
+            Experience Unparalleled Luxury In Nature's Embrace.
+          </h1>
+          <p class="subtext2 sans" style="margin: 20px 0;">
+            At Moffat Bay Lodge, we redefine mountain luxury with thoughtfully curated accommodations,
+            personalized service, and a serene environment designed to rejuvenate your soul. Whether seeking
+            a romantic escape, a family getaway, or a corporate retreat, our lodge offers the perfect
+            blend of comfort and exclusivity.
+          </p>
+          <h:link outcome="home" styleClass="whiteoutlinebutton" style="margin-top: 25px; display: inline-block;">Explore rooms</h:link>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="row" style="padding: 80px 40px; background-color: #fff; display: flex; justify-content: center;">
+        <div style="max-width: 700px; text-align: center;">
+          <h2 class="title serif">Moffat Bay Welcomes You</h2>
+          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+            Your private sanctuary nestled amidst the breathtaking peaks and tranquil waters
+            of our exclusive mountain retreat.
+          </p>
+          <br />
+          <h:link outcome="home" styleClass="blackoutlinebutton">About Us</h:link>
+        </div>
+      </div>
+
+      <!-- Amenities Section -->
+      <div class="row" style="padding: 0px; background-color: #F9F7F5; display: flex;">
+        <div style="flex: 1;">
+          <h:graphicImage library="images" name="HP_03_Amenities_Section.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;" alt="World-Class Amenities" />
+        </div>
+        <div class="twocol" style="padding-left: 40px; padding-top: 40px; margin: 60px; flex: 1;">
+          <h2 class="title serif">World-Class Amenities &amp; Experiences</h2>
+          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+            From Gourmet Dining and our premium Spa &amp; Wellness Center to Adventure and Exploration around Moffat Bay, 
+            we have everything to make your stay exquisite, relaxing, and full of the right amount of excitement.
+          </p>
+          <br />
+          <h:link outcome="home" styleClass="blackoutlinebutton">View Amenities</h:link>
+        </div>
+      </div>
+
+      <!-- Explore Our Rooms Section -->
+      <div class="explore-rooms-section">
+        <div class="explore-rooms-header">
+          <h2 class="title serif">Explore Our Rooms</h2>
+        </div>
+
+        <!-- Carousel container (arrows + tiles) -->
+        <div style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 30px;
+        ">
+          <!-- Left Arrow Button -->
+          <button style="
+            background: none;
+            border: 2px solid #333;
+            border-radius: 25px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            user-select: none;
+          " aria-label="Previous Rooms">
+            &#8249;
+          </button>
+
+          <!-- Room Tile 1 -->
+          <div style="
+            width: 320px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+          ">
+            <div style="
+              overflow: hidden;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+              transition: box-shadow 0.3s ease;
+            ">
+              <h:graphicImage library="images" name="HP_04_Rooms_Section_1.png" style="
+                width: 100%; 
+                height: 240px; 
+                object-fit: cover;
+                border-radius: 0;
+                transition: transform 0.3s ease;
+              " alt="King Beds" />
+            </div>
+            <h3 class="subtext sans" style="
+              margin-top: 20px;
+              font-size: 1.1em;
+              font-weight: 600;
+              color: #333;
+            ">King Beds</h3>
+          </div>
+
+          <!-- Room Tile 2 -->
+          <div style="
+            width: 320px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+          ">
+            <div style="
+              overflow: hidden;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+              transition: box-shadow 0.3s ease;
+            ">
+              <h:graphicImage library="images" name="HP_04_Rooms_Section_2.png" style="
+                width: 100%; 
+                height: 240px; 
+                object-fit: cover;
+                border-radius: 0;
+                transition: transform 0.3s ease;
+              " alt="Double Queen Beds" />
+            </div>
+            <h3 class="subtext sans" style="
+              margin-top: 20px;
+              font-size: 1.1em;
+              font-weight: 600;
+              color: #333;
+            ">Double Queen Beds</h3>
+          </div>
+
+          <!-- Room Tile 3 -->
+          <div style="
+            width: 320px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+          ">
+            <div style="
+              overflow: hidden;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+              transition: box-shadow 0.3s ease;
+            ">
+              <h:graphicImage library="images" name="HP_04_Rooms_Section_3.png" style="
+                width: 100%; 
+                height: 240px; 
+                object-fit: cover;
+                border-radius: 0;
+                transition: transform 0.3s ease;
+              " alt="Queen Beds" />
+            </div>
+            <h3 class="subtext sans" style="
+              margin-top: 20px;
+              font-size: 1.1em;
+              font-weight: 600;
+              color: #333;
+            ">Queen Beds</h3>
+          </div>
+
+          <!-- Right Arrow Button -->
+          <button style="
+            background: none;
+            border: 2px solid #333;
+            border-radius: 25px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            user-select: none;
+          " aria-label="Next Rooms">
+            &#8250;
+          </button>
+        </div>
+
+        <!-- View All Rooms Button (centered) -->
+        <div style="text-align: center;">
+          <h:link outcome="home" styleClass="blackoutlinebutton" style="
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+          ">
+            View All Rooms
+          </h:link>
+        </div>
+      </div>
+
+      <!-- Testimonials Section -->
+      <div class="row" style="padding: 80px 40px; background-color: #F9F7F5; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+          
+          <!-- Testimonial Quote -->
+          <blockquote style="
+            font-size: 1.5em;
+            line-height: 1.4em;
+            color: #333;
+            margin: 0 0 30px 0;
+            font-style: italic;
+          " class="serif">
+            "We found Moffat Bay Lodge on a whim seven years ago and it has become our absolute favorite place 
+            to visit year after year. We'll keep coming back for more."
+          </blockquote>
+
+          <!-- Attribution -->
+          <p style="
+            font-size: 1em;
+            color: #666;
+            margin: 0 0 40px 0;
+            font-weight: 500;
+          " class="sans">
+            – Jason Hook, USA
+          </p>
+
+          <!-- Pagination Dots -->
+          <div style="display: flex; justify-content: center; gap: 8px;">
+            <div style="
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: #333;
+            "></div>
+            <div style="
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: #ccc;
+            "></div>
+            <div style="
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: #ccc;
+            "></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Availability Section -->
+      <div style="width: 100%; position: relative;">
+        <h:graphicImage library="images" name="HP_06_Availability_Section.png" style="width: 100%; display: block;" alt="Check Availability" />
+      </div>
+
+      <!-- Video Section -->
+      <div style="width: 100%; position: relative;">
+        <h:graphicImage library="images" name="HP_07_Video_Section.png" style="width: 100%; display: block;" alt="Moffat Bay Lodge Video" />
+        <div style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: rgba(0,0,0,0.5);
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        ">
+          <div style="
+            width: 0; 
+            height: 0; 
+            border-left: 25px solid white;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+          "></div>
+        </div>
+      </div>
+
+      <!-- Latest News Section -->
+      <div class="row" style="padding: 80px 40px; background-color: #F9F7F5;">
+        <!-- Title  -->
+        <h2 class="latest-news-title" style="margin-bottom: 40px; text-align: center;">
+          Latest News
+        </h2>
+
+        <!-- News container -->
+        <div style="
+          display: flex;
+          justify-content: flex-start;
+          gap: 40px;
+          max-width: 1200px;
+          margin: 0 auto;
+          flex-wrap: nowrap;
+        ">
+          <!-- News Item 1 -->
+          <div style="flex: 1 1 0; max-width: 350px; text-align: left;">
+            <h3 class="news-item-title" style="font-weight: 400;">See The Hidden Caves of Moffat Bay by Kayak</h3>
+            <p style="font-size: 0.7em; color: #999; margin-bottom: 8px;">June 22, 2025</p>
+            <p class="subtext sans" style="line-height: 1.4em;">This time of year, the crystal blue waters of Moffat Bay offer a chance to see true hidden treasures: underwater caves and sunken...</p>
+          </div>
+
+          <!-- News Item 2 -->
+          <div style="flex: 1 1 0; max-width: 350px; text-align: left;">
+            <h3 class="news-item-title" style="font-weight: 400;">Meet Emily Salace: Our New Aroma-Therapy Specialist</h3>
+            <p style="font-size: 0.7em; color: #999; margin-bottom: 8px;">June 15, 2025</p>
+            <p class="subtext sans" style="line-height: 1.4em;">Our Spa and Wellness Center is always striving to improve our offerings and high-quality service. Meet our newest addition...</p>
+          </div>
+
+          <!-- News Item 3 -->
+          <div style="flex: 1 1 0; max-width: 350px; text-align: left;">
+            <h3 class="news-item-title" style="font-weight: 400;">Top 10 Local Shopping Destinations for Visitors</h3>
+            <p style="font-size: 0.7em; color: #999; margin-bottom: 8px;">June 10, 2025</p>
+            <p class="subtext sans" style="line-height: 1.4em;">While Moffat Bay is known for its natural resources, wilderness, and seclusion for the hustle-and-bustle of the big city, our local...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Insert -->
+      <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+      </ui:insert>
+
+      <!-- Footer Insert -->
+      <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+      </ui:insert>
+
+    </f:view>
+  </h:body>
 </html>
-</jsp:root>

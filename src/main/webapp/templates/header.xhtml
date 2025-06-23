@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-    >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
-	<ui:composition>
+  <ui:composition>
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="nav-container sans">
+          
+          <!-- Logo -->
+          <div class="nav-logo">
+            <a href="home.jsf" class="logo-link">
+              <h:graphicImage library="images" name="MBL_Logo_White.svg" alt="Moffat Bay Lodge" styleClass="logo-image" />
+            </a>
+          </div>
 
-		<div>navigation bar goes here</div>
-		
-		<h1>Example of Templating</h1>
-		
-		    
-    <a href="home.jsf">Home</a>
-    ||
-    <a href="register.jsf">Registration Page</a>
-    ||
-    <a href="login.jsf">Login Page</a>
+          <!-- Navigation Menu -->
+          <div class="nav-menu" id="navMenu">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="home.jsf" class="nav-link">HOME</a></li>
+              <li class="nav-item"><a href="home.jsf" class="nav-link">ABOUT US</a></li>
+              <li class="nav-item"><a href="home.jsf" class="nav-link">ROOMS</a></li>
+              <li class="nav-item"><a href="home.jsf" class="nav-link">SERVICES</a></li>
+              <li class="nav-item"><a href="home.jsf" class="nav-link">NEWS</a></li>
+              <li class="nav-item"><a href="home.jsf" class="nav-link">CONTACT</a></li>
+            </ul>
+          </div>
 
-	</ui:composition>
+          <!-- Call to Action -->
+          <div class="nav-cta">
+            <a href="home.jsf" class="book-now-btn">BOOK NOW</a>
+          </div>
+
+          <!-- Mobile Toggle -->
+          <div class="nav-toggle" id="navToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+  </ui:composition>
 </h:body>
 </html>
