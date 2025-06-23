@@ -74,14 +74,6 @@
 		<validator-id>passwordValidator</validator-id>
 		<validator-class>validators.PasswordValidator</validator-class>
 	</validator>
-
-	<navigation-rule>
-		<from-view-id>/register.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>register</from-outcome>
-			<to-view-id>/first.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 	
 	<managed-bean>
   		<managed-bean-name>loginBean</managed-bean-name>

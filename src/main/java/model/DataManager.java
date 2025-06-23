@@ -123,7 +123,7 @@ public class DataManager {
 
 		Connection conn = getConnection();
 
-		String success = "Failed";
+		String success = "register";
 
 		// get the password and hash it with a random salt
 		String passwordHash = hashPassword(user.getPassword());
@@ -140,7 +140,7 @@ public class DataManager {
 
 				ps.executeUpdate();
 
-				success = "Success";
+				success = "reservation";
 
 			} catch (SQLException e) {
 				e.printStackTrace();
