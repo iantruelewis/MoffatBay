@@ -26,8 +26,18 @@
 		</ui:insert>
 
 <!--  Page Content  -->
-    <h:outputText value="#{reservationManagerBean.displayUserInfo()}" />
-
+					<h:outputText value="UID: #{userBean.uid}" />
+					<br />
+					<h:outputText value="Name: #{userBean.name}" />
+					<br />
+					<h:outputText value="Email: #{userBean.email}" />
+					<br />
+					<h:outputText value="Phone: #{userBean.phone}" />
+					<br />
+					<h:outputText value="Comments: #{userBean.comments}" />
+					<br />
+					<h:outputText value="Google ID: #{userBean.googleId}" />
+					<br />
 						
 
 <!--  Footer  -->

@@ -15,6 +15,7 @@ public class ReservationManager implements Serializable {
 	private User userBean;
 	private Login loginBean;
 	private Reservation reservation;
+	private Register registerBean;
 
 	public String getRoomType() {
 		roomType = dm.getRoomType(101);
@@ -52,21 +53,27 @@ public class ReservationManager implements Serializable {
 		this.loginBean = loginBean;
 	}
 
-	public String displayUserInfo() {
-		return "" + userBean.getName() + userBean.getEmail();
+	public Register getRegisterBean() {
+		return registerBean;
+	}
+
+	public void setRegisterBean(Register registerBean) {
+		this.registerBean = registerBean;
 	}
 
 	public String login() {
 		DataManager dm = new DataManager();
 
+		// Get form input to login
 		String email = getLoginBean().getEmail();
 		String password = getLoginBean().getPassword();
 		
-		int UID = dm.validateLogin(email, password);
+		User user = dm.validateLogin(email, password);
 
-		if (UID >= 0) {
+		
+		if (user != null) {
+			setUser(user);
 
-			getUserBean().setUid(UID);
 
 			return "home.xhtml?faces-redirect=true";
 		} else {
@@ -74,7 +81,34 @@ public class ReservationManager implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "*Login Failed*", "Incorrect Email or Password"));
 			return null;
 		}
+	}
+	
+	public String displayUserInfo() {
+		return "delete me when you can";
+	}
+	
+	public String register() {
 
+		// Register User in the database - return the user retrieved from the database
+		DataManager dm = new DataManager();
+		User user = dm.registerUser(getRegisterBean());
+
+		// Set the user bean after login
+		if (user != null) {
+			setUser(user);
+		}
+
+		// Forward to reservation.xhtml
+		return "reservation";
+	}
+	
+	private void setUser(User user) {
+		getUserBean().setUid(user.getUid());
+		getUserBean().setName(user.getName());
+		getUserBean().setEmail(user.getEmail());
+		getUserBean().setPhone(user.getPhone());
+		getUserBean().setComments(user.getComments());
+		getUserBean().setGoogleId(user.getGoogleId());
 	}
 
 }

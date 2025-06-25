@@ -2,9 +2,6 @@ package beans;
 
 import java.io.Serializable;
 
-import model.DataManager;
-
-
 public class Register implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +11,6 @@ public class Register implements Serializable {
 	private String password;
 	private String passwordConfirm;
 	private String phone;
-	private ReservationManager reservationManagerBean;
 
 	public String getName() {
 		return name;
@@ -55,26 +51,4 @@ public class Register implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public ReservationManager getReservationManagerBean() {
-		return reservationManagerBean;
-	}
-
-	public void setReservationManagerBean(ReservationManager reservationManagerBean) {
-		this.reservationManagerBean = reservationManagerBean;
-	}
-
-	public String register() {
-		
-		// Register User
-		DataManager dm = new DataManager();
-		User user = dm.registerUser(this);
-
-		// reservation manager set user
-		reservationManagerBean.setUserBean(user);
-		
-		// Forward to reservation.xhtml
-		return "reservation";
-	}
-	
 }

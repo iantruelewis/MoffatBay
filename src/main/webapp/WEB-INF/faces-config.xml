@@ -19,6 +19,11 @@
 			<property-name>loginBean</property-name>
 			<value>#{loginBean}</value>
 		</managed-property>
+		
+		<managed-property>
+			<property-name>registerBean</property-name>
+			<value>#{registerBean}</value>
+		</managed-property>
 
 	</managed-bean>
 
@@ -37,12 +42,7 @@
 	<managed-bean>
 		<managed-bean-name>registerBean</managed-bean-name>
 		<managed-bean-class>beans.Register</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-		<managed-property>
-			<property-name>reservationManagerBean</property-name>
-			<property-class>beans.ReservationManager</property-class>
-			<value>#{reservationManagerBean}</value>
-		</managed-property>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 

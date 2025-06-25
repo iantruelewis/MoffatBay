@@ -124,8 +124,8 @@ public class DataManager {
 
 		Connection conn = getConnection();
 
-		User retrievedUser = null;
-		
+		String email = user.getEmail(); // store email for later retrieval
+
 		// get the password and hash it with a random salt
 		String passwordHash = hashPassword(user.getPassword());
 
@@ -135,13 +135,11 @@ public class DataManager {
 				String sql = "INSERT INTO `user` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?)";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getName());
-				ps.setString(2, user.getEmail());
+				ps.setString(2, email);
 				ps.setString(3, user.getPhone());
 				ps.setString(4, passwordHash);
 
 				ps.executeUpdate();
-
-				retrievedUser = getUser(user.getEmail());
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -165,16 +163,16 @@ public class DataManager {
 				closeConnection(conn);
 			}
 		}
-		return retrievedUser;
+
+		return getUser(email);
 	}
-	
+
 	// Get user from DB using email
 	public User getUser(String email) {
-		
-		User user = new User();
-		
-		Connection conn = getConnection();
 
+		User user = new User();
+
+		Connection conn = getConnection();
 
 		if (conn != null) {
 			try {
@@ -184,14 +182,16 @@ public class DataManager {
 				ps.setString(1, email);
 
 				ResultSet rs = ps.executeQuery();
-				
-				user.setUid(rs.getInt("uid"));
-				user.setName(rs.getString("name"));
-				user.setEmail(rs.getString("email"));
-				user.setPhone(rs.getString("phone"));
-				user.setComments(rs.getString("comments"));
-				user.setGoogleId(rs.getString("googleId"));
-				
+
+				if (rs.next()) {
+					user.setUid(rs.getInt("uid"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPhone(rs.getString("phone"));
+					user.setComments(rs.getString("comments"));
+					user.setGoogleId(rs.getString("google_id"));
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 
@@ -199,14 +199,14 @@ public class DataManager {
 				closeConnection(conn);
 			}
 		}
-		
+
 		return user;
 	}
 
-	public int validateLogin(String email, String password) {
-		
-		int uid = -1;
-		
+	public User validateLogin(String email, String password) {
+
+		User user = null;
+
 		Connection conn = getConnection();
 
 		if (conn != null) {
@@ -230,7 +230,17 @@ public class DataManager {
 
 					// true if the hashes match.
 					if (hashedInput.equals(storedHash)) {
-						uid = rs.getInt("uid");
+
+						user = new User();
+
+						// set the new user bean properties
+						user.setUid(rs.getInt("uid"));
+						user.setName(rs.getString("name"));
+						user.setEmail(rs.getString("email"));
+						user.setPhone(rs.getString("phone"));
+						user.setComments(rs.getString("comments"));
+						user.setGoogleId(rs.getString("google_id"));
+
 					}
 
 				}
@@ -241,7 +251,7 @@ public class DataManager {
 			}
 		}
 
-		return uid;
+		return user;
 	}
 
 	// Return Hex String salt + password string. - separator
