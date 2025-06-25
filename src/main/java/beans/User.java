@@ -12,6 +12,7 @@ public class User implements Serializable{
 	private String phone;
 	private String comments;
 	private String googleId;
+	private String initial;
 	
 
 	public int getUid() {
@@ -61,8 +62,12 @@ public class User implements Serializable{
 	public String getGoogleId() {
 		return googleId;
 	}
-	
-	public void login() {
-		
+
+	public String getInitial() {
+		return initial;
+	}
+
+	public void setInitial(String initial) {
+		this.initial = initial;
 	}
 }

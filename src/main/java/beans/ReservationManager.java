@@ -14,8 +14,9 @@ public class ReservationManager implements Serializable {
 	private String roomType;
 	private User userBean;
 	private Login loginBean;
-	private Reservation reservation;
 	private Register registerBean;
+	private Reservation reservation;
+
 
 	public String getRoomType() {
 		roomType = dm.getRoomType(101);
@@ -102,6 +103,7 @@ public class ReservationManager implements Serializable {
 		return "reservation";
 	}
 	
+	// Sets the Managed User Bean based on a provided User object.
 	private void setUser(User user) {
 		getUserBean().setUid(user.getUid());
 		getUserBean().setName(user.getName());
@@ -109,6 +111,7 @@ public class ReservationManager implements Serializable {
 		getUserBean().setPhone(user.getPhone());
 		getUserBean().setComments(user.getComments());
 		getUserBean().setGoogleId(user.getGoogleId());
+		getUserBean().setInitial(String.valueOf(user.getName().charAt(0)).toUpperCase());
 	}
 
 }
