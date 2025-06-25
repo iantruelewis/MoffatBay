@@ -791,6 +791,27 @@ body {
   line-height: 1.4em;
 }
 
+/* User Circle */
+.circle {
+	display: inline-block;
+	background-color: #00000000;
+	border: 2px solid white;
+	margin: 10px;
+	margin-left: 30px;
+	border-radius: 50%;
+}
+
+.circle-inner {
+	color: white;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	height: 40px;
+	width: 40px;
+	font-size: 20px;
+}
+
 /* Accessibility */
 [tabindex="0"]:focus {
   outline: 3px solid #555;
