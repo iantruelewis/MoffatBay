@@ -5,15 +5,33 @@
 	version="2.3">
 
 
-	<managed-bean>
-		<managed-bean-name>resMngrBean</managed-bean-name>
+	<managed-bean eager="true">
+		<managed-bean-name>reservationManagerBean</managed-bean-name>
 		<managed-bean-class>beans.ReservationManager</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+
 		<managed-property>
-			<property-name>roomType</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
+			<property-name>userBean</property-name>
+			<value>#{userBean}</value>
 		</managed-property>
+
+		<managed-property>
+			<property-name>loginBean</property-name>
+			<value>#{loginBean}</value>
+		</managed-property>
+
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>userBean</managed-bean-name>
+		<managed-bean-class>beans.User</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>beans.Login</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
@@ -21,31 +39,15 @@
 		<managed-bean-class>beans.Register</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
-			<property-name>name</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
-		</managed-property>
-		<managed-property>
-			<property-name>phone</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
-		</managed-property>
-		<managed-property>
-			<property-name>email</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
-		</managed-property>
-		<managed-property>
-			<property-name>password</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
-		</managed-property>
-		<managed-property>
-			<property-name>passwordConfirm</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
+			<property-name>reservationManagerBean</property-name>
+			<property-class>beans.ReservationManager</property-class>
+			<value>#{reservationManagerBean}</value>
 		</managed-property>
 	</managed-bean>
+
+
+
+
 
 	<managed-bean>
 		<managed-bean-name>newsletterSignupBean</managed-bean-name>
@@ -54,7 +56,7 @@
 		<managed-property>
 			<property-name>email</property-name>
 			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
+			<null-value />
 		</managed-property>
 	</managed-bean>
 
@@ -65,35 +67,25 @@
 		<managed-property>
 			<property-name>str</property-name>
 			<property-class>java.lang.String</property-class>
-			<null-value></null-value>
+			<null-value />
 		</managed-property>
 	</managed-bean>
-	
-	
+
+
 	<validator>
 		<validator-id>passwordValidator</validator-id>
 		<validator-class>validators.PasswordValidator</validator-class>
 	</validator>
-	
-	<managed-bean>
-  		<managed-bean-name>loginBean</managed-bean-name>
- 		<managed-bean-class>beans.Login</managed-bean-class>
-  		<managed-bean-scope>session</managed-bean-scope>
 
-  	<managed-property>
-    	<property-name>email</property-name>
-    	<property-class>java.lang.String</property-class>
-    	<null-value></null-value>
-  	</managed-property>
+	<navigation-rule>
+		<from-view-id>/register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/first.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
-  	<managed-property>
-    	<property-name>password</property-name>
-   	 	<property-class>java.lang.String</property-class>
-   	 	<null-value></null-value>
-  	</managed-property>
-	</managed-bean>
-	
-	
+
 	<navigation-rule>
 		<from-view-id>/first.xhtml</from-view-id>
 		<navigation-case>

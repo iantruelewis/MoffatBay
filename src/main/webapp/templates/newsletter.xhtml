@@ -23,6 +23,7 @@
 						<h:outputText
 							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</p>
+					<h:outputText value="UID: #{userBean.uid}" />
 					<p id="emailMessage"><h:message for="newsletterField" id="emailMessage" styleClass="message" /></p>
 					<div id="email-entry-wrapper">
 						<h:inputText id="newsletterField" styleClass="newsletterField" value="#{newsletterSignupBean.email}" pt:placeholder="Enter your email address"

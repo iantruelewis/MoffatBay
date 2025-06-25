@@ -61,4 +61,8 @@ public class User implements Serializable{
 	public String getGoogleId() {
 		return googleId;
 	}
+	
+	public void login() {
+		
+	}
 }

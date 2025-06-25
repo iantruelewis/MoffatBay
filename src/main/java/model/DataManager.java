@@ -19,6 +19,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import beans.Register;
+import beans.User;
 
 public class DataManager {
 
@@ -119,12 +120,12 @@ public class DataManager {
 	}
 
 	// Save a new user to the database
-	public String registerUser(Register user) {
+	public User registerUser(Register user) {
 
 		Connection conn = getConnection();
 
-		String success = "register";
-
+		User retrievedUser = null;
+		
 		// get the password and hash it with a random salt
 		String passwordHash = hashPassword(user.getPassword());
 
@@ -140,7 +141,7 @@ public class DataManager {
 
 				ps.executeUpdate();
 
-				success = "reservation";
+				retrievedUser = getUser(user.getEmail());
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -164,11 +165,48 @@ public class DataManager {
 				closeConnection(conn);
 			}
 		}
-		return success;
+		return retrievedUser;
+	}
+	
+	// Get user from DB using email
+	public User getUser(String email) {
+		
+		User user = new User();
+		
+		Connection conn = getConnection();
+
+
+		if (conn != null) {
+			try {
+
+				String sql = "SELECT * FROM user WHERE email = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, email);
+
+				ResultSet rs = ps.executeQuery();
+				
+				user.setUid(rs.getInt("uid"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				user.setPhone(rs.getString("phone"));
+				user.setComments(rs.getString("comments"));
+				user.setGoogleId(rs.getString("googleId"));
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			} finally {
+				closeConnection(conn);
+			}
+		}
+		
+		return user;
 	}
 
-	public boolean validateLogin(String email, String password) {
-		boolean valid = false;
+	public int validateLogin(String email, String password) {
+		
+		int uid = -1;
+		
 		Connection conn = getConnection();
 
 		if (conn != null) {
@@ -191,7 +229,9 @@ public class DataManager {
 					String hashedInput = hashPassword(password, salt);
 
 					// true if the hashes match.
-					valid = hashedInput.equals(storedHash);
+					if (hashedInput.equals(storedHash)) {
+						uid = rs.getInt("uid");
+					}
 
 				}
 			} catch (SQLException e) {
@@ -201,7 +241,7 @@ public class DataManager {
 			}
 		}
 
-		return valid;
+		return uid;
 	}
 
 	// Return Hex String salt + password string. - separator
