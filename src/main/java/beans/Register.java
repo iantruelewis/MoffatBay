@@ -2,9 +2,6 @@ package beans;
 
 import java.io.Serializable;
 
-import model.DataManager;
-
-
 public class Register implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +11,6 @@ public class Register implements Serializable {
 	private String password;
 	private String passwordConfirm;
 	private String phone;
-	
 
 	public String getName() {
 		return name;
@@ -55,11 +51,4 @@ public class Register implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	public String register() {
-		DataManager dm = new DataManager();
-		String success = dm.registerUser(this);
-		return success;
-	}
-	
 }

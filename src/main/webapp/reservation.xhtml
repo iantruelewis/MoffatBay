@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title><ui:insert name="title">Reservation</ui:insert></title>
+
+	<!--  Import Project Styles -->
+	<h:outputStylesheet name="styles.css" library="css" />
+
+
+</h:head>
+
+<h:body>
+	<f:view>
+
+<!--  Header  -->
+
+		<ui:insert name="header">
+			<ui:include src="/templates/header.xhtml" />
+		</ui:insert>
+
+<!--  Page Content  -->
+					<h:outputText value="UID: #{userBean.uid}" />
+					<br />
+					<h:outputText value="Name: #{userBean.name}" />
+					<br />
+					<h:outputText value="Email: #{userBean.email}" />
+					<br />
+					<h:outputText value="Phone: #{userBean.phone}" />
+					<br />
+					<h:outputText value="Comments: #{userBean.comments}" />
+					<br />
+					<h:outputText value="Google ID: #{userBean.googleId}" />
+					<br />
+						
+
+<!--  Footer  -->
+		<ui:insert name="newsletter">
+			<ui:include src="/templates/newsletter.xhtml" />
+		</ui:insert>
+
+
+		<ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert> 
+
+
+	</f:view>
+</h:body>
+</html>

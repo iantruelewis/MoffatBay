@@ -15,7 +15,7 @@
 		<div class="newscontainer">
 			<div id="newsletter">
 				<h:form>
-				
+
 					<h:outputText styleClass="title" id="newsletterMessage"
 						value="#{newsletterSignupBean.message}" />
 
@@ -23,14 +23,36 @@
 						<h:outputText
 							value="Sign up for our newsletter to receive the latest news about offers &nbsp; promotions." />
 					</p>
-					<p id="emailMessage"><h:message for="newsletterField" id="emailMessage" styleClass="message" /></p>
+					<h:outputText value="UID: #{userBean.uid}" />
+					<br />
+					<h:outputText value="Name: #{userBean.name}" />
+					<br />
+					<h:outputText value="Email: #{userBean.email}" />
+					<br />
+					<h:outputText value="Phone: #{userBean.phone}" />
+					<br />
+					<h:outputText value="Comments: #{userBean.comments}" />
+					<br />
+					<h:outputText value="Google ID: #{userBean.googleId}" />
+					<br />
+					<h:outputText value="Initial: #{userBean.initial}" />
+					<br />
+
+					<p id="emailMessage">
+						<h:message for="newsletterField" id="emailMessage"
+							styleClass="message" />
+					</p>
 					<div id="email-entry-wrapper">
-						<h:inputText id="newsletterField" styleClass="newsletterField" value="#{newsletterSignupBean.email}" pt:placeholder="Enter your email address"
-						validatorMessage="Invalid Email Address">
-						<f:validateRegex pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9]+" />
+						<h:inputText id="newsletterField" styleClass="newsletterField"
+							value="#{newsletterSignupBean.email}"
+							pt:placeholder="Enter your email address"
+							validatorMessage="Invalid Email Address">
+							<f:validateRegex
+								pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9]+" />
 						</h:inputText>
 						<h:commandButton value="Sign Up" styleClass="solidbutton">
-							<f:ajax execute="newsletterField" update="emailMessage " render="newsletterMessage emailMessage" />
+							<f:ajax execute="newsletterField" update="emailMessage "
+								render="newsletterMessage emailMessage" />
 						</h:commandButton>
 					</div>
 				</h:form>

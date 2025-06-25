@@ -19,6 +19,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import beans.Register;
+import beans.User;
 
 public class DataManager {
 
@@ -119,11 +120,11 @@ public class DataManager {
 	}
 
 	// Save a new user to the database
-	public String registerUser(Register user) {
+	public User registerUser(Register user) {
 
 		Connection conn = getConnection();
 
-		String success = "Failed";
+		String email = user.getEmail(); // store email for later retrieval
 
 		// get the password and hash it with a random salt
 		String passwordHash = hashPassword(user.getPassword());
@@ -134,13 +135,11 @@ public class DataManager {
 				String sql = "INSERT INTO `user` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?)";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getName());
-				ps.setString(2, user.getEmail());
+				ps.setString(2, email);
 				ps.setString(3, user.getPhone());
 				ps.setString(4, passwordHash);
 
 				ps.executeUpdate();
-
-				success = "Success";
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -164,11 +163,50 @@ public class DataManager {
 				closeConnection(conn);
 			}
 		}
-		return success;
+
+		return getUser(email);
 	}
 
-	public boolean validateLogin(String email, String password) {
-		boolean valid = false;
+	// Get user from DB using email
+	public User getUser(String email) {
+
+		User user = new User();
+
+		Connection conn = getConnection();
+
+		if (conn != null) {
+			try {
+
+				String sql = "SELECT * FROM user WHERE email = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, email);
+
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					user.setUid(rs.getInt("uid"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPhone(rs.getString("phone"));
+					user.setComments(rs.getString("comments"));
+					user.setGoogleId(rs.getString("google_id"));
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			} finally {
+				closeConnection(conn);
+			}
+		}
+
+		return user;
+	}
+
+	public User validateLogin(String email, String password) {
+
+		User user = null;
+
 		Connection conn = getConnection();
 
 		if (conn != null) {
@@ -191,7 +229,19 @@ public class DataManager {
 					String hashedInput = hashPassword(password, salt);
 
 					// true if the hashes match.
-					valid = hashedInput.equals(storedHash);
+					if (hashedInput.equals(storedHash)) {
+
+						user = new User();
+
+						// set the new user bean properties
+						user.setUid(rs.getInt("uid"));
+						user.setName(rs.getString("name"));
+						user.setEmail(rs.getString("email"));
+						user.setPhone(rs.getString("phone"));
+						user.setComments(rs.getString("comments"));
+						user.setGoogleId(rs.getString("google_id"));
+
+					}
 
 				}
 			} catch (SQLException e) {
@@ -201,7 +251,7 @@ public class DataManager {
 			}
 		}
 
-		return valid;
+		return user;
 	}
 
 	// Return Hex String salt + password string. - separator
