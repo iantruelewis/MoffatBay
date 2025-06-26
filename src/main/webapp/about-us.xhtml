@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+  <h:head>
+    <title><ui:insert name="title">Welcome to Moffat Bay Lodge</ui:insert></title>
+    <h:outputStylesheet name="styles.css" library="css" />
+  </h:head>
+
+  <h:body>
+    <f:view>
+
+      <!-- Header -->
+      <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+      </ui:insert>
+
+      <!-- Hero Section -->
+      <div style="
+        height: 80vh;
+        width: 100%;
+        background-image: url('#{resource['images/about-us-4.jpg']}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 80px;
+      ">
+        <!-- Overlay -->
+        <div style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.4);
+          z-index: 1;
+        "></div>
+
+        <!-- Content -->
+        <div style="
+          position: relative;
+          z-index: 2;
+          color: white;
+          text-align: left;
+          max-width: 700px;
+          padding: 20px;
+        ">
+          <h2 class="subtext2 sans" style="letter-spacing: 2px;">WELCOME TO MOFFAT BAY LODGE.</h2>
+          <h1 class="title serif" style="font-size: 2.5em; margin-top: 10px;">
+            Family Owned And Operated For Over 100 Years.
+          </h1>
+          <p class="subtext2 sans" style="margin: 20px 0;">
+            That's right: For five generations (and counting) our family has preserved this wonderful 
+            oasis in the mountains. We welcome you to join us and get a taste of our unique blend of adventure, relaxation, and comfortable luxury.
+            Let our homr become your home, and make memories that will last.
+          </p>
+          <h:link outcome="home" styleClass="whiteoutlinebutton" style="margin-top: 25px; display: inline-block;">Explore rooms</h:link>
+        </div>
+      </div>
+      
+<!-- Amenities Section -->
+<div class="row" style="min-height: 500px; padding: 0px; background-color: #F9F7F5; display: flex; flex-direction: row;">
+  <div style="flex: 1; height: 100%;">
+    <h:graphicImage library="images" name="about-us-1.jpg" 
+      style="width: 800px; height: 100%; object-fit: cover; border-radius: 0; display: block;" 
+      alt="World-Class Amenities" />
+  </div>
+  <div class="twocol" style="padding-left: 40px; padding-top: 40px; margin: 60px; flex: 1;">
+    <h2 class="title serif">It All Started With Two Rooms And Gramma Mae's Breakfast</h2>
+    <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+      What's now a 150 room lodge with high-end amenities and luxurious dining all began as a rustic Bed &amp; Breakfast nestled in the mountains. 
+      Over the years, generations of our family have worked to build the lodge into a destination worthy of the natural beauty and 
+      authentic majesty this area has to offer.
+    </p>
+    <br />
+    <h:link outcome="home" styleClass="blackoutlinebutton">Learn More</h:link>
+  </div>
+</div>
+
+<!-- Availability Section -->
+<div style="width: 100%; position: relative;">
+  <h:graphicImage library="images" name="HP_06_Availability_Section.png" 
+    style="width: 100%; display: block;" 
+    alt="Check Availability" />
+</div>
+
+<!-- Amenities Section -->
+<div class="row" style="min-height: 500px; padding: 0px; background-color: #F9F7F5; display: flex; flex-direction: row;">
+  <div class="twocol" style="padding-left: 40px; padding-top: 40px; margin: 60px; flex: 1;">
+    <h2 class="title serif">Explore The Bay Like A True Local.</h2>
+    <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+      Hiking, Mountain Biking, Kayaking, Sailing—however you choose to move, we have the tools and equipment to take you there. From scouring underwater caves to 
+      cresting the peaks of The Eechen Mountains, your time here should feel as free as the Northern Winds.
+    </p>
+    <br />
+    <h:link outcome="home" styleClass="blackoutlinebutton">Explore the Bay</h:link>
+  </div>
+  <div style="flex: 1; height: 100%;">
+    <h:graphicImage library="images" name="about-us-2.png" 
+      style="width: 800px; height: 930px; object-fit: cover; border-radius: 0; display: block;" 
+      alt="Never ending Hikes" />
+  </div>
+</div>
+
+      <!-- Video Section -->
+      <div style="width: 100%; position: relative;">
+        <h:graphicImage library="images" name="about-us-3.jpg" style="width: 100%; height:850px; display: block;" alt="Moffat Bay Lodge" />
+        <div style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: rgba(0,0,0,0.5);
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        ">
+          <div style="
+            width: 0; 
+            height: 0; 
+            border-left: 25px solid white;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+          "></div>
+        </div>
+      </div>
+
+      <!-- Newsletter Insert -->
+      <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+      </ui:insert>
+
+      <!-- Footer Insert -->
+      <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+      </ui:insert>
+
+    </f:view>
+  </h:body>
+</html>
