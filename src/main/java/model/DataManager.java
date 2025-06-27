@@ -353,6 +353,13 @@ public class DataManager {
         
 		Connection conn = getConnection();
 		HashMap<String, Integer> rooms = new HashMap<String, Integer>();
+		
+		// set all room types to zero
+		rooms.put("1king", 0);
+		rooms.put("1queen", 0);
+		rooms.put("2queen", 0);
+		rooms.put("2full", 0);
+		
 
 
 		if (conn != null) {
