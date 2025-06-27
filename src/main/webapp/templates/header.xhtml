@@ -53,16 +53,19 @@
               z-index: 1;
               border-radius: 4px;">
               <a href="account.jsf" style="padding: 10px; display: block; text-decoration: none; color: black;">Account</a>
-  			<!-- Logout Button (JSF Form) -->
-  			<h:form style="margin: 0; padding: 0;">
-   				<h:commandLink value="Logout"
-                   action="#{reservationManager.logout}"
-                   style="padding: 10px; display: block; text-decoration: none; color: black;" />
-  				</h:form>
+
+              <!-- Logout Button -->
+				<h:form style="margin: 0; padding: 0;">
+  					<h:commandLink value="Logout"
+                 action="#{reservationManager.logout}"
+                 onclick="return confirm('Are you sure you want to log out?');"
+                 styleClass="logout-link" />
+				</h:form>
+
             </div>
           </div>
 
-          <!-- Dropdown Script -->
+          <!-- Dropdown Behavior -->
           <script>
             const userMenu = document.querySelector('.user-menu');
             const dropdown = userMenu.querySelector('.dropdown-content');
@@ -73,7 +76,37 @@
             userMenu.addEventListener('mouseleave', () => {
               dropdown.style.display = 'none';
             });
+
+            document.addEventListener("DOMContentLoaded", function () {
+              const logoutLink = document.querySelector(".logout-link");
+              if (logoutLink) {
+                logoutLink.addEventListener("click", function (e) {
+                  const confirmLogout = confirm("Are you sure you want to log out?");
+                  if (!confirmLogout) {
+                    e.preventDefault();
+                  } else {
+                    logoutLink.innerText = "Logging out...";
+                  }
+                });
+              }
+            });
           </script>
+
+          <!-- Logout Button Styles -->
+          <style>
+            .logout-link {
+              padding: 10px;
+              display: block;
+              color: black;
+              text-decoration: none;
+              transition: background-color 0.2s ease;
+            }
+
+            .logout-link:hover {
+              background-color: #f0f0f0;
+              cursor: pointer;
+            }
+          </style>
 
           <!-- Mobile Toggle -->
           <div class="nav-toggle" id="navToggle">

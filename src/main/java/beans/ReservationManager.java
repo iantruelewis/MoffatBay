@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 
 import model.DataManager;
 
@@ -102,4 +104,13 @@ public class ReservationManager implements Serializable {
 	public String saveReservation() {
 		return "reservation";
 	}
+    public String logout() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "login?faces-redirect=true";
+    }
+	
 }
