@@ -4,29 +4,16 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import model.DataManager;
 
 public class ReservationManager implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private DataManager dm = new DataManager();
-	private String roomType;
 	private User userBean;
 	private Login loginBean;
 	private Register registerBean;
-	private Reservation reservation;
-
-
-	public String getRoomType() {
-		roomType = dm.getRoomType(101);
-		return roomType;
-	}
-
-	public void setRoomType(String s) {
-		// Do nothing
-	}
+	private Reservation reservationBean;
 
 	public User getUserBean() {
 		if (userBean == null) {
@@ -37,14 +24,6 @@ public class ReservationManager implements Serializable {
 
 	public void setUserBean(User userBean) {
 		this.userBean = userBean;
-	}
-
-	public Reservation getReservation() {
-		return reservation;
-	}
-
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
 	}
 
 	public Login getLoginBean() {
@@ -63,19 +42,28 @@ public class ReservationManager implements Serializable {
 		this.registerBean = registerBean;
 	}
 
+	public Reservation getReservationBean() {
+		if (reservationBean == null) {
+			reservationBean = new Reservation();
+		}
+		return reservationBean;
+	}
+
+	public void setReservationBean(Reservation reservationBean) {
+		this.reservationBean = reservationBean;
+	}
+
 	public String login() {
 		DataManager dm = new DataManager();
 
 		// Get form input to login
 		String email = getLoginBean().getEmail();
 		String password = getLoginBean().getPassword();
-		
+
 		User user = dm.validateLogin(email, password);
 
-		
 		if (user != null) {
 			setUser(user);
-
 
 			return "home.xhtml?faces-redirect=true";
 		} else {
@@ -84,11 +72,7 @@ public class ReservationManager implements Serializable {
 			return null;
 		}
 	}
-	
-	public String displayUserInfo() {
-		return "delete me when you can";
-	}
-	
+
 	public String register() {
 
 		// Register User in the database - return the user retrieved from the database
@@ -103,7 +87,7 @@ public class ReservationManager implements Serializable {
 		// Forward to reservation.xhtml
 		return "reservation";
 	}
-	
+
 	// Sets the Managed User Bean based on a provided User object.
 	private void setUser(User user) {
 		getUserBean().setUid(user.getUid());
@@ -114,5 +98,8 @@ public class ReservationManager implements Serializable {
 		getUserBean().setGoogleId(user.getGoogleId());
 		getUserBean().setInitial(String.valueOf(user.getName().charAt(0)).toUpperCase());
 	}
-	
+
+	public String saveReservation() {
+		return "reservation";
+	}
 }

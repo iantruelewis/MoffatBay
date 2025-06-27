@@ -19,28 +19,82 @@
 <h:body>
 	<f:view>
 
-<!--  Header  -->
+		<!--  Header  -->
 
 		<ui:insert name="header">
 			<ui:include src="/templates/header.xhtml" />
 		</ui:insert>
 
-<!--  Page Content  -->
-					<h:outputText value="UID: #{userBean.uid}" />
-					<br />
-					<h:outputText value="Name: #{userBean.name}" />
-					<br />
-					<h:outputText value="Email: #{userBean.email}" />
-					<br />
-					<h:outputText value="Phone: #{userBean.phone}" />
-					<br />
-					<h:outputText value="Comments: #{userBean.comments}" />
-					<br />
-					<h:outputText value="Google ID: #{userBean.googleId}" />
-					<br />
-						
+		<!--  Page Content  -->
 
-<!--  Footer  -->
+		<h:form>
+
+			<h:outputText value="checkin" />
+			<h:inputText id="checkin" value="#{reservationBean.checkinDate}">
+				<f:convertDateTime pattern="MM-dd-yyyy" />
+			</h:inputText><h:outputText value="#{reservationBean.checkinDate}" />
+			<br />      <h:message for = "checkin" style = "color:red" />
+
+			<h:outputText value="checkout" />
+			<h:inputText id="checkout" value="#{reservationBean.checkoutDate}">
+				<f:convertDateTime pattern="MM-dd-yyyy" />
+			</h:inputText><h:outputText value="#{reservationBean.checkoutDate}" />
+			<br />      <h:message for = "checkout" style = "color:red" />
+
+			<h:outputText value="Guest Count" />
+			<h:inputText id="guestCount" value="#{reservationBean.guestCount}">
+				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+			</h:inputText>
+			<br />
+
+			<h:outputText value="1 King" />
+			<h:inputText id="king1" value="#{reservationBean.king1}">
+				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+			</h:inputText>
+			<h:outputText
+				value="#{reservationBean.roomAvailability['1king']}" />
+			<br />
+
+
+			<h:outputText value="2 Full" />
+			<h:inputText id="full2" value="#{reservationBean.full2}">
+				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+			</h:inputText>
+			<h:outputText
+				value="#{reservationBean.roomAvailability['2full']}" />
+			<br />
+
+
+			<h:outputText value="1 Queen" />
+			<h:inputText id="queen1" value="#{reservationBean.queen1}">
+				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+			</h:inputText>
+			<h:outputText
+				value="#{reservationBean.roomAvailability['1queen']}" />
+			<br />
+
+			<h:outputText value="2 Queen" />
+			<h:inputText id="queen2" value="#{reservationBean.queen2}">
+				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+			</h:inputText>
+			<h:outputText
+				value="#{reservationBean.roomAvailability['2queen']}" />
+			<br />
+
+
+			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
+				value="Update Bean" styleClass="solidbutton" />
+				
+			<h:commandButton action="#{reservationBean.updateRoomAvailability()}"
+				value="Update Room Availability" styleClass="solidbutton" />
+		</h:form>
+		
+<ui:repeat var="entry" value="#{reservationBean.roomAvailability.entrySet().toArray()}">
+            key:#{entry.key}, value: #{entry.value}
+</ui:repeat>
+
+
+		<!--  Footer  -->
 		<ui:insert name="newsletter">
 			<ui:include src="/templates/newsletter.xhtml" />
 		</ui:insert>
@@ -48,7 +102,7 @@
 
 		<ui:insert name="footer">
 			<ui:include src="/templates/footer.xhtml" />
-		</ui:insert> 
+		</ui:insert>
 
 
 	</f:view>
