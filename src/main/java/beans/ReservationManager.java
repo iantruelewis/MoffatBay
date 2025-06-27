@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import model.DataManager;
 
@@ -113,5 +114,5 @@ public class ReservationManager implements Serializable {
 		getUserBean().setGoogleId(user.getGoogleId());
 		getUserBean().setInitial(String.valueOf(user.getName().charAt(0)).toUpperCase());
 	}
-
+	
 }

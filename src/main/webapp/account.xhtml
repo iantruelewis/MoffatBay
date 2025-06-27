@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title><ui:insert name="title">Account</ui:insert></title>
+
+  <!-- Import Project Styles -->
+  <h:outputStylesheet name="styles.css" library="css" />
+
+  <!-- Local Page Styles -->
+  <style>
+    .account-container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .account-container h2 {
+      text-align: center;
+    }
+
+    .account-field {
+      margin: 15px 0;
+    }
+
+    .account-field label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .account-field span {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .edit-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</h:head>
+
+<h:body>
+  <f:view>
+
+    <!-- Header Include -->
+    <ui:insert name="header">
+      <ui:include src="/templates/header.xhtml" />
+    </ui:insert>
+
+    <!-- Main Account Content -->
+    <div class="account-container">
+      <h2>My Account</h2>
+
+      <div class="account-field">
+        <label>UID:</label>
+        <span><h:outputText value="#{userBean.uid}" /></span>
+      </div>
+
+      <div class="account-field">
+        <label>Name:</label>
+        <span><h:outputText value="#{userBean.name}" /></span>
+      </div>
+
+      <div class="account-field">
+        <label>Email:</label>
+        <span><h:outputText value="#{userBean.email}" /></span>
+      </div>
+
+      <div class="account-field">
+        <label>Phone:</label>
+        <span><h:outputText value="#{userBean.phone}" /></span>
+      </div>
+
+      <div class="account-field">
+        <label>Comments:</label>
+        <span><h:outputText value="#{userBean.comments}" /></span>
+      </div>
+
+      <div class="account-field">
+        <label>Google ID:</label>
+        <span><h:outputText value="#{userBean.googleId}" /></span>
+      </div>
+
+      <div class="edit-link">
+        <h:link value="Edit Profile" outcome="editAccount" />
+      </div>
+    </div>
+
+    <!-- Newsletter Include -->
+    <ui:insert name="newsletter">
+      <ui:include src="/templates/newsletter.xhtml" />
+    </ui:insert>
+
+    <!-- Footer Include -->
+    <ui:insert name="footer">
+      <ui:include src="/templates/footer.xhtml" />
+    </ui:insert>
+
+  </f:view>
+</h:body>
+</html>

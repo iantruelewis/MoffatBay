@@ -6,12 +6,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <h:body>
   <ui:composition>
     <header class="main-header">
       <nav class="navbar">
         <div class="nav-container sans">
-          
+
           <!-- Logo -->
           <div class="nav-logo">
             <a href="home.jsf" class="logo-link">
@@ -23,11 +24,11 @@
           <div class="nav-menu" id="navMenu">
             <ul class="nav-list">
               <li class="nav-item"><a href="home.jsf" class="nav-link">HOME</a></li>
-              <li class="nav-item"><a href="home.jsf" class="nav-link">ABOUT US</a></li>
+              <li class="nav-item"><a href="about-us.jsf" class="nav-link">ABOUT US</a></li>
               <li class="nav-item"><a href="home.jsf" class="nav-link">ROOMS</a></li>
-              <li class="nav-item"><a href="home.jsf" class="nav-link">SERVICES</a></li>
-              <li class="nav-item"><a href="home.jsf" class="nav-link">NEWS</a></li>
-              <li class="nav-item"><a href="home.jsf" class="nav-link">CONTACT</a></li>
+              <li class="nav-item"><a href="reservation.jsf" class="nav-link">RESERVATIONS</a></li>
+              <li class="nav-item"><a href="register.jsf" class="nav-link">REGISTER</a></li>
+              <li class="nav-item"><a href="login.jsf" class="nav-link">LOG IN</a></li>
             </ul>
           </div>
 
@@ -35,15 +36,46 @@
           <div class="nav-cta">
             <a href="home.jsf" class="book-now-btn">BOOK NOW</a>
           </div>
-          
-          <!-- User Avatar -->
-			<div class="circle" id="">
-				<a href="login.jsf" class="circle-inner">
-					<h:outputText value="#{userBean.initial}" />
-				</a>
-			</div>
 
-			<!-- Mobile Toggle -->
+          <!-- User Avatar with Dropdown -->
+          <div class="user-menu" style="position: relative; display: inline-block;">
+            <div class="circle">
+              <a class="circle-inner">#{userBean.initial}</a>
+            </div>
+
+            <div class="dropdown-content" style="
+              display: none;
+              position: absolute;
+              right: 0;
+              background-color: white;
+              min-width: 120px;
+              box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+              z-index: 1;
+              border-radius: 4px;">
+              <a href="account.jsf" style="padding: 10px; display: block; text-decoration: none; color: black;">Account</a>
+  			<!-- Logout Button (JSF Form) -->
+  			<h:form style="margin: 0; padding: 0;">
+   				<h:commandLink value="Logout"
+                   action="#{reservationManager.logout}"
+                   style="padding: 10px; display: block; text-decoration: none; color: black;" />
+  				</h:form>
+            </div>
+          </div>
+
+          <!-- Dropdown Script -->
+          <script>
+            const userMenu = document.querySelector('.user-menu');
+            const dropdown = userMenu.querySelector('.dropdown-content');
+
+            userMenu.addEventListener('mouseenter', () => {
+              dropdown.style.display = 'block';
+            });
+            userMenu.addEventListener('mouseleave', () => {
+              dropdown.style.display = 'none';
+            });
+          </script>
+
+          <!-- Mobile Toggle -->
           <div class="nav-toggle" id="navToggle">
             <span class="bar"></span>
             <span class="bar"></span>
