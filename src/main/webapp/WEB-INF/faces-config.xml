@@ -24,7 +24,11 @@
 			<property-name>registerBean</property-name>
 			<value>#{registerBean}</value>
 		</managed-property>
-
+		
+		<managed-property>
+			<property-name>reservationBean</property-name>
+			<value>#{reservationBean}</value>
+		</managed-property>
 	</managed-bean>
 
 	<managed-bean>
@@ -44,9 +48,12 @@
 		<managed-bean-class>beans.Register</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-
-
-
+	
+	<managed-bean>
+		<managed-bean-name>reservationBean</managed-bean-name>
+		<managed-bean-class>beans.Reservation</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 
 	<managed-bean>
@@ -60,66 +67,10 @@
 		</managed-property>
 	</managed-bean>
 
-	<managed-bean>
-		<managed-bean-name>aStringBean</managed-bean-name>
-		<managed-bean-class>beans.AString</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>str</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value />
-		</managed-property>
-	</managed-bean>
-
 
 	<validator>
 		<validator-id>passwordValidator</validator-id>
 		<validator-class>validators.PasswordValidator</validator-class>
 	</validator>
 
-	<navigation-rule>
-		<from-view-id>/register.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>register</from-outcome>
-			<to-view-id>/first.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
-
-	<navigation-rule>
-		<from-view-id>/first.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>go2</from-outcome>
-			<to-view-id>/page2.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>go3</from-outcome>
-			<to-view-id>/page3.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>go4</from-outcome>
-			<to-view-id>/page4.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/page2.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>goBack</from-outcome>
-			<to-view-id>/first.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/page3.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>goBack</from-outcome>
-			<to-view-id>/first.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/page4.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>goBack</from-outcome>
-			<to-view-id>/first.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 </faces-config>

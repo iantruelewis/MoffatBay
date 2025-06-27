@@ -9,6 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.TimeZone;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -340,5 +344,69 @@ public class DataManager {
 		}
 
 		return byteArray;
+	}
+
+	public HashMap<String, Integer> getRoomAvailability(Date checkin, Date checkout) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        
+		Connection conn = getConnection();
+		HashMap<String, Integer> rooms = new HashMap<String, Integer>();
+		
+		// set all room types to zero
+		rooms.put("1king", 0);
+		rooms.put("1queen", 0);
+		rooms.put("2queen", 0);
+		rooms.put("2full", 0);
+		
+
+
+		if (conn != null) {
+			try {
+				String sql = "WITH reservations AS (\n"
+						+ "SELECT \n"
+						+ "    res.res_id, checkin, checkout, room.room_num, inv.type\n"
+						+ "FROM\n"
+						+ "    reservation AS res\n"
+						+ "        INNER JOIN\n"
+						+ "    room_reservation AS room ON res.res_id = room.res_id\n"
+						+ "        INNER JOIN\n"
+						+ "    room_inventory AS inv ON inv.room_num = room.room_num\n"
+						+ "WHERE\n"
+						+ "checkout > ? \n"
+						+ "        AND checkin < ? \n"
+						+ ")\n"
+						+ "SELECT\n"
+						+ "	inv.room_num, inv.type\n"
+						+ "FROM room_inventory AS inv \n"
+						+ "LEFT JOIN reservations ON inv.room_num=reservations.room_num \n"
+						+ "WHERE reservations.res_id IS NULL;";
+
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, dateFormat.format(checkin));
+				ps.setString(2, dateFormat.format(checkout));
+
+				ResultSet rs = ps.executeQuery();
+				
+
+				while (rs.next()) {
+
+					String roomType = rs.getString("type");
+
+					// Increment room values by one
+					rooms.put(roomType, rooms.getOrDefault(roomType, 0) + 1);
+				}
+			}
+
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				closeConnection(conn);
+			}
+		}
+		
+		return rooms;
 	}
 }
