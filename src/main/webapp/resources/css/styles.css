@@ -825,7 +825,12 @@ body {
     border: none;
     font-family: "Old Standard TT", serif;
     font-size: 4em;
-    max-width: 60px;
+    max-width: 100px;
+}
+
+.chevron {
+	width: 20p;
+	margin-left: 10px;
 }
 
 /* Accessibility */

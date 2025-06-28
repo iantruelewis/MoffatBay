@@ -19,7 +19,7 @@ public class Reservation implements Serializable {
 	private int full2 = 0;
 	private String comment;
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
-	
+
 	public Reservation() {
 		checkinDate = new Date();
 		checkoutDate = new Date();
@@ -30,10 +30,10 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckinDate(Date checkinDate) {
-		
+
 		if (checkinDate != null) {
-		updateRoomAvailability();
-		this.checkinDate = checkinDate;
+			this.checkinDate = checkinDate;
+			updateRoomAvailability();
 		} else {
 			checkinDate = new Date();
 		}
@@ -45,10 +45,9 @@ public class Reservation implements Serializable {
 
 	public void setCheckoutDate(Date checkoutDate) {
 		if (checkoutDate != null) {
-			updateRoomAvailability();
 			this.checkoutDate = checkoutDate;
-		}
-		else {
+			updateRoomAvailability();
+		} else {
 			this.checkoutDate = new Date();
 		}
 	}
@@ -59,7 +58,7 @@ public class Reservation implements Serializable {
 
 	public void setGuestCount(int guestCount) {
 		if (guestCount > 0) {
-		this.guestCount = guestCount;
+			this.guestCount = guestCount;
 		}
 	}
 
@@ -98,9 +97,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setFull2(int full2) {
-		if (full2 >= 0 && full2 <= roomAvailability.get("2full")) {
-			this.full2 = full2;
-		}
+//		if (full2 >= 0 && full2 <= roomAvailability.get("2full")) {
+		this.full2 = full2;
+//		}
 	}
 
 	public String getComment() {
@@ -128,5 +127,63 @@ public class Reservation implements Serializable {
 		roomAvailability = dm.getRoomAvailability(checkinDate, checkoutDate);
 
 		return "reservation";
+	}
+
+	public String upFull2() {
+		if (full2 < roomAvailability.get("2full")) {
+			full2++;
+		}
+		return null;
+	}
+
+	public String dnFull2() {
+		if (full2 > 0) {
+			full2--;
+		}
+		return null;
+	}
+
+
+	public String upQueen1() {
+		if (queen1 < roomAvailability.get("1queen")) {
+			queen1++;
+		}
+		return null;
+	}
+
+	public String dnQueen1() {
+		if (queen1 > 0) {
+			queen1--;
+		}
+		return null;
+	}
+	
+	public String upKing1() {
+		if (king1 < roomAvailability.get("1king")) {
+			king1++;
+		}
+		return null;
+	}
+
+	public String dnKing1() {
+		if (king1 > 0) {
+			king1--;
+		}
+		return null;
+	}
+
+
+	public String upQueen2() {
+		if (queen2 < roomAvailability.get("2queen")) {
+			queen2++;
+		}
+		return null;
+	}
+
+	public String dnQueen2() {
+		if (queen2 > 0) {
+			queen2--;
+		}
+		return null;
 	}
 }

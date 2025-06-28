@@ -47,9 +47,14 @@
 
 			<h:outputText value="Guest Count" />
 			<h:inputText styleClass="room-count" id="guestCount"
-				value="#{reservationBean.guestCount}">
+				value="#{reservationBean.guestCount}"
+				validatorMessage="A minumum of one guest must be selected">
+
 				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+				<f:validateLongRange minimum="1" />
 			</h:inputText>
+			<h:message for="guestCount" styleClass="message" />
+
 
 			<h:commandButton action="#{reservationManagerBean.updateBean()}"
 				value="Update Bean" styleClass="solidbutton" />
@@ -59,7 +64,7 @@
 
 
 
-			<!--  Being CONTENT UI -->
+			<!--  Begin CONTENT UI -->
 
 			<!-- FULL -->
 			<div class="row">
@@ -78,15 +83,31 @@
 
 						<!-- FUll FORM -->
 						<p class="sans subtext">
+
 							<h:outputText value="ROOMS" />
+
+							<!--  Add Remove Links -->
+							<h:commandLink action="#{reservationBean.upFull2}">
+								<h:graphicImage library="images" name="chevron-up.svg"
+									class="chevron" alt="Add room" />
+								<f:ajax execute="@form" render="full2" />
+							</h:commandLink>
+							<h:commandLink action="#{reservationBean.dnFull2}">
+								<h:graphicImage library="images" name="chevron-down.svg"
+									class="chevron" alt="Remove room" />
+								<f:ajax execute="@form" render="full2" />
+							</h:commandLink>
+
 						</p>
 						<h:inputText styleClass="room-count" id="full2"
-							value="#{reservationBean.full2}">
+							value="#{reservationBean.full2}"
+							validatorMessage="#{reservationBean.roomAvailability['2full']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+							<f:validateLongRange minimum="0"
+								maximum="#{reservationBean.roomAvailability['2full']}" />
 						</h:inputText>
-						<h:outputText
-							value="Only #{reservationBean.roomAvailability['2full']} available" />
-						<br />
+						<h:message for="full2" styleClass="message" />
+						#{reservationBean.roomAvailability['2full']} <br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -113,14 +134,29 @@
 						<!-- 1 QUEEN FORM -->
 						<p class="sans subtext">
 							<h:outputText value="ROOMS" />
+
+							<!--  Add Remove Links -->
+							<h:commandLink action="#{reservationBean.upQueen1}">
+								<h:graphicImage library="images" name="chevron-up.svg"
+									class="chevron" alt="Add room" />
+								<f:ajax execute="@form" render="queen1" />
+							</h:commandLink>
+							<h:commandLink action="#{reservationBean.dnQueen1}">
+								<h:graphicImage library="images" name="chevron-down.svg"
+									class="chevron" alt="Remove room" />
+								<f:ajax execute="@form" render="queen1" />
+							</h:commandLink>
+
 						</p>
 						<h:inputText styleClass="room-count" id="queen1"
-							value="#{reservationBean.queen1}">
+							value="#{reservationBean.queen1}"
+							validatorMessage="#{reservationBean.roomAvailability['1queen']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+							<f:validateLongRange minimum="0"
+								maximum="#{reservationBean.roomAvailability['1queen']}" />
 						</h:inputText>
-						<h:outputText
-							value="Only #{reservationBean.roomAvailability['1queen']} available" />
-						<br />
+						<h:message for="queen1" styleClass="message" />
+						#{reservationBean.roomAvailability['1queen']} <br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -148,14 +184,29 @@
 						<!-- 2 QUEEN FORM -->
 						<p class="sans subtext">
 							<h:outputText value="ROOMS" />
+
+							<!--  Add Remove Links -->
+							<h:commandLink action="#{reservationBean.upQueen2}">
+								<h:graphicImage library="images" name="chevron-up.svg"
+									class="chevron" alt="Add room" />
+								<f:ajax execute="@form" render="queen2" />
+							</h:commandLink>
+							<h:commandLink action="#{reservationBean.dnQueen2}">
+								<h:graphicImage library="images" name="chevron-down.svg"
+									class="chevron" alt="Remove room" />
+								<f:ajax execute="@form" render="queen2" />
+							</h:commandLink>
+
 						</p>
 						<h:inputText styleClass="room-count" id="queen2"
-							value="#{reservationBean.queen2}">
+							value="#{reservationBean.queen2}"
+							validatorMessage="#{reservationBean.roomAvailability['2queen']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+							<f:validateLongRange minimum="0"
+								maximum="#{reservationBean.roomAvailability['2queen']}" />
 						</h:inputText>
-						<h:outputText
-							value="Only #{reservationBean.roomAvailability['2queen']} available." />
-						<br />
+						<h:message for="queen2" styleClass="message" />
+						#{reservationBean.roomAvailability['2queen']} <br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -183,14 +234,29 @@
 						<!-- 1 KING FORM -->
 						<p class="sans subtext">
 							<h:outputText value="ROOMS" />
+
+							<!--  Add Remove Links -->
+							<h:commandLink action="#{reservationBean.upKing1}">
+								<h:graphicImage library="images" name="chevron-up.svg"
+									class="chevron" alt="Add room" />
+								<f:ajax execute="@form" render="king1" />
+							</h:commandLink>
+							<h:commandLink action="#{reservationBean.dnKing1}">
+								<h:graphicImage library="images" name="chevron-down.svg"
+									class="chevron" alt="Remove room" />
+								<f:ajax execute="@form" render="king1" />
+							</h:commandLink>
+
 						</p>
 						<h:inputText styleClass="room-count" id="king1"
-							value="#{reservationBean.king1}">
+							value="#{reservationBean.king1}"
+							validatorMessage="#{reservationBean.roomAvailability['1king']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+							<f:validateLongRange minimum="0"
+								maximum="#{reservationBean.roomAvailability['1king']}" />
 						</h:inputText>
-						<h:outputText
-							value="Only #{reservationBean.roomAvailability['1king']} available" />
-						<br />
+						<h:message for="king1" styleClass="message" />
+						#{reservationBean.roomAvailability['1king']} <br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
