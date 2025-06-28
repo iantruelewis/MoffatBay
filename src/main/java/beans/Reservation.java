@@ -19,7 +19,7 @@ public class Reservation implements Serializable {
 	private int full2 = 0;
 	private String comment;
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
-	
+
 	public Reservation() {
 		checkinDate = new Date();
 		checkoutDate = new Date();
@@ -30,10 +30,10 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckinDate(Date checkinDate) {
-		
+
 		if (checkinDate != null) {
-		updateRoomAvailability();
-		this.checkinDate = checkinDate;
+			this.checkinDate = checkinDate;
+			updateRoomAvailability();
 		} else {
 			checkinDate = new Date();
 		}
@@ -45,10 +45,9 @@ public class Reservation implements Serializable {
 
 	public void setCheckoutDate(Date checkoutDate) {
 		if (checkoutDate != null) {
-			updateRoomAvailability();
 			this.checkoutDate = checkoutDate;
-		}
-		else {
+			updateRoomAvailability();
+		} else {
 			this.checkoutDate = new Date();
 		}
 	}
@@ -58,7 +57,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setGuestCount(int guestCount) {
-		this.guestCount = guestCount;
+		if (guestCount > 0) {
+			this.guestCount = guestCount;
+		}
 	}
 
 	public int getKing1() {
@@ -66,7 +67,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setKing1(int king1) {
-		this.king1 = king1;
+		if (king1 >= 0 && king1 <= roomAvailability.get("1king")) {
+			this.king1 = king1;
+		}
 	}
 
 	public int getQueen1() {
@@ -74,7 +77,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen1(int queen1) {
-		this.queen1 = queen1;
+		if (queen1 >= 0 && queen1 <= roomAvailability.get("1queen")) {
+			this.queen1 = queen1;
+		}
 	}
 
 	public int getQueen2() {
@@ -82,7 +87,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen2(int queen2) {
-		this.queen2 = queen2;
+		if (queen2 >= 0 && queen2 <= roomAvailability.get("2queen")) {
+			this.queen2 = queen2;
+		}
 	}
 
 	public int getFull2() {
@@ -90,7 +97,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setFull2(int full2) {
+//		if (full2 >= 0 && full2 <= roomAvailability.get("2full")) {
 		this.full2 = full2;
+//		}
 	}
 
 	public String getComment() {
@@ -118,5 +127,63 @@ public class Reservation implements Serializable {
 		roomAvailability = dm.getRoomAvailability(checkinDate, checkoutDate);
 
 		return "reservation";
+	}
+
+	public String upFull2() {
+		if (full2 < roomAvailability.get("2full")) {
+			full2++;
+		}
+		return null;
+	}
+
+	public String dnFull2() {
+		if (full2 > 0) {
+			full2--;
+		}
+		return null;
+	}
+
+
+	public String upQueen1() {
+		if (queen1 < roomAvailability.get("1queen")) {
+			queen1++;
+		}
+		return null;
+	}
+
+	public String dnQueen1() {
+		if (queen1 > 0) {
+			queen1--;
+		}
+		return null;
+	}
+	
+	public String upKing1() {
+		if (king1 < roomAvailability.get("1king")) {
+			king1++;
+		}
+		return null;
+	}
+
+	public String dnKing1() {
+		if (king1 > 0) {
+			king1--;
+		}
+		return null;
+	}
+
+
+	public String upQueen2() {
+		if (queen2 < roomAvailability.get("2queen")) {
+			queen2++;
+		}
+		return null;
+	}
+
+	public String dnQueen2() {
+		if (queen2 > 0) {
+			queen2--;
+		}
+		return null;
 	}
 }
