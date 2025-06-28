@@ -819,6 +819,15 @@ body {
 	font-size: 20px;
 }
 
+
+.room-count {
+	background-color: none;
+    border: none;
+    font-family: "Old Standard TT", serif;
+    font-size: 4em;
+    max-width: 60px;
+}
+
 /* Accessibility */
 [tabindex="0"]:focus {
   outline: 3px solid #555;

@@ -46,7 +46,8 @@
 			<h:message for="checkout" style="color:red" />
 
 			<h:outputText value="Guest Count" />
-			<h:inputText id="guestCount" value="#{reservationBean.guestCount}">
+			<h:inputText styleClass="room-count" id="guestCount"
+				value="#{reservationBean.guestCount}">
 				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 			</h:inputText>
 
@@ -76,12 +77,15 @@
 						<p>Our most affordable room</p>
 
 						<!-- FUll FORM -->
-						<h:outputText value="2 Full" />
-						<h:inputText id="full2" value="#{reservationBean.full2}">
+						<p class="sans subtext">
+							<h:outputText value="ROOMS" />
+						</p>
+						<h:inputText styleClass="room-count" id="full2"
+							value="#{reservationBean.full2}">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 						</h:inputText>
 						<h:outputText
-							value="#{reservationBean.roomAvailability['2full']} 2full roooms available" />
+							value="Only #{reservationBean.roomAvailability['2full']} available" />
 						<br />
 
 						<h:commandButton
@@ -107,12 +111,15 @@
 						<p>Sleeps up to two guests</p>
 
 						<!-- 1 QUEEN FORM -->
-						<h:outputText value="1 Queen" />
-						<h:inputText id="queen1" value="#{reservationBean.queen1}">
+						<p class="sans subtext">
+							<h:outputText value="ROOMS" />
+						</p>
+						<h:inputText styleClass="room-count" id="queen1"
+							value="#{reservationBean.queen1}">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 						</h:inputText>
 						<h:outputText
-							value="#{reservationBean.roomAvailability['1queen']} 1queen rooms available" />
+							value="Only #{reservationBean.roomAvailability['1queen']} available" />
 						<br />
 
 						<h:commandButton
@@ -139,12 +146,15 @@
 						<p>Sleeps up to four guests</p>
 
 						<!-- 2 QUEEN FORM -->
-						<h:outputText value="2 Queen" />
-						<h:inputText id="queen2" value="#{reservationBean.queen2}">
+						<p class="sans subtext">
+							<h:outputText value="ROOMS" />
+						</p>
+						<h:inputText styleClass="room-count" id="queen2"
+							value="#{reservationBean.queen2}">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 						</h:inputText>
 						<h:outputText
-							value="#{reservationBean.roomAvailability['2queen']} 2queen rooms available." />
+							value="Only #{reservationBean.roomAvailability['2queen']} available." />
 						<br />
 
 						<h:commandButton
@@ -171,12 +181,15 @@
 						<p>Sleeps up to two guests</p>
 
 						<!-- 1 KING FORM -->
-						<h:outputText value="1 King" />
-						<h:inputText id="king1" value="#{reservationBean.king1}">
+						<p class="sans subtext">
+							<h:outputText value="ROOMS" />
+						</p>
+						<h:inputText styleClass="room-count" id="king1"
+							value="#{reservationBean.king1}">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 						</h:inputText>
 						<h:outputText
-							value="#{reservationBean.roomAvailability['1king']} 1king beds available" />
+							value="Only #{reservationBean.roomAvailability['1king']} available" />
 						<br />
 
 						<h:commandButton
