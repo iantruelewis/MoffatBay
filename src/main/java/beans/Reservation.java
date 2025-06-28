@@ -12,21 +12,31 @@ public class Reservation implements Serializable {
 
 	private Date checkinDate;
 	private Date checkoutDate;
-	private int guestCount;
+	private int guestCount = 1;
 	private int king1 = 0;
 	private int queen1 = 0;
 	private int queen2 = 0;
 	private int full2 = 0;
 	private String comment;
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
+	
+	public Reservation() {
+		checkinDate = new Date();
+		checkoutDate = new Date();
+	}
 
 	public Date getCheckinDate() {
 		return checkinDate;
 	}
 
 	public void setCheckinDate(Date checkinDate) {
+		
+		if (checkinDate != null) {
 		updateRoomAvailability();
 		this.checkinDate = checkinDate;
+		} else {
+			checkinDate = new Date();
+		}
 	}
 
 	public Date getCheckoutDate() {
@@ -34,8 +44,13 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckoutDate(Date checkoutDate) {
-		updateRoomAvailability();
-		this.checkoutDate = checkoutDate;
+		if (checkoutDate != null) {
+			updateRoomAvailability();
+			this.checkoutDate = checkoutDate;
+		}
+		else {
+			this.checkoutDate = new Date();
+		}
 	}
 
 	public int getGuestCount() {

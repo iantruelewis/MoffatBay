@@ -102,6 +102,24 @@ public class ReservationManager implements Serializable {
 	}
 
 	public String saveReservation() {
+		
+		// login if not logged in
+		if (userBean.getUid() == 0) {
+			return "login";
+		}
+		
+		if (!reservationBean.getCheckoutDate().after(reservationBean.getCheckinDate())) {
+			return "reserror";
+		}
+		
+		DataManager dm = new DataManager();
+		String redirectLocation = dm.saveReservation(userBean, reservationBean);
+		
+		// redirect based on result of saving the reservation
+		return redirectLocation;
+	}
+	
+	public String updateBean() {
 		return "reservation";
 	}
     public String logout() {
