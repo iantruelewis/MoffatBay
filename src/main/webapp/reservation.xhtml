@@ -32,67 +32,162 @@
 			<h:outputText value="checkin" />
 			<h:inputText id="checkin" value="#{reservationBean.checkinDate}">
 				<f:convertDateTime pattern="MM-dd-yyyy" />
-			</h:inputText><h:outputText value="#{reservationBean.checkinDate}" />
-			<br />      <h:message for = "checkin" style = "color:red" />
+			</h:inputText>
+			<h:outputText value="#{reservationBean.checkinDate}" />
+			<br />
+			<h:message for="checkin" style="color:red" />
 
 			<h:outputText value="checkout" />
 			<h:inputText id="checkout" value="#{reservationBean.checkoutDate}">
 				<f:convertDateTime pattern="MM-dd-yyyy" />
-			</h:inputText><h:outputText value="#{reservationBean.checkoutDate}" />
-			<br />      <h:message for = "checkout" style = "color:red" />
+			</h:inputText>
+			<h:outputText value="#{reservationBean.checkoutDate}" />
+			<br />
+			<h:message for="checkout" style="color:red" />
 
 			<h:outputText value="Guest Count" />
 			<h:inputText id="guestCount" value="#{reservationBean.guestCount}">
 				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 			</h:inputText>
-			<br />
-
-			<h:outputText value="1 King" />
-			<h:inputText id="king1" value="#{reservationBean.king1}">
-				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-			</h:inputText>
-			<h:outputText
-				value="#{reservationBean.roomAvailability['1king']} 1king beds available" />
-			<br />
-
-
-			<h:outputText value="2 Full" />
-			<h:inputText id="full2" value="#{reservationBean.full2}">
-				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-			</h:inputText>
-			<h:outputText
-				value="#{reservationBean.roomAvailability['2full']} 2full roooms available" />
-			<br />
-
-
-			<h:outputText value="1 Queen" />
-			<h:inputText id="queen1" value="#{reservationBean.queen1}">
-				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-			</h:inputText>
-			<h:outputText
-				value="#{reservationBean.roomAvailability['1queen']} 1queen rooms available" />
-			<br />
-
-			<h:outputText value="2 Queen" />
-			<h:inputText id="queen2" value="#{reservationBean.queen2}">
-				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-			</h:inputText>
-			<h:outputText
-				value="#{reservationBean.roomAvailability['2queen']} 2queen rooms available." />
-			<br />
-
 
 			<h:commandButton action="#{reservationManagerBean.updateBean()}"
 				value="Update Bean" styleClass="solidbutton" />
-				
-			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
-				value="Book" styleClass="solidbutton" />
-		</h:form>
-		
-<ui:repeat var="entry" value="#{reservationBean.roomAvailability.entrySet().toArray()}">
-            key:#{entry.key}, value: #{entry.value}
-</ui:repeat>
 
+			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
+				value="Reserve Now" styleClass="solidbutton" />
+
+
+
+			<!--  Being CONTENT UI -->
+
+			<!-- FULL -->
+			<div class="row">
+				<div class="twocol" style="max-height: 500px">
+					<h:graphicImage library="images" name="HP_04_Rooms_Section_3.png"
+						class="center-image" alt="Room with two full beds" />
+				</div>
+
+				<div class="twocol">
+					<div class="room-form-container">
+						<p class="title">Two Full Beds</p>
+						<p>$120 per night</p>
+						<p>Dual Full Beds</p>
+						<p>Sleeps up to four guests</p>
+						<p>Our most affordable room</p>
+
+						<!-- FUll FORM -->
+						<h:outputText value="2 Full" />
+						<h:inputText id="full2" value="#{reservationBean.full2}">
+							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+						</h:inputText>
+						<h:outputText
+							value="#{reservationBean.roomAvailability['2full']} 2full roooms available" />
+						<br />
+
+						<h:commandButton
+							action="#{reservationManagerBean.saveReservation()}"
+							value="Reserve Now" styleClass="solidbutton" />
+					</div>
+				</div>
+			</div>
+
+			<br />
+			<!-- 1 QUEEN -->
+			<div class="row">
+				<div class="twocol" style="max-height: 500px">
+					<h:graphicImage library="images" name="HP_04_Rooms_Section_1.png"
+						class="center-image" alt="Room with one queen bed" />
+				</div>
+
+				<div class="twocol">
+					<div class="room-form-container">
+						<p class="title">One Queen Bed</p>
+						<p>$135 per night</p>
+						<p>One Queen Bed</p>
+						<p>Sleeps up to two guests</p>
+
+						<!-- 1 QUEEN FORM -->
+						<h:outputText value="1 Queen" />
+						<h:inputText id="queen1" value="#{reservationBean.queen1}">
+							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+						</h:inputText>
+						<h:outputText
+							value="#{reservationBean.roomAvailability['1queen']} 1queen rooms available" />
+						<br />
+
+						<h:commandButton
+							action="#{reservationManagerBean.saveReservation()}"
+							value="Reserve Now" styleClass="solidbutton" />
+					</div>
+				</div>
+			</div>
+
+			<br />
+
+			<!-- 2 QUEEN -->
+			<div class="row">
+				<div class="twocol" style="max-height: 500px">
+					<h:graphicImage library="images" name="HP_04_Rooms_Section_2.png"
+						class="center-image" alt="Room with two queen beds" />
+				</div>
+
+				<div class="twocol">
+					<div class="room-form-container">
+						<p class="title">Two Queen Beds</p>
+						<p>$150 per night</p>
+						<p>Two Queen Beds</p>
+						<p>Sleeps up to four guests</p>
+
+						<!-- 2 QUEEN FORM -->
+						<h:outputText value="2 Queen" />
+						<h:inputText id="queen2" value="#{reservationBean.queen2}">
+							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+						</h:inputText>
+						<h:outputText
+							value="#{reservationBean.roomAvailability['2queen']} 2queen rooms available." />
+						<br />
+
+						<h:commandButton
+							action="#{reservationManagerBean.saveReservation()}"
+							value="Reserve Now" styleClass="solidbutton" />
+					</div>
+				</div>
+			</div>
+
+			<br />
+
+			<!-- 1 KING -->
+			<div class="row">
+				<div class="twocol" style="max-height: 500px">
+					<h:graphicImage library="images" name="HP_04_Rooms_Section_2.png"
+						class="center-image" alt="Room with one king bed" />
+				</div>
+
+				<div class="twocol">
+					<div class="room-form-container">
+						<p class="title">One King Bed</p>
+						<p>$160 per night</p>
+						<p>One King Bed</p>
+						<p>Sleeps up to two guests</p>
+
+						<!-- 1 KING FORM -->
+						<h:outputText value="1 King" />
+						<h:inputText id="king1" value="#{reservationBean.king1}">
+							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+						</h:inputText>
+						<h:outputText
+							value="#{reservationBean.roomAvailability['1king']} 1king beds available" />
+						<br />
+
+						<h:commandButton
+							action="#{reservationManagerBean.saveReservation()}"
+							value="Reserve Now" styleClass="solidbutton" />
+
+					</div>
+				</div>
+			</div>
+
+		</h:form>
 
 		<!--  Footer  -->
 		<ui:insert name="newsletter">

@@ -58,7 +58,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setGuestCount(int guestCount) {
+		if (guestCount > 0) {
 		this.guestCount = guestCount;
+		}
 	}
 
 	public int getKing1() {
@@ -66,7 +68,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setKing1(int king1) {
-		this.king1 = king1;
+		if (king1 >= 0 && king1 <= roomAvailability.get("1king")) {
+			this.king1 = king1;
+		}
 	}
 
 	public int getQueen1() {
@@ -74,7 +78,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen1(int queen1) {
-		this.queen1 = queen1;
+		if (queen1 >= 0 && queen1 <= roomAvailability.get("1queen")) {
+			this.queen1 = queen1;
+		}
 	}
 
 	public int getQueen2() {
@@ -82,7 +88,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen2(int queen2) {
-		this.queen2 = queen2;
+		if (queen2 >= 0 && queen2 <= roomAvailability.get("2queen")) {
+			this.queen2 = queen2;
+		}
 	}
 
 	public int getFull2() {
@@ -90,7 +98,9 @@ public class Reservation implements Serializable {
 	}
 
 	public void setFull2(int full2) {
-		this.full2 = full2;
+		if (full2 >= 0 && full2 <= roomAvailability.get("2full")) {
+			this.full2 = full2;
+		}
 	}
 
 	public String getComment() {

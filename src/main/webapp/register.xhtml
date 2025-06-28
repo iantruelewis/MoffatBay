@@ -26,12 +26,13 @@
 		</ui:insert>
 
 <!--  Page Content  -->
+					<h:form>
+
 		<div class="row">
 			<div class="twocol" id="regform">
 
 				<div id="regforminner">
 
-					<h:form>
 						<h:outputText styleClass="title" value="Create An Account" />
 						<br />
 						<h:outputText styleClass="subtext sans"
@@ -88,15 +89,16 @@
 						<h:messages for="phone" styleClass="message" />
 
 
-					</h:form>
 
 				</div>
 
 			</div>
 			<div class="twocol">
-				<h:graphicImage value="images/regimage01.jpg" id="regimage" alt="Moffat Bay Sunset"/>
+				<h:graphicImage value="images/regimage01.jpg" class="center-image" alt="Moffat Bay Sunset"/>
 			</div>
 		</div>
+		
+							</h:form>
 		
 <!--  Footer  -->
 		<ui:insert name="newsletter">
