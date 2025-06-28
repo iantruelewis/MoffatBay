@@ -180,6 +180,7 @@ body {
 	padding-right: 30px;
 	padding-left: 30px;
 	border-radius: 25px;
+	cursor:pointer;
 }
 
 .blackoutlinebutton {
@@ -191,6 +192,7 @@ body {
 	padding-right: 30px;
 	padding-left: 30px;
 	border-radius: 25px;
+	cursor:pointer;
 }
 
 .whiteoutlinebutton {
@@ -202,6 +204,7 @@ body {
 	padding-right: 30px;
 	padding-left: 30px;
 	border-radius: 25px;
+	cursor:pointer;
 }
 
 .terms-container,
