@@ -100,6 +100,14 @@ public class ReservationManager implements Serializable {
 	}
 
 	public String saveReservation() {
+		
+		DataManager dm = new DataManager();
+		String redirectLocation = dm.saveReservation(userBean, reservationBean);
+		
+		// redirect based on result of saving the reservation
+		return redirectLocation;
+	}
+	public String updateBean() {
 		return "reservation";
 	}
 }

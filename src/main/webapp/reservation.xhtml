@@ -82,11 +82,11 @@
 			<br />
 
 
-			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
+			<h:commandButton action="#{reservationManagerBean.updateBean()}"
 				value="Update Bean" styleClass="solidbutton" />
 				
-			<h:commandButton action="#{reservationBean.updateRoomAvailability()}"
-				value="Update Room Availability" styleClass="solidbutton" />
+			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
+				value="Book" styleClass="solidbutton" />
 		</h:form>
 		
 <ui:repeat var="entry" value="#{reservationBean.roomAvailability.entrySet().toArray()}">
