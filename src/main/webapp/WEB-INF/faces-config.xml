@@ -30,12 +30,6 @@
 			<value>#{reservationBean}</value>
 		</managed-property>
 	</managed-bean>
-	
-	<managed-bean>
- 	 <managed-bean-name>reservationManager</managed-bean-name>
- 	 <managed-bean-class>beans.ReservationManager</managed-bean-class>
-  	 <managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>userBean</managed-bean-name>
