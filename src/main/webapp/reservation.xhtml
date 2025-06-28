@@ -106,8 +106,13 @@
 							<f:validateLongRange minimum="0"
 								maximum="#{reservationBean.roomAvailability['2full']}" />
 						</h:inputText>
+
+						<h:outputText
+							value="#{reservationBean.roomAvailability['2full']} Max" />
+						<br />
 						<h:message for="full2" styleClass="message" />
-						#{reservationBean.roomAvailability['2full']} <br />
+
+						<br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -155,8 +160,13 @@
 							<f:validateLongRange minimum="0"
 								maximum="#{reservationBean.roomAvailability['1queen']}" />
 						</h:inputText>
+
+						<h:outputText
+							value="#{reservationBean.roomAvailability['1queen']} Max" />
+						<br />
+
 						<h:message for="queen1" styleClass="message" />
-						#{reservationBean.roomAvailability['1queen']} <br />
+						<br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -205,8 +215,13 @@
 							<f:validateLongRange minimum="0"
 								maximum="#{reservationBean.roomAvailability['2queen']}" />
 						</h:inputText>
+						<h:outputText
+							value="#{reservationBean.roomAvailability['2queen']} Max" />
+						<br />
+
 						<h:message for="queen2" styleClass="message" />
-						#{reservationBean.roomAvailability['2queen']} <br />
+
+						<br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
@@ -220,7 +235,7 @@
 			<!-- 1 KING -->
 			<div class="row">
 				<div class="twocol" style="max-height: 500px">
-					<h:graphicImage library="images" name="HP_04_Rooms_Section_2.png"
+					<h:graphicImage library="images" name="HP_04_Rooms_Section_4.jpg"
 						class="center-image" alt="Room with one king bed" />
 				</div>
 
@@ -255,8 +270,13 @@
 							<f:validateLongRange minimum="0"
 								maximum="#{reservationBean.roomAvailability['1king']}" />
 						</h:inputText>
+
+						<h:outputText
+							value="#{reservationBean.roomAvailability['1king']} Max" />
+						<br />
+
 						<h:message for="king1" styleClass="message" />
-						#{reservationBean.roomAvailability['1king']} <br />
+						<br />
 
 						<h:commandButton
 							action="#{reservationManagerBean.saveReservation()}"
