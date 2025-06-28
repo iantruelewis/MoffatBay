@@ -1,49 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-  <title><ui:insert name="title">Account</ui:insert></title>
-
-  <!-- Import Project Styles -->
+  <title><ui:insert name="title">My Account</ui:insert></title>
   <h:outputStylesheet name="styles.css" library="css" />
-
-  <!-- Local Page Styles -->
   <style>
     .account-container {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 30px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      max-width: 700px;
+      margin: 160px auto;
+      padding: 40px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
       font-family: sans-serif;
-      background-color: #f9f9f9;
+      background-color: #fafafa;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
 
     .account-container h2 {
       text-align: center;
+      margin-bottom: 30px;
     }
 
     .account-field {
-      margin: 15px 0;
+      margin: 20px 0;
     }
 
     .account-field label {
-      display: block;
       font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
     }
 
     .account-field span {
       display: block;
-      margin-top: 4px;
+      font-size: 1em;
+      color: #444;
     }
 
-    .edit-link {
+    .button-container {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
+    }
+
+    .edit-button {
+      padding: 10px 25px;
+      font-size: 1em;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .edit-button:hover {
+      background-color: #555;
+      cursor: pointer;
     }
   </style>
 </h:head>
@@ -51,7 +69,7 @@
 <h:body>
   <f:view>
 
-    <!-- Header Include -->
+    <!-- Header -->
     <ui:insert name="header">
       <ui:include src="/templates/header.xhtml" />
     </ui:insert>
@@ -90,17 +108,12 @@
         <span><h:outputText value="#{userBean.googleId}" /></span>
       </div>
 
-      <div class="edit-link">
-        <h:link value="Edit Profile" outcome="editAccount" />
+      <div class="button-container">
+        <h:link outcome="editAccount" styleClass="edit-button">Edit Profile</h:link>
       </div>
     </div>
 
-    <!-- Newsletter Include -->
-    <ui:insert name="newsletter">
-      <ui:include src="/templates/newsletter.xhtml" />
-    </ui:insert>
-
-    <!-- Footer Include -->
+    <!-- Footer -->
     <ui:insert name="footer">
       <ui:include src="/templates/footer.xhtml" />
     </ui:insert>

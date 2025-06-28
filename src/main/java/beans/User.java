@@ -70,4 +70,5 @@ public class User implements Serializable{
 	public void setInitial(String initial) {
 		this.initial = initial;
 	}
+	
 }

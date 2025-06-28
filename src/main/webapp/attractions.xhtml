@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+  <h:head>
+    <title><ui:insert name="title">Attractions</ui:insert></title>
+    <h:outputStylesheet name="styles.css" library="css" />
+  </h:head>
+
+  <h:body>
+    <f:view>
+
+      <!-- Header -->
+      <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+      </ui:insert>
+
+      <!-- Hero Section -->
+      <div style="
+        height: 80vh;
+        width: 100%;
+        background-image: url('#{resource['images/about-us-4.jpg']}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      ">
+        <div style="
+          background-color: rgba(0, 0, 0, 0.4);
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        "></div>
+
+        <div style="position: relative; z-index: 1;">
+          <h1 class="title serif">Attractions</h1>
+          <p class="subtext sans">Coming soon...</p>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+      </ui:insert>
+
+      <!-- Footer -->
+      <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+      </ui:insert>
+
+    </f:view>
+  </h:body>
+</html>
