@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c ="http://java.sun.com/jsp/jstl/core">
 
 <h:body>
   <ui:composition>
@@ -40,29 +41,39 @@
           <!-- User Avatar with Dropdown -->
           <div class="user-menu" style="position: relative; display: inline-block;">
             <div class="circle">
-              <a class="circle-inner">#{userBean.initial}</a>
+
+					<c:choose>
+						<c:when test="#{userBean.uid == 0}">
+							<a class="circle-inner" href="login.jsf">#{userBean.initial}</a>
+						</c:when>
+						<c:otherwise>
+							<a class="circle-inner">#{userBean.initial}</a>
+						</c:otherwise>
+					</c:choose>
             </div>
 
-            <div class="dropdown-content" style="
-              display: none;
-              position: absolute;
-              right: 0;
-              background-color: white;
-              min-width: 120px;
-              box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-              z-index: 1;
-              border-radius: 4px;">
-              <a href="account.jsf" style="padding: 10px; display: block; text-decoration: none; color: black;">Account</a>
-
-              <!-- Logout Button -->
-				<h:form style="margin: 0; padding: 0;">
-  					<h:commandLink value="Logout"
-                 action="#{reservationManagerBean.logout}"
-                 onclick="return confirm('Are you sure you want to log out?');"
-                 styleClass="logout-link" />
-				</h:form>
-
-            </div>
+			<c:if test="#{userBean.uid > 0}">
+	            <div class="dropdown-content" style="
+	              display: none;
+	              position: absolute;
+	              right: 0;
+	              background-color: white;
+	              min-width: 120px;
+	              box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+	              z-index: 1;
+	              border-radius: 4px;">
+	              <a href="account.jsf" style="padding: 10px; display: block; text-decoration: none; color: black;">Account</a>
+	
+	              <!-- Logout Button -->
+					<h:form style="margin: 0; padding: 0;">
+	  					<h:commandLink value="Logout"
+	                 action="#{reservationManagerBean.logout}"
+	                 onclick="return confirm('Are you sure you want to log out?');"
+	                 styleClass="logout-link" />
+					</h:form>
+	
+	            </div>
+            </c:if>
           </div>
 
           <!-- Dropdown Behavior -->

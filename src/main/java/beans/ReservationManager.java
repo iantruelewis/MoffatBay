@@ -67,7 +67,7 @@ public class ReservationManager implements Serializable {
 		if (user != null) {
 			setUser(user);
 
-			return "home.xhtml?faces-redirect=true";
+			return "reservation.xhtml?faces-redirect=true";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "*Login Failed*", "Incorrect Email or Password"));
