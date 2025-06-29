@@ -34,6 +34,7 @@
 							value="#{newsletterSignupBean.email}"
 							pt:placeholder="Enter your email address"
 							validatorMessage="Invalid Email Address">
+							<f:validateLength minimum = "6" maximum = "254" />
 							<f:validateRegex
 								pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9]+" />
 						</h:inputText>
