@@ -410,7 +410,7 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .nav-container {
         padding: 0 20px;
     }
@@ -890,7 +890,7 @@ body {
     flex: auto; /* Reset flex property for stacking */
   }
   #regforminner {
-  	display: flex;
+  	display: block;
 	align-items: center;
 	}
 }
