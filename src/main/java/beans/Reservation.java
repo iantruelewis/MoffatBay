@@ -31,12 +31,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckinDate(Date checkinDate) {
-
-		if (checkinDate != null) {
+		
+		// initialize date if null
+		if (checkinDate == null) {
+			this.checkinDate = new Date();
+		}
+		
+		// set date 
+		else {
 			this.checkinDate = checkinDate;
 			updateRoomAvailability();
-		} else {
-			checkinDate = new Date();
 		}
 	}
 
@@ -45,11 +49,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckoutDate(Date checkoutDate) {
-		if (checkoutDate != null) {
+		
+		// initialize date if null
+		if (checkoutDate == null) {
+			this.checkoutDate = new Date();
+		}
+		
+		// set date 
+		else {
 			this.checkoutDate = checkoutDate;
 			updateRoomAvailability();
-		} else {
-			this.checkoutDate = new Date();
 		}
 	}
 
