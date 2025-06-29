@@ -56,6 +56,21 @@
 
 				<h:outputText styleClass="subtext" style="color: #777777"
 					value="GUESTS" />
+
+
+				<!--  Add Remove Links -->
+				<h:commandLink action="#{reservationBean.upGuest}">
+					<h:graphicImage library="images" name="chevron-up.svg"
+						class="chevron" alt="Add room" />
+					<f:ajax execute="@form" render="guestCount" />
+				</h:commandLink>
+				<h:commandLink action="#{reservationBean.dnGuest}">
+					<h:graphicImage library="images" name="chevron-down.svg"
+						class="chevron" alt="Remove room" />
+					<f:ajax execute="@form" render="guestCount" />
+				</h:commandLink>
+
+
 				<br />
 				<h:inputText styleClass="res-date" id="guestCount"
 					value="#{reservationBean.guestCount}"

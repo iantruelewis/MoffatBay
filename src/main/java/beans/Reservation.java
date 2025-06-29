@@ -187,4 +187,19 @@ public class Reservation implements Serializable {
 		}
 		return null;
 	}
+	
+	public String upGuest() {
+		if (guestCount < 99) {
+			guestCount++;
+			}
+		return null;
+	}
+
+	public String dnGuest() {
+		if (guestCount > 1) {
+			guestCount--;
+		}
+		return null;
+	}
+	
 }
