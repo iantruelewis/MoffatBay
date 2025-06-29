@@ -16,8 +16,23 @@ INSERT INTO reservation (uid, checkin, checkout, guest_count, comment) VALUES
 INSERT INTO room_inventory (room_num, type) VALUES
   (101, '1king'),
   (102, '2queen'),
+  (103, '1king'),
+  (104, '1king'),
+  (105, '1king'),
+  (106, '2queen'),
+  (107, '2queen'),
+  (108, '2queen'),
+  (109, '2queen'),
   (201, '1queen'),
-  (202, '2full');
+  (202, '2full'),
+  (203, '1queen'),
+  (204, '1queen'),
+  (205, '1queen'),
+  (206, '2full'),
+  (207, '2full'),
+  (208, '2full'),
+  (209, '2full');
+
 
 -- Room Reservation
 INSERT INTO room_reservation (res_id, room_num) VALUES
