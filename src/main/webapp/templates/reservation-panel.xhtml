@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<!--  Surround the reservation panel in a form -->
+
+	<ui:composition>
+    	<div class="rescontainer">
+
+			<!--  Check-in Date -->
+			<div class="innercontainer">
+
+				<h:outputText styleClass="subtext" style="color: #777777"
+					value="ARRIVAL" />
+				<br />
+				<h:inputText id="checkin" styleClass="res-date"
+					style="width: 400px;" value="#{reservationBean.checkinDate}">
+					<f:convertDateTime pattern="MM-dd-yyyy" />
+					<f:ajax event="blur"
+						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+				</h:inputText>
+				<br />
+				<h:message for="checkin" style="color:red" />
+
+			</div>
+
+
+			<!--  Check-out Date -->
+			<div class="innercontainer">
+
+				<h:outputText styleClass="subtext" style="color: #777777"
+					value="DEPARTURE" />
+				<br />
+				<h:inputText id="checkout" styleClass="res-date"
+					value="#{reservationBean.checkoutDate}">
+					<f:convertDateTime pattern="MM-dd-yyyy" />
+					<f:ajax event="blur"
+						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+				</h:inputText>
+				<br />
+				<h:message for="checkout" style="color:red" />
+
+			</div>
+
+
+			<!--  Guest Count -->
+			<div class="innercontainer">
+
+				<h:outputText styleClass="subtext" style="color: #777777"
+					value="GUESTS" />
+
+
+				<!--  Add Remove Links -->
+				<h:commandLink action="#{reservationBean.upGuest}">
+					<h:graphicImage library="images" name="chevron-up.svg"
+						class="chevron" alt="Add room" />
+					<f:ajax execute="@form" render="guestCount" />
+				</h:commandLink>
+				<h:commandLink action="#{reservationBean.dnGuest}">
+					<h:graphicImage library="images" name="chevron-down.svg"
+						class="chevron" alt="Remove room" />
+					<f:ajax execute="@form" render="guestCount" />
+				</h:commandLink>
+
+
+				<br />
+				<h:inputText styleClass="res-date" id="guestCount"
+					value="#{reservationBean.guestCount}"
+					validatorMessage="A minumum of one guest must be selected">
+
+					<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
+					<f:validateLongRange minimum="1" />
+					<f:ajax event="blur"
+						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+				</h:inputText>
+				<h:message for="guestCount" styleClass="message" />
+
+			</div>
+
+
+			<div class="innercontainer" style="width: 100%">
+				<h:commandButton value="Check Availability" styleClass="solidbutton"
+					action="reservation">
+				</h:commandButton>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

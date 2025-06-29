@@ -23,6 +23,7 @@ public class Reservation implements Serializable {
 	public Reservation() {
 		checkinDate = new Date();
 		checkoutDate = new Date();
+		updateRoomAvailability();
 	}
 
 	public Date getCheckinDate() {
@@ -30,12 +31,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckinDate(Date checkinDate) {
-
-		if (checkinDate != null) {
+		
+		// initialize date if null
+		if (checkinDate == null) {
+			this.checkinDate = new Date();
+		}
+		
+		// set date 
+		else {
 			this.checkinDate = checkinDate;
 			updateRoomAvailability();
-		} else {
-			checkinDate = new Date();
 		}
 	}
 
@@ -44,11 +49,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setCheckoutDate(Date checkoutDate) {
-		if (checkoutDate != null) {
+		
+		// initialize date if null
+		if (checkoutDate == null) {
+			this.checkoutDate = new Date();
+		}
+		
+		// set date 
+		else {
 			this.checkoutDate = checkoutDate;
 			updateRoomAvailability();
-		} else {
-			this.checkoutDate = new Date();
 		}
 	}
 
@@ -186,4 +196,19 @@ public class Reservation implements Serializable {
 		}
 		return null;
 	}
+	
+	public String upGuest() {
+		if (guestCount < 99) {
+			guestCount++;
+			}
+		return null;
+	}
+
+	public String dnGuest() {
+		if (guestCount > 1) {
+			guestCount--;
+		}
+		return null;
+	}
+	
 }

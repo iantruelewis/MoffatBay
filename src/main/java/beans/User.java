@@ -64,6 +64,9 @@ public class User implements Serializable{
 	}
 
 	public String getInitial() {
+		if (uid == 0) {
+			return "MB";
+		}
 		return initial;
 	}
 
