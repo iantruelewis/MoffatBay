@@ -27,6 +27,36 @@ body {
 	font-size: .8em;
 	color: #ffffff;
 }
+
+/* reservation panel specific settings */
+.rescontainer {
+	background-color: #FFFFFF;
+	margin: 0px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 40px;	
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+
+.innercontainer {
+	text-align: center;
+		padding: 10px;	
+		padding-left: 20px;
+		padding-right: 20px;
+	
+}
+
+.res-date {
+  background-color: #FFFFFF;
+  border: none;
+  font-family: "Old Standard TT", serif;
+  font-size: 2.7em;
+  max-width: 250px;
+  text-align: center;
+}
+
 /* Newsletter specific settings */
 .newscontainer {
 	background-color: #ffffff;
@@ -35,6 +65,7 @@ body {
 
 .room-form-container {
 	padding: 50px;
+	padding-top: 0px;
 }
 
 #newsletter {

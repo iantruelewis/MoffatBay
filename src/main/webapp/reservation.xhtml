@@ -25,42 +25,14 @@
 			<ui:include src="/templates/header.xhtml" />
 		</ui:insert>
 
-		<!--  Page Content  -->
-
 		<h:form>
 
-			<h:outputText value="checkin" />
-			<h:inputText id="checkin" value="#{reservationBean.checkinDate}">
-				<f:convertDateTime pattern="MM-dd-yyyy" />
-			</h:inputText>
-			<h:outputText value="#{reservationBean.checkinDate}" />
-			<br />
-			<h:message for="checkin" style="color:red" />
-
-			<h:outputText value="checkout" />
-			<h:inputText id="checkout" value="#{reservationBean.checkoutDate}">
-				<f:convertDateTime pattern="MM-dd-yyyy" />
-			</h:inputText>
-			<h:outputText value="#{reservationBean.checkoutDate}" />
-			<br />
-			<h:message for="checkout" style="color:red" />
-
-			<h:outputText value="Guest Count" />
-			<h:inputText styleClass="room-count" id="guestCount"
-				value="#{reservationBean.guestCount}"
-				validatorMessage="A minumum of one guest must be selected">
-
-				<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-				<f:validateLongRange minimum="1" />
-			</h:inputText>
-			<h:message for="guestCount" styleClass="message" />
-
-
-			<h:commandButton action="#{reservationManagerBean.updateBean()}"
-				value="Update Bean" styleClass="solidbutton" />
-
-			<h:commandButton action="#{reservationManagerBean.saveReservation()}"
-				value="Reserve Now" styleClass="solidbutton" />
+		<ui:insert name="reservation-panel">
+			<ui:include src="/templates/reservation-panel.xhtml" />
+		</ui:insert>
+		
+		
+		<!--  Page Content  -->
 
 
 
@@ -107,7 +79,7 @@
 								maximum="#{reservationBean.roomAvailability['2full']}" />
 						</h:inputText>
 
-						<h:outputText
+						<h:outputText id="max-full2"
 							value="#{reservationBean.roomAvailability['2full']} Max" />
 						<br />
 						<h:message for="full2" styleClass="message" />
@@ -161,7 +133,7 @@
 								maximum="#{reservationBean.roomAvailability['1queen']}" />
 						</h:inputText>
 
-						<h:outputText
+						<h:outputText id="max-queen1"
 							value="#{reservationBean.roomAvailability['1queen']} Max" />
 						<br />
 
@@ -215,7 +187,7 @@
 							<f:validateLongRange minimum="0"
 								maximum="#{reservationBean.roomAvailability['2queen']}" />
 						</h:inputText>
-						<h:outputText
+						<h:outputText id="max-queen2"
 							value="#{reservationBean.roomAvailability['2queen']} Max" />
 						<br />
 
@@ -271,7 +243,7 @@
 								maximum="#{reservationBean.roomAvailability['1king']}" />
 						</h:inputText>
 
-						<h:outputText
+						<h:outputText id="max-king1"
 							value="#{reservationBean.roomAvailability['1king']} Max" />
 						<br />
 

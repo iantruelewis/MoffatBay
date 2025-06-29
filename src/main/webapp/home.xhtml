@@ -296,11 +296,14 @@
       </div>
 
       <!-- Availability Section -->
-      <div style="width: 100%; position: relative;">
-        <h:graphicImage library="images" name="HP_06_Availability_Section.png" style="width: 100%; display: block;" alt="Check Availability" />
-      </div>
+		<h:form>
+			<ui:insert name="reservation-panel">
+				<ui:include src="/templates/reservation-panel.xhtml" />
+			</ui:insert>
+		</h:form>
 
-      <!-- Video Section -->
+
+		<!-- Video Section -->
       <div style="width: 100%; position: relative;">
         <h:graphicImage library="images" name="HP_07_Video_Section.png" style="width: 100%; display: block;" alt="Moffat Bay Lodge Video" />
         <div style="

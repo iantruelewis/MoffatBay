@@ -88,13 +88,14 @@
 </div>
 
 <!-- Availability Section -->
-<div style="width: 100%; position: relative;">
-  <h:graphicImage library="images" name="HP_06_Availability_Section.png" 
-    style="width: 100%; display: block;" 
-    alt="Check Availability" />
-</div>
+		<h:form>
+			<ui:insert name="reservation-panel">
+				<ui:include src="/templates/reservation-panel.xhtml" />
+			</ui:insert>
+		</h:form>
 
-<!-- Amenities Section -->
+
+		<!-- Amenities Section -->
 <div class="row" style="min-height: 500px; padding: 0px; background-color: #F9F7F5; display: flex; flex-direction: row;">
   <div class="twocol" style="padding-left: 40px; padding-top: 40px; margin: 60px; flex: 1;">
     <h2 class="title serif">Explore The Bay Like A True Local.</h2>

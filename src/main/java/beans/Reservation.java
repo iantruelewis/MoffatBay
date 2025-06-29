@@ -23,6 +23,7 @@ public class Reservation implements Serializable {
 	public Reservation() {
 		checkinDate = new Date();
 		checkoutDate = new Date();
+		updateRoomAvailability();
 	}
 
 	public Date getCheckinDate() {
