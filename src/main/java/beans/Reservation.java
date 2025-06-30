@@ -10,6 +10,7 @@ public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private int res_id = 0;
 	private Date checkinDate;
 	private Date checkoutDate;
 	private int guestCount = 1;
@@ -24,6 +25,14 @@ public class Reservation implements Serializable {
 		checkinDate = new Date();
 		checkoutDate = new Date();
 		updateRoomAvailability();
+	}
+
+	public int getRes_id() {
+		return res_id;
+	}
+
+	public void setRes_id(int res_id) {
+		this.res_id = res_id;
 	}
 
 	public Date getCheckinDate() {
