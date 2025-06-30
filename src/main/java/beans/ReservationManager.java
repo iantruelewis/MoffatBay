@@ -130,5 +130,5 @@ public class ReservationManager implements Serializable {
         }
         return "login?faces-redirect=true";
     }
-	
+
 }

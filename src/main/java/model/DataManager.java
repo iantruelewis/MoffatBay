@@ -494,6 +494,24 @@ public class DataManager {
 						ps.setInt(5, reservation.getGuestCount());
 
 						ps.executeUpdate();
+						
+						
+						// Store res_id
+						sql = "SELECT res_id from `reservation` where `uid` = ? AND `checkin` = ? AND `checkout` = ? AND `guest_count` = ?;";
+
+						ps = conn.prepareStatement(sql);
+
+						ps.setInt(1, user.getUid());
+						ps.setString(2, checkin);
+						ps.setString(3, checkout);
+						ps.setInt(4, reservation.getGuestCount());
+
+						rs = ps.executeQuery();
+						
+						if (rs.next()) {
+							reservation.setRes_id(rs.getInt("res_id"));
+						}
+						
 					}
 				}
 
@@ -518,7 +536,43 @@ public class DataManager {
 			}
 		}
 
-		// TODO: go to reservation summary on success
-		return "home";
+		return "reservation-summary";
 	}
+//	
+//	
+//	private void getCurrReservation(Reservation reservation, User user) {
+//
+//		Connection conn = getConnection();
+//		
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//
+//		if (conn != null) {
+//
+//			try {
+//				
+//				String sql = "SELECT \n"
+//						+ "    res.res_id, uid, checkin, checkout, room.room_num, inv.type\n"
+//						+ "FROM\n"
+//						+ "    reservation AS res\n"
+//						+ "        INNER JOIN\n"
+//						+ "    room_reservation AS room ON res.res_id = room.res_id\n"
+//						+ "        INNER JOIN\n"
+//						+ "    room_inventory AS inv ON inv.room_num = room.room_num\n"
+//						+ "WHERE\n"
+//						+ "    res.res_id = ?;";
+//				
+//				PreparedStatement ps = conn.prepareStatement(sql);
+//				
+//				ps.setInt(1, reservation.getRes_id());
+//				
+//				ResultSet rs = ps.executeQuery();
+//				
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();			
+//				}
+//		}
+//	}
+	
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c ="http://java.sun.com/jsp/jstl/core">
+
+
+  <f:view>
+
+    <h:head>
+      <title><ui:insert name="title">Reservation Summary</ui:insert></title>
+      <h:outputStylesheet name="styles.css" library="css" />
+    </h:head>
+
+    <h:body>
+
+      <!-- Header -->
+      <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+      </ui:insert>
+
+
+      <!-- Main Content Section -->
+      <div class="row" style="padding: 80px 40px; background-color: #fff;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+
+          <h2 class="title serif">Your Reservation Summary</h2>
+          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+            Thank you for booking with Moffat Bay Lodge. Below is a summary of your stay.
+          </p>
+
+          <hr style="margin: 40px 0;" />
+<c:choose>
+	<c:when test="#{reservationBean.res_id > 0}">
+          <h:panelGroup>
+            <!-- Reservation Details -->
+            <div style="text-align: left;">
+              <p class="subtext sans"><strong>Guest Name:</strong> #{userBean.name}</p>
+              <p class="subtext sans"><strong>Email:</strong> #{userBean.email}</p>
+              <p class="subtext sans"><strong>Phone:</strong> #{userBean.phone}</p>
+              <br />
+
+              <p class="subtext sans"><strong>Check-in Date:</strong>
+                <h:outputText value="#{reservationBean.checkinDate}">
+                  <f:convertDateTime pattern="MM-dd-yyyy" />
+                </h:outputText>
+              </p>
+              <p class="subtext sans"><strong>Check-out Date:</strong>
+                <h:outputText value="#{reservationBean.checkoutDate}">
+                  <f:convertDateTime pattern="MM-dd-yyyy" />
+                </h:outputText>
+              </p>
+              <p class="subtext sans"><strong>Guest Count:</strong> #{reservationBean.guestCount}</p>
+              <br />
+
+              <p class="subtext sans"><strong>Room Selection:</strong></p>
+              <ul class="subtext sans" style="list-style: disc; padding-left: 20px;">
+                <ui:fragment rendered="#{reservationBean.full2 > 0}">
+                  <li>Two Full Beds: #{reservationBean.full2}</li>
+                </ui:fragment>
+                <ui:fragment rendered="#{reservationBean.queen1 > 0}">
+                  <li>One Queen Bed: #{reservationBean.queen1}</li>
+                </ui:fragment>
+                <ui:fragment rendered="#{reservationBean.queen2 > 0}">
+                  <li>Two Queen Beds: #{reservationBean.queen2}</li>
+                </ui:fragment>
+                <ui:fragment rendered="#{reservationBean.king1 > 0}">
+                  <li>One King Bed: #{reservationBean.king1}</li>
+                </ui:fragment>
+              </ul>
+            </div>
+          </h:panelGroup>
+</c:when>
+<c:otherwise>
+          <h:panelGroup>
+            <p class="subtext sans" style="color: #900; font-weight: bold;">
+              No reservation found.
+            </p>
+            <h:link outcome="home" styleClass="blackoutlinebutton">Back to Home</h:link>
+          </h:panelGroup>
+</c:otherwise>
+</c:choose>
+
+        </div>
+      </div>
+
+      <!-- Newsletter Insert -->
+      <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+      </ui:insert>
+
+      <!-- Footer Insert -->
+      <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+      </ui:insert>
+
+    </h:body>
+  </f:view>
+
+</html>
