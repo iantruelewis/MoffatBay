@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Deque;
@@ -460,25 +461,25 @@ public class DataManager {
 					for (int i = 0; i < roomsNeeded.get(roomType); i++) {
 
 						int roomNumber = 0;
+						boolean available = true;
 
-						// If a room is booked that isn't available it will cause an exception.
-						try {
-							
-//						// get room number
-							if (roomType.equals("king1")) {
-								roomNumber = king1.pop();
-							}
-							else if (roomType.equals("queen1")) {
-								roomNumber = queen1.pop();
-							}
-							else if (roomType.equals("queen2")) {
-								roomNumber = queen2.pop();
-							}
-							else if (roomType.equals("full2")) {
-								roomNumber = full2.pop();
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
+						if (roomType.equals("king1")) {
+							if (!king1.isEmpty()) roomNumber = king1.pop();
+							else available = false;
+						} else if (roomType.equals("queen1")) {
+							if (!queen1.isEmpty()) roomNumber = queen1.pop();
+							else available = false;
+						} else if (roomType.equals("queen2")) {
+							if (!queen2.isEmpty()) roomNumber = queen2.pop();
+							else available = false;
+						} else if (roomType.equals("full2")) {
+							if (!full2.isEmpty()) roomNumber = full2.pop();
+							else available = false;
+						}
+
+						if (!available) {
+							System.err.println("Not enough rooms available for type: " + roomType);
+							conn.rollback(); // rollback any partial inserts
 							return "reserror";
 						}
 
@@ -518,7 +519,86 @@ public class DataManager {
 			}
 		}
 
-		// TODO: go to reservation summary on success
-		return "home";
+		// Go to reservation summary on success
+		return "reservation-summary?faces-redirect=true";
 	}
+
+	// Get the most recent reservation for a user, including room counts
+	public Reservation getLatestReservationForUser(int userId) {
+	    Reservation reservation = null;
+
+	    Connection conn = getConnection();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+	    if (conn != null) {
+	        try {
+	            // First, get the latest reservation record for the user
+	            String sql = "SELECT * FROM reservation WHERE uid = ? ORDER BY res_id DESC LIMIT 1";
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ps.setInt(1, userId);
+
+	            ResultSet rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                reservation = new Reservation();
+	                reservation.setCheckinDate(dateFormat.parse(rs.getString("checkin")));
+	                reservation.setCheckoutDate(dateFormat.parse(rs.getString("checkout")));
+	                reservation.setGuestCount(rs.getInt("guest_count"));
+
+	                int resId = rs.getInt("res_id");
+
+	                // Now get the count of each room type reserved for this reservation
+	                sql = "SELECT inv.type, COUNT(*) as count FROM room_reservation rr "
+	                    + "JOIN room_inventory inv ON rr.room_num = inv.room_num "
+	                    + "WHERE rr.res_id = ? GROUP BY inv.type";
+
+	                PreparedStatement psRooms = conn.prepareStatement(sql);
+	                psRooms.setInt(1, resId);
+
+	                ResultSet rsRooms = psRooms.executeQuery();
+
+	                // Initialize counts to zero
+	                reservation.setKing1(0);
+	                reservation.setQueen1(0);
+	                reservation.setQueen2(0);
+	                reservation.setFull2(0);
+
+	                while (rsRooms.next()) {
+	                    String type = rsRooms.getString("type");
+	                    int count = rsRooms.getInt("count");
+
+	                    switch (type) {
+	                        case "1king":
+	                            reservation.setKing1(count);
+	                            break;
+	                        case "1queen":
+	                            reservation.setQueen1(count);
+	                            break;
+	                        case "2queen":
+	                            reservation.setQueen2(count);
+	                            break;
+	                        case "2full":
+	                            reservation.setFull2(count);
+	                            break;
+	                    }
+	                }
+
+	                rsRooms.close();
+	                psRooms.close();
+	            }
+
+	            rs.close();
+	            ps.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            closeConnection(conn);
+	        }
+	    }
+
+	    return reservation;
+	}
+
 }
