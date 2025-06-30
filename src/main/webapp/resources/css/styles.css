@@ -127,12 +127,12 @@ body {
 	object-fit: cover;
 }
 
-#regforminner input[type=text], #regforminner input[type=password] {
+.reg-form-field {
 	font-family: inherit;
 	font-size: .9em;
 	border: none;
 	border-bottom: 1px solid #777777;
-	width: 480px;
+	width: 90%;
 	padding: 8px;
 	background-color: inherit;
 }
