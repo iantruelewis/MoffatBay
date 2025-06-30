@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Date;
@@ -385,6 +386,10 @@ public class DataManager {
 		Connection conn = getConnection();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
+		// temporary storage of reservation id
+		// It will be saved to the reservation bean on successful completion of all sql scripts
+		int res_id = 0;
 
 		if (conn != null) {
 
@@ -438,13 +443,19 @@ public class DataManager {
 				// Insert Reservation into reservation table
 				sql = "INSERT INTO `reservation` (`uid`, `checkin`, `checkout`, `guest_count`) VALUES (?, ?, ?, ?);";
 
-				ps = conn.prepareStatement(sql);
+				ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, user.getUid());
 				ps.setString(2, checkin);
 				ps.setString(3, checkout);
 				ps.setInt(4, reservation.getGuestCount());
 
 				ps.executeUpdate();
+				
+				// Get reservation ID for later use
+				ResultSet keys = ps.getGeneratedKeys();  
+				if (keys.next()) {
+					res_id = keys.getInt(1);
+				}
 
 				// Get reservation room type needed and count into a HashMap
 				HashMap<String, Integer> roomsNeeded = new HashMap<String, Integer>();
@@ -479,38 +490,20 @@ public class DataManager {
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
+							
+							// Forward to an error on failure
 							return "reserror";
 						}
 
 						// Insert Room Reservation table
-						sql = "INSERT INTO `room_reservation` SELECT res_id, ? from `reservation` where `uid` = ? AND `checkin` = ? AND `checkout` = ? AND `guest_count` = ?;";
+						sql = "INSERT INTO `moffat_bay_lodge`.`room_reservation` (`res_id`, `room_num`) VALUES (?, ?);";
 
 						ps = conn.prepareStatement(sql);
 
-						ps.setInt(1, roomNumber);
-						ps.setInt(2, user.getUid());
-						ps.setString(3, checkin);
-						ps.setString(4, checkout);
-						ps.setInt(5, reservation.getGuestCount());
+						ps.setInt(1, res_id);
+						ps.setInt(2, roomNumber);
 
 						ps.executeUpdate();
-						
-						
-						// Store res_id
-						sql = "SELECT res_id from `reservation` where `uid` = ? AND `checkin` = ? AND `checkout` = ? AND `guest_count` = ?;";
-
-						ps = conn.prepareStatement(sql);
-
-						ps.setInt(1, user.getUid());
-						ps.setString(2, checkin);
-						ps.setString(3, checkout);
-						ps.setInt(4, reservation.getGuestCount());
-
-						rs = ps.executeQuery();
-						
-						if (rs.next()) {
-							reservation.setRes_id(rs.getInt("res_id"));
-						}
 						
 					}
 				}
@@ -535,6 +528,9 @@ public class DataManager {
 				closeConnection(conn);
 			}
 		}
+
+		// store res_id in bean upon success
+		reservation.setRes_id(res_id);
 
 		return "reservation-summary";
 	}
