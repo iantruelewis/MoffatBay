@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.TimeZone;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -570,5 +573,69 @@ public class DataManager {
 //				}
 //		}
 //	}
+	
+	
+	public List<Reservation> findReservationById(int resId) {
+	    List<Reservation> list = new ArrayList<>();
+	    try (Connection conn = getConnection()) {
+	    	String sql = """
+	    		    SELECT r.res_id, r.checkin, r.checkout, r.guest_count, inv.type AS room_type, u.name AS owner_name
+	    		    FROM reservation r
+	    		    JOIN user u ON u.uid = r.uid
+	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
+	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
+	    		    WHERE r.res_id = ?
+	    		""";
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setInt(1, resId);
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            Reservation r = new Reservation();
+	            r.setOwnerName(rs.getString("owner_name"));
+	            r.setRes_id(rs.getInt("res_id"));
+	            r.setRoomType(rs.getString("room_type"));
+	            r.setGuestCount(rs.getInt("guest_count"));
+	            r.setCheckinDate(rs.getDate("checkin"));
+	            r.setCheckoutDate(rs.getDate("checkout"));
+	            list.add(r);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+
+	public List<Reservation> findReservationsByEmail(String email) {
+	    List<Reservation> list = new ArrayList<>();
+	    try (Connection conn = getConnection()) {
+	    	String sql = """
+	    		    SELECT r.res_id, r.checkin, r.checkout, r.guest_count, inv.type AS room_type, u.name AS owner_name
+	    		    FROM user u
+	    		    JOIN reservation r ON u.uid = r.uid
+	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
+	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
+	    		    WHERE u.email = ?
+	    		""";
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, email);
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            Reservation r = new Reservation();
+	            r.setOwnerName(rs.getString("owner_name"));
+	            r.setRes_id(rs.getInt("res_id"));
+	            r.setRoomType(rs.getString("room_type"));
+	            r.setGuestCount(rs.getInt("guest_count"));
+	            r.setCheckinDate(rs.getDate("checkin"));
+	            r.setCheckoutDate(rs.getDate("checkout"));
+	            list.add(r);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+
+
+	
 	
 }
