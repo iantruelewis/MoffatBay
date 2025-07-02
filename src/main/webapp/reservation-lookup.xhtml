@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<f:view>
+  <h:head>
+    <title><ui:insert name="title">Reservation Lookup</ui:insert></title>
+    <h:outputStylesheet name="styles.css" library="css" />
+    <style>
+      .lookup-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+      }
+
+      h2, h3 {
+        text-align: center;
+        color: #444;
+        margin-bottom: 20px;
+      }
+
+      .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .results-table th, .results-table td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: center;
+      }
+
+      .results-table th {
+        background-color: #f0f0f0;
+      }
+
+      .status-message {
+        font-weight: bold;
+        margin-top: 15px;
+        text-align: center;
+        display: block;
+      }
+    </style>
+  </h:head>
+
+  <h:body>
+    <ui:insert name="header">
+      <ui:include src="/templates/header.xhtml" />
+    </ui:insert>
+
+<h:form>
+  <div class="lookup-container">
+    <h2>Reservation Lookup</h2>
+
+    <h:panelGrid columns="3" cellpadding="8" style="margin: 0 auto;">
+      <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" />
+      <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" />
+      <h:commandButton value="Search" action="#{reservationLookupBean.search}" />
+    </h:panelGrid>
+
+    <h:outputText value="No results found."
+                  rendered="#{reservationLookupBean.searched and empty reservationLookupBean.reservationResults}"
+                  styleClass="status-message" style="color: red;" />
+
+    <h:outputText value="Reservations under: #{reservationLookupBean.reservationResults[0].ownerName}"
+                  rendered="#{not empty reservationLookupBean.reservationResults}"
+                  styleClass="status-message" style="color: #444;" />
+
+    <h:dataTable value="#{reservationLookupBean.reservationResults}" var="res"
+                 styleClass="results-table"
+                 rendered="#{not empty reservationLookupBean.reservationResults}">
+                 
+       <h:column>
+        <f:facet name="header">Name on Reservation</f:facet>
+        #{res.ownerName}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Reservation ID</f:facet>
+        #{res.res_id}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Room Type</f:facet>
+        #{res.readableRoomType}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Guests</f:facet>
+        #{res.guestCount}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Check-In</f:facet>
+        #{res.checkinDate}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Check-Out</f:facet>
+        #{res.checkoutDate}
+      </h:column>
+    </h:dataTable>
+  </div>
+</h:form>
+
+    <ui:insert name="newsletter">
+      <ui:include src="/templates/newsletter.xhtml" />
+    </ui:insert>
+
+    <ui:insert name="footer">
+      <ui:include src="/templates/footer.xhtml" />
+    </ui:insert>
+  </h:body>
+</f:view>
+</html>
+
+

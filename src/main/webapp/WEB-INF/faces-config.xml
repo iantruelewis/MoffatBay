@@ -66,6 +66,13 @@
 			<null-value />
 		</managed-property>
 	</managed-bean>
+	
+	<managed-bean>
+    	<managed-bean-name>reservationLookupBean</managed-bean-name>
+   		<managed-bean-class>beans.ReservationLookup</managed-bean-class>
+    	<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
 
 
 	<validator>
