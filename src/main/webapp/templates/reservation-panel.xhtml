@@ -22,13 +22,13 @@
 					value="ARRIVAL" />
 				<br />
 				<h:inputText id="checkin" styleClass="res-date"
-					style="width: 400px;" value="#{reservationBean.checkinDate}">
+					style="width: 400px;" value="#{reservationBean.checkinDate}" converterMessage="Date Must Match mm-dd-yyy">
 					<f:convertDateTime pattern="MM-dd-yyyy" />
 					<f:ajax event="blur"
-						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+						render="checkin checkout for-checkout for-checkin guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
-				<h:message for="checkin" style="color:red" />
+				<h:message for="checkin" id="for-checkin" style="color:red" />
 
 			</div>
 
@@ -40,13 +40,13 @@
 					value="DEPARTURE" />
 				<br />
 				<h:inputText id="checkout" styleClass="res-date"
-					value="#{reservationBean.checkoutDate}">
+					value="#{reservationBean.checkoutDate}" converterMessage="Date Must Match mm-dd-yyy">
 					<f:convertDateTime pattern="MM-dd-yyyy" />
 					<f:ajax event="blur"
-						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+						render="checkin for-checkout for-checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
-				<h:message for="checkout" style="color:red" />
+				<h:message for="checkout" id="for-checkout" style="color:red" />
 
 			</div>
 
@@ -62,12 +62,12 @@
 				<h:commandLink action="#{reservationBean.upGuest}">
 					<h:graphicImage library="images" name="chevron-up.svg"
 						class="chevron" alt="Add room" />
-					<f:ajax execute="@form" render="guestCount" />
+					<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:commandLink>
 				<h:commandLink action="#{reservationBean.dnGuest}">
 					<h:graphicImage library="images" name="chevron-down.svg"
 						class="chevron" alt="Remove room" />
-					<f:ajax execute="@form" render="guestCount" />
+					<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:commandLink>
 
 
@@ -79,7 +79,7 @@
 					<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
 					<f:validateLongRange minimum="1" />
 					<f:ajax event="blur"
-						render="checkin checkout guestCount max-full2 max-queen1 max-queen2 max-king1" />
+						render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<h:message for="guestCount" styleClass="message" />
 
