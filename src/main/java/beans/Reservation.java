@@ -54,6 +54,7 @@ public class Reservation implements Serializable {
 			this.checkinDate = checkinDate;
 			updateRoomAvailability();
 		}
+
 	}
 
 	public Date getCheckoutDate() {
@@ -89,7 +90,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setKing1(int king1) {
-		if (king1 >= 0 && king1 <= roomAvailability.get("1king")) {
+		
+		int maxRooms = roomAvailability.getOrDefault("1king", 0);
+		
+		if (king1 <= 0) {
+			this.king1 = 0;
+		}
+		else if (king1 >= maxRooms) {
+			this.king1 = maxRooms;
+		}
+		else {
 			this.king1 = king1;
 		}
 	}
@@ -99,7 +109,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen1(int queen1) {
-		if (queen1 >= 0 && queen1 <= roomAvailability.get("1queen")) {
+		
+		int maxRooms = roomAvailability.getOrDefault("1queen", 0);
+		
+		if (queen1 <= 0) {
+			this.queen1 = 0;
+		}
+		else if (queen1 >= maxRooms) {
+			this.queen1 = maxRooms;
+		}
+		else {
 			this.queen1 = queen1;
 		}
 	}
@@ -109,7 +128,16 @@ public class Reservation implements Serializable {
 	}
 
 	public void setQueen2(int queen2) {
-		if (queen2 >= 0 && queen2 <= roomAvailability.get("2queen")) {
+		
+		int maxRooms = roomAvailability.getOrDefault("2queen", 0);
+		
+		if (queen2 <= 0) {
+			this.queen2 = 0;
+		}
+		else if (queen2 >= maxRooms) {
+			this.queen2 = maxRooms;
+		}
+		else {
 			this.queen2 = queen2;
 		}
 	}
@@ -119,9 +147,18 @@ public class Reservation implements Serializable {
 	}
 
 	public void setFull2(int full2) {
-//		if (full2 >= 0 && full2 <= roomAvailability.get("2full")) {
-		this.full2 = full2;
-//		}
+		
+		int maxRooms = roomAvailability.getOrDefault("2full", 0);
+		
+		if (full2 <= 0) {
+			this.full2 = 0;
+		}
+		else if (full2 >= maxRooms) {
+			this.full2 = maxRooms;
+		}
+		else {
+			this.full2 = full2;
+		}
 	}
 
 	public String getComment() {
@@ -149,10 +186,10 @@ public class Reservation implements Serializable {
 		roomAvailability = dm.getRoomAvailability(checkinDate, checkoutDate);
 
 		// update room reservation list to not exceed available rooms
-		king1 = roomAvailability.getOrDefault("1king", 0);
-		queen1 = roomAvailability.getOrDefault("1queen", 0);
-		queen2 = roomAvailability.getOrDefault("2queen", 0);
-		full2 = roomAvailability.getOrDefault("2full", 0);
+		setKing1(king1);
+		setQueen1(queen1);
+		setQueen2(queen2);
+		setFull2(full2);
 
 		return "reservation";
 	}
@@ -268,6 +305,7 @@ public class Reservation implements Serializable {
 		
 		return "home";
 	}
+
 
 	
 }

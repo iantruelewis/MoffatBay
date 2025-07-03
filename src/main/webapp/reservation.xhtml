@@ -64,12 +64,12 @@
 							<h:commandLink action="#{reservationBean.upFull2}">
 								<h:graphicImage library="images" name="chevron-up.svg"
 									class="chevron" alt="Add room" />
-								<f:ajax execute="@form" render="full2" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 							<h:commandLink action="#{reservationBean.dnFull2}">
 								<h:graphicImage library="images" name="chevron-down.svg"
 									class="chevron" alt="Remove room" />
-								<f:ajax execute="@form" render="full2" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 
 						</p>
@@ -77,8 +77,8 @@
 							value="#{reservationBean.full2}"
 							validatorMessage="#{reservationBean.roomAvailability['2full']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-							<f:validateLongRange minimum="0"
-								maximum="#{reservationBean.roomAvailability['2full']}" />
+
+						<f:ajax event="blur" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 						</h:inputText>
 
 						<h:outputText id="max-full2"
@@ -123,7 +123,7 @@
 							<h:commandLink action="#{reservationBean.dnQueen1}">
 								<h:graphicImage library="images" name="chevron-down.svg"
 									class="chevron" alt="Remove room" />
-								<f:ajax execute="@form" render="queen1" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 
 						</p>
@@ -131,8 +131,10 @@
 							value="#{reservationBean.queen1}"
 							validatorMessage="#{reservationBean.roomAvailability['1queen']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-							<f:validateLongRange minimum="0"
-								maximum="#{reservationBean.roomAvailability['1queen']}" />
+
+								
+							<f:ajax event="blur" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
+								
 						</h:inputText>
 
 						<h:outputText id="max-queen1"
@@ -173,12 +175,12 @@
 							<h:commandLink action="#{reservationBean.upQueen2}">
 								<h:graphicImage library="images" name="chevron-up.svg"
 									class="chevron" alt="Add room" />
-								<f:ajax execute="@form" render="queen2" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 							<h:commandLink action="#{reservationBean.dnQueen2}">
 								<h:graphicImage library="images" name="chevron-down.svg"
 									class="chevron" alt="Remove room" />
-								<f:ajax execute="@form" render="queen2" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 
 						</p>
@@ -186,8 +188,9 @@
 							value="#{reservationBean.queen2}"
 							validatorMessage="#{reservationBean.roomAvailability['2queen']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-							<f:validateLongRange minimum="0"
-								maximum="#{reservationBean.roomAvailability['2queen']}" />
+
+							<f:ajax event="blur" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
+								
 						</h:inputText>
 						<h:outputText id="max-queen2"
 							value="#{reservationBean.roomAvailability['2queen']} Availavle" />
@@ -228,12 +231,12 @@
 							<h:commandLink action="#{reservationBean.upKing1}">
 								<h:graphicImage library="images" name="chevron-up.svg"
 									class="chevron" alt="Add room" />
-								<f:ajax execute="@form" render="king1" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 							<h:commandLink action="#{reservationBean.dnKing1}">
 								<h:graphicImage library="images" name="chevron-down.svg"
 									class="chevron" alt="Remove room" />
-								<f:ajax execute="@form" render="king1" />
+								<f:ajax execute="@form" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 							</h:commandLink>
 
 						</p>
@@ -241,8 +244,9 @@
 							value="#{reservationBean.king1}"
 							validatorMessage="#{reservationBean.roomAvailability['1king']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
-							<f:validateLongRange minimum="0"
-								maximum="#{reservationBean.roomAvailability['1king']}" />
+								
+							<f:ajax event="blur" render="checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
+								
 						</h:inputText>
 
 						<h:outputText id="max-king1"
