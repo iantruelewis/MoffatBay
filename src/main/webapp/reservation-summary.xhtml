@@ -17,6 +17,11 @@
       <h:outputStylesheet name="styles.css" library="css" />
     </h:head>
 
+<!-- redirects to login if the user is not logged in -->
+<f:metadata>
+    <f:viewAction action="#{userBean.checkLogin()}" />
+</f:metadata>
+
     <h:body>
 
       <!-- Header -->
@@ -29,14 +34,32 @@
       <div class="row" style="padding: 80px 40px; background-color: #fff;">
         <div style="max-width: 800px; margin: 0 auto; text-align: center;">
 
-          <h2 class="title serif">Your Reservation Summary</h2>
-          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
-            Thank you for booking with Moffat Bay Lodge. Below is a summary of your stay.
-          </p>
+
+          <!-- Display Confirmation Message Once Reservation has been saved to the database -->
+          <ui:fragment rendered="#{reservationBean.res_id != 0}">
+          
+	          <h2 class="title serif">Your Reservation is Confirmed!</h2>
+	          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+            	Thank you for choosing Moffat Bay Lodge. Below is a summary of your stay.
+          	  </p>
+	          <p><h:outputText value="Reservation ID: #{reservationBean.res_id}" /></p>
+	          
+          </ui:fragment>
+
+          <!-- Display Summary Message Before Saving to the database -->
+          <ui:fragment rendered="#{reservationBean.res_id == 0}">
+
+	          <h2 class="title serif">Your Reservation Summary</h2>
+	          <p class="subtext sans" style="font-size: 1em; line-height: 1.6em;">
+	            Below is a summary of your stay. Please review it for accuracy.
+	          </p>
+	          
+          </ui:fragment>
 
           <hr style="margin: 40px 0;" />
-<c:choose>
-	<c:when test="#{reservationBean.res_id == 0}">
+          
+
+          
           <h:panelGroup>
             <!-- Reservation Details -->
             <div style="text-align: left;">
@@ -76,34 +99,35 @@
             </div>
           </h:panelGroup>
 
-<!-- Reserve and cancel buttons -->
-	<h:form>
-		<div style="display: flex; justify-content:center; gap: 30px;">
-			<h:commandButton action="reservation.jsf" value="Cancel"
-				styleClass="blackoutlinebutton" />
+				<h:form>
+
+					<!-- Reserve and cancel buttons If reservation has not been saved to the database -->
+					<ui:fragment rendered="#{reservationBean.res_id == 0}">
+					
+						<div style="display: flex; justify-content: center; gap: 30px;">
+							<h:commandButton action="reservation.jsf" value="Cancel"
+								styleClass="blackoutlinebutton" />
 
 
-			<h:commandButton
-				action="#{reservationManagerBean.saveReservation()}"
-				value="Confirm Reservation" styleClass="blackoutlinebutton" />
-		</div>
-	</h:form>
+							<h:commandButton
+								action="#{reservationManagerBean.saveReservation()}"
+								value="Confirm Reservation" styleClass="blackoutlinebutton" />
+						</div>
+						
+					</ui:fragment>
 
-</c:when>
-<c:otherwise>
-          <h:panelGroup>
-            <p class="subtext sans" style="color: #900; font-weight: bold;">
-              Your Reservation is complete
-            </p>
-            <p><h:outputText value="Your reservation number is: #{reservationBean.res_id}" /></p>
-            <h:form>
-            	<h:commandButton action="#{reservationBean.resetBean()}" value="Explore More" styleClass="blackoutlinebutton" />
-            </h:form>
-          </h:panelGroup>
-</c:otherwise>
-</c:choose>
+					<!-- Explore more if reservation has been saved to the database -->
+					<ui:fragment rendered="#{reservationBean.res_id != 0}">
+					
+						<h:commandButton action="#{reservationBean.resetBean()}"
+							value="Explore More" styleClass="blackoutlinebutton" />
+							
+					</ui:fragment>
+					
+				</h:form>
 
-        </div>
+
+			</div>
       </div>
 
       <!-- Newsletter Insert -->
