@@ -98,6 +98,9 @@ body {
 	border: none;
 	cursor: pointer;
 }
+#email-entry-wrapper input[type=submit]:hover {
+	background-color: #cccccc;
+}
 
 /* Two Column Layout */
 .row {
@@ -212,6 +215,14 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border: 1.5px solid black;	
+}
+
+.solidbutton:hover {
+	background-color: white;
+	color: black;
 }
 
 .blackoutlinebutton {
@@ -224,6 +235,14 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	
+}
+.blackoutlinebutton:hover {
+	background-color: black;
+	color: white;
+	border: 1.5px solid white;
 }
 
 .whiteoutlinebutton {
@@ -236,6 +255,7 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
 }
 
 .terms-container,
@@ -865,7 +885,6 @@ body {
 
 
 .room-count {
-	background-color: none;
     border: none;
     font-family: "Old Standard TT", serif;
     font-size: 4em;
@@ -873,7 +892,6 @@ body {
 }
 
 .chevron {
-	width: 20p;
 	margin-left: 10px;
 }
 
