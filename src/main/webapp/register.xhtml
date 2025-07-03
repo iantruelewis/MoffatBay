@@ -79,6 +79,12 @@
 						<br />
 						<h:commandButton action="#{reservationManagerBean.register}" value="Create"
 							styleClass="solidbutton" />
+							
+						<br/><br/>
+						<h:outputLink value="login.jsf"
+              			              style="color: black; text-decoration: underline; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.85em;">
+  						Already have an account? Login
+						</h:outputLink>
 
           				<h:messages globalOnly="true" styleClass="message" />
 						<h:messages for="name" styleClass="message" />
