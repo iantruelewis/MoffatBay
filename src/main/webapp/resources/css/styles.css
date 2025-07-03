@@ -212,6 +212,7 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
 }
 
 .blackoutlinebutton {
@@ -224,6 +225,14 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	
+}
+.blackoutlinebutton:hover {
+	background-color: black;
+	color: white;
+	border: 1.5px solid white;
 }
 
 .whiteoutlinebutton {
@@ -236,6 +245,7 @@ body {
 	padding-left: 30px;
 	border-radius: 25px;
 	cursor:pointer;
+	text-decoration: none;
 }
 
 .terms-container,
