@@ -6,8 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:view>
   <h:head>
@@ -30,27 +29,33 @@
         margin-bottom: 20px;
       }
 
-      .results-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-
-      .results-table th, .results-table td {
-        border: 1px solid #ccc;
-        padding: 12px;
-        text-align: center;
-      }
-
-      .results-table th {
-        background-color: #f0f0f0;
-      }
-
       .status-message {
         font-weight: bold;
         margin-top: 15px;
         text-align: center;
         display: block;
+      }
+
+	.reservation-box {
+  		border: 1px solid #ddd;
+  		padding: 10px 15px;
+  		margin: 10px 0;
+  		border-radius: 5px;
+  		background-color: #fcfcfc;
+  		font-size: 0.95em;
+	}
+
+      .toggle-link {
+        text-align: center;
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #007BFF;
+        cursor: pointer;
+        text-decoration: underline;
+        border: none;
+        background: none;
+        font-family: inherit;
       }
     </style>
   </h:head>
@@ -60,55 +65,51 @@
       <ui:include src="/templates/header.xhtml" />
     </ui:insert>
 
-<h:form>
-  <div class="lookup-container">
-    <h2>Reservation Lookup</h2>
+    <h:form>
+      <div class="lookup-container">
+        <h2>Reservation Lookup</h2>
 
-    <h:panelGrid columns="3" cellpadding="8" style="margin: 0 auto;">
-      <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" />
-      <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" />
-      <h:commandButton value="Search" action="#{reservationLookupBean.search}" />
-    </h:panelGrid>
+        <h:panelGrid columns="3" cellpadding="8" style="margin: 0 auto;">
+          <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" />
+          <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" />
+          <h:commandButton value="Search" action="#{reservationLookupBean.search}" />
+        </h:panelGrid>
 
-    <h:outputText value="No results found."
-                  rendered="#{reservationLookupBean.searched and empty reservationLookupBean.reservationResults}"
-                  styleClass="status-message" style="color: red;" />
+        <h:outputText value="No results found."
+                      rendered="#{reservationLookupBean.searched and empty reservationLookupBean.reservationResults}"
+                      styleClass="status-message" style="color: red;" />
 
-    <h:outputText value="Reservations under: #{reservationLookupBean.reservationResults[0].ownerName}"
-                  rendered="#{not empty reservationLookupBean.reservationResults}"
-                  styleClass="status-message" style="color: #444;" />
+        <ui:repeat value="#{reservationLookupBean.reservationResults}" var="res">
+          <h:panelGroup layout="block" styleClass="reservation-box">
 
-    <h:dataTable value="#{reservationLookupBean.reservationResults}" var="res"
-                 styleClass="results-table"
-                 rendered="#{not empty reservationLookupBean.reservationResults}">
-                 
-       <h:column>
-        <f:facet name="header">Name on Reservation</f:facet>
-        #{res.ownerName}
-      </h:column>
-      <h:column>
-        <f:facet name="header">Reservation ID</f:facet>
-        #{res.res_id}
-      </h:column>
-      <h:column>
-        <f:facet name="header">Room Type</f:facet>
-        #{res.readableRoomType}
-      </h:column>
-      <h:column>
-        <f:facet name="header">Guests</f:facet>
-        #{res.guestCount}
-      </h:column>
-      <h:column>
-        <f:facet name="header">Check-In</f:facet>
-        #{res.checkinDate}
-      </h:column>
-      <h:column>
-        <f:facet name="header">Check-Out</f:facet>
-        #{res.checkoutDate}
-      </h:column>
-    </h:dataTable>
-  </div>
-</h:form>
+			<div style="display: flex; justify-content: space-between; align-items: center;">
+  			<h3 style="margin: 0;">Reservation ID: #{res.res_id} — #{res.ownerName}</h3>
+			<h:commandLink value="#{reservationLookupBean.toggleLabel(res.res_id)}"
+               action="#{reservationLookupBean.toggleExpand(res.res_id)}"
+               immediate="true"
+               styleClass="toggle-link" />
+			</div>
+
+
+            <h:panelGroup rendered="#{reservationLookupBean.expandedMap[res.res_id]}">
+              <h:panelGrid columns="2" cellpadding="6">
+                <h:outputLabel value="Room Type:" />
+                <h:outputText value="#{res.readableRoomType}" />
+
+                <h:outputLabel value="Guests:" />
+                <h:outputText value="#{res.guestCount}" />
+
+                <h:outputLabel value="Check-In:" />
+                <h:outputText value="#{res.checkinDate}" />
+
+                <h:outputLabel value="Check-Out:" />
+                <h:outputText value="#{res.checkoutDate}" />
+              </h:panelGrid>
+            </h:panelGroup>
+          </h:panelGroup>
+        </ui:repeat>
+      </div>
+    </h:form>
 
     <ui:insert name="newsletter">
       <ui:include src="/templates/newsletter.xhtml" />
@@ -120,5 +121,6 @@
   </h:body>
 </f:view>
 </html>
+
 
 

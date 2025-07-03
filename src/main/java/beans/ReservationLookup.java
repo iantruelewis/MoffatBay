@@ -2,14 +2,22 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import model.DataManager;
 
 public class ReservationLookup implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String searchInput;
     private List<Reservation> reservationResults = new ArrayList<>();
     private boolean searched = false;
+
+
+    private Map<Integer, Boolean> expandedMap = new HashMap<>();
 
     public String getSearchInput() {
         return searchInput;
@@ -51,5 +59,26 @@ public class ReservationLookup implements Serializable {
         }
 
         return null;
+    }
+
+    public boolean isExpanded(int resId) {
+        return expandedMap.getOrDefault(resId, false);
+    }
+
+    public void toggleExpand(int resId) {
+        boolean current = expandedMap.getOrDefault(resId, false);
+        expandedMap.put(resId, !current);
+    }
+
+    public Map<Integer, Boolean> getExpandedMap() {
+        return expandedMap;
+    }
+    
+    public String toggleLabel(int resId) {
+        return isExpanded(resId) ? "Hide Details" : "Show Details";
+    }
+
+    public void setExpandedMap(Map<Integer, Boolean> expandedMap) {
+        this.expandedMap = expandedMap;
     }
 }

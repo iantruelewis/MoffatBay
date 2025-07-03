@@ -578,12 +578,18 @@ public class DataManager {
 	    List<Reservation> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
 	    	String sql = """
-	    		    SELECT r.res_id, r.checkin, r.checkout, r.guest_count, inv.type AS room_type, u.name AS owner_name
+	    		    SELECT r.res_id,
+	    		           MIN(r.checkin) AS checkin,
+	    		           MIN(r.checkout) AS checkout,
+	    		           MIN(r.guest_count) AS guest_count,
+	    		           MIN(inv.type) AS room_type,
+	    		           MIN(u.name) AS owner_name
 	    		    FROM reservation r
 	    		    JOIN user u ON u.uid = r.uid
 	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
 	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
 	    		    WHERE r.res_id = ?
+	    		    GROUP BY r.res_id
 	    		""";
 	        PreparedStatement stmt = conn.prepareStatement(sql);
 	        stmt.setInt(1, resId);
@@ -608,12 +614,18 @@ public class DataManager {
 	    List<Reservation> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
 	    	String sql = """
-	    		    SELECT r.res_id, r.checkin, r.checkout, r.guest_count, inv.type AS room_type, u.name AS owner_name
+	    		    SELECT r.res_id,
+	    		           MIN(r.checkin) AS checkin,
+	    		           MIN(r.checkout) AS checkout,
+	    		           MIN(r.guest_count) AS guest_count,
+	    		           MIN(inv.type) AS room_type,
+	    		           MIN(u.name) AS owner_name
 	    		    FROM user u
 	    		    JOIN reservation r ON u.uid = r.uid
 	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
 	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
 	    		    WHERE u.email = ?
+	    		    GROUP BY r.res_id
 	    		""";
 	        PreparedStatement stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, email);
