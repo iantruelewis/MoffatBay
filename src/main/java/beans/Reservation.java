@@ -148,6 +148,12 @@ public class Reservation implements Serializable {
 		// Then get availability from database
 		roomAvailability = dm.getRoomAvailability(checkinDate, checkoutDate);
 
+		// update room reservation list to not exceed available rooms
+		king1 = roomAvailability.getOrDefault("1king", 0);
+		queen1 = roomAvailability.getOrDefault("1queen", 0);
+		queen2 = roomAvailability.getOrDefault("2queen", 0);
+		full2 = roomAvailability.getOrDefault("2full", 0);
+
 		return "reservation";
 	}
 
@@ -252,7 +258,16 @@ public class Reservation implements Serializable {
 		this.ownerName = ownerName;
 	}
 
-
+	public String resetBean() {
+		res_id = 0;
+		guestCount = 1;
+		king1 = 0;
+		queen1 = 0;
+		queen2 = 0;
+		full2 = 0;
+		
+		return "home";
+	}
 
 	
 }

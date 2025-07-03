@@ -36,7 +36,7 @@
 
           <hr style="margin: 40px 0;" />
 <c:choose>
-	<c:when test="#{reservationBean.res_id > 0}">
+	<c:when test="#{reservationBean.res_id == 0}">
           <h:panelGroup>
             <!-- Reservation Details -->
             <div style="text-align: left;">
@@ -75,13 +75,30 @@
               </ul>
             </div>
           </h:panelGroup>
+
+<!-- Reserve and cancel buttons -->
+	<h:form>
+		<div style="display: flex; justify-content:center; gap: 30px;">
+			<h:commandButton action="reservation.jsf" value="Cancel"
+				styleClass="blackoutlinebutton" />
+
+
+			<h:commandButton
+				action="#{reservationManagerBean.saveReservation()}"
+				value="Confirm Reservation" styleClass="blackoutlinebutton" />
+		</div>
+	</h:form>
+
 </c:when>
 <c:otherwise>
           <h:panelGroup>
             <p class="subtext sans" style="color: #900; font-weight: bold;">
-              No reservation found.
+              Your Reservation is complete
             </p>
-            <h:link outcome="home" styleClass="blackoutlinebutton">Back to Home</h:link>
+            <p><h:outputText value="Your reservation number is: #{reservationBean.res_id}" /></p>
+            <h:form>
+            	<h:commandButton action="#{reservationBean.resetBean()}" value="Explore More" styleClass="blackoutlinebutton" />
+            </h:form>
           </h:panelGroup>
 </c:otherwise>
 </c:choose>
