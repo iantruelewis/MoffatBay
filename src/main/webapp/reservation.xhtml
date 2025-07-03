@@ -30,8 +30,22 @@
 			<ui:include src="/templates/header.xhtml" />
 		</ui:insert>
 
-
-		<p class="title" style="text-align: center; margin-top: 100px;">Reserve Your Rooms</p>
+		<!-- Hero Section -->
+      <div style="
+        height: 200px;
+        width: 100%;
+        background-image: url('#{resource['images/res-hero.jpg']}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      ">
+      		<p class="title" style="text-shadow: 0px 2px 3px black; width: 100%; color: white; text-align: center; margin-top: 50px;">Reserve Your Rooms Today</p>
+      
+      </div>
 		
 		<h:form id="reservation-form">
 
@@ -40,11 +54,7 @@
 		</ui:insert>
 		
 		
-		<!--  Page Content  -->
-
-
-
-			<!--  Begin CONTENT UI -->
+		<!--  Room Listing  -->
 
 			<!-- FULL -->
 			<div class="row">
