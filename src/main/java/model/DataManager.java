@@ -577,31 +577,38 @@ public class DataManager {
 	public List<Reservation> findReservationById(int resId) {
 	    List<Reservation> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
-	    	String sql = """
-	    		    SELECT r.res_id,
-	    		           MIN(r.checkin) AS checkin,
-	    		           MIN(r.checkout) AS checkout,
-	    		           MIN(r.guest_count) AS guest_count,
-	    		           MIN(inv.type) AS room_type,
-	    		           MIN(u.name) AS owner_name
-	    		    FROM reservation r
-	    		    JOIN user u ON u.uid = r.uid
-	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
-	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
-	    		    WHERE r.res_id = ?
-	    		    GROUP BY r.res_id
-	    		""";
+	        String sql = """
+	            SELECT
+	                r.res_id,
+	                r.checkin,
+	                r.checkout,
+	                r.guest_count,
+	                u.name AS owner_name,
+	                SUM(CASE WHEN inv.type = '1king' THEN 1 ELSE 0 END) AS king1,
+	                SUM(CASE WHEN inv.type = '1queen' THEN 1 ELSE 0 END) AS queen1,
+	                SUM(CASE WHEN inv.type = '2queen' THEN 1 ELSE 0 END) AS queen2,
+	                SUM(CASE WHEN inv.type = '2full' THEN 1 ELSE 0 END) AS full2
+	            FROM reservation r
+	            JOIN user u ON u.uid = r.uid
+	            JOIN room_reservation rr ON r.res_id = rr.res_id
+	            JOIN room_inventory inv ON rr.room_num = inv.room_num
+	            WHERE r.res_id = ?
+	            GROUP BY r.res_id, r.checkin, r.checkout, r.guest_count, u.name
+	        """;
 	        PreparedStatement stmt = conn.prepareStatement(sql);
 	        stmt.setInt(1, resId);
 	        ResultSet rs = stmt.executeQuery();
 	        while (rs.next()) {
 	            Reservation r = new Reservation();
-	            r.setOwnerName(rs.getString("owner_name"));
 	            r.setRes_id(rs.getInt("res_id"));
-	            r.setRoomType(rs.getString("room_type"));
-	            r.setGuestCount(rs.getInt("guest_count"));
 	            r.setCheckinDate(rs.getDate("checkin"));
 	            r.setCheckoutDate(rs.getDate("checkout"));
+	            r.setGuestCount(rs.getInt("guest_count"));
+	            r.setOwnerName(rs.getString("owner_name"));
+	            r.setKing1(rs.getInt("king1"));
+	            r.setQueen1(rs.getInt("queen1"));
+	            r.setQueen2(rs.getInt("queen2"));
+	            r.setFull2(rs.getInt("full2"));
 	            list.add(r);
 	        }
 	    } catch (Exception e) {
@@ -613,31 +620,38 @@ public class DataManager {
 	public List<Reservation> findReservationsByEmail(String email) {
 	    List<Reservation> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
-	    	String sql = """
-	    		    SELECT r.res_id,
-	    		           MIN(r.checkin) AS checkin,
-	    		           MIN(r.checkout) AS checkout,
-	    		           MIN(r.guest_count) AS guest_count,
-	    		           MIN(inv.type) AS room_type,
-	    		           MIN(u.name) AS owner_name
-	    		    FROM user u
-	    		    JOIN reservation r ON u.uid = r.uid
-	    		    JOIN room_reservation rr ON r.res_id = rr.res_id
-	    		    JOIN room_inventory inv ON rr.room_num = inv.room_num
-	    		    WHERE u.email = ?
-	    		    GROUP BY r.res_id
-	    		""";
+	        String sql = """
+	            SELECT
+	                r.res_id,
+	                r.checkin,
+	                r.checkout,
+	                r.guest_count,
+	                u.name AS owner_name,
+	                SUM(CASE WHEN inv.type = '1king' THEN 1 ELSE 0 END) AS king1,
+	                SUM(CASE WHEN inv.type = '1queen' THEN 1 ELSE 0 END) AS queen1,
+	                SUM(CASE WHEN inv.type = '2queen' THEN 1 ELSE 0 END) AS queen2,
+	                SUM(CASE WHEN inv.type = '2full' THEN 1 ELSE 0 END) AS full2
+	            FROM reservation r
+	            JOIN user u ON u.uid = r.uid
+	            JOIN room_reservation rr ON r.res_id = rr.res_id
+	            JOIN room_inventory inv ON rr.room_num = inv.room_num
+	            WHERE u.email = ?
+	            GROUP BY r.res_id, r.checkin, r.checkout, r.guest_count, u.name
+	        """;
 	        PreparedStatement stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, email);
 	        ResultSet rs = stmt.executeQuery();
 	        while (rs.next()) {
 	            Reservation r = new Reservation();
-	            r.setOwnerName(rs.getString("owner_name"));
 	            r.setRes_id(rs.getInt("res_id"));
-	            r.setRoomType(rs.getString("room_type"));
-	            r.setGuestCount(rs.getInt("guest_count"));
 	            r.setCheckinDate(rs.getDate("checkin"));
 	            r.setCheckoutDate(rs.getDate("checkout"));
+	            r.setGuestCount(rs.getInt("guest_count"));
+	            r.setOwnerName(rs.getString("owner_name"));
+	            r.setKing1(rs.getInt("king1"));
+	            r.setQueen1(rs.getInt("queen1"));
+	            r.setQueen2(rs.getInt("queen2"));
+	            r.setFull2(rs.getInt("full2"));
 	            list.add(r);
 	        }
 	    } catch (Exception e) {
@@ -645,6 +659,7 @@ public class DataManager {
 	    }
 	    return list;
 	}
+
 
 
 	

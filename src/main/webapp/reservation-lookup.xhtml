@@ -12,6 +12,7 @@
   <h:head>
     <title><ui:insert name="title">Reservation Lookup</ui:insert></title>
     <h:outputStylesheet name="styles.css" library="css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&amp;family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet" />
     <style>
       .lookup-container {
         max-width: 700px;
@@ -20,13 +21,15 @@
         background-color: #ffffff;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
       }
 
-      h2, h3 {
-        text-align: center;
-        color: #444;
-        margin-bottom: 20px;
+      .reservation-box {
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        background-color: #fcfcfc;
+        font-size: 0.95em;
       }
 
       .status-message {
@@ -34,16 +37,8 @@
         margin-top: 15px;
         text-align: center;
         display: block;
+        font-family: "IBM Plex Sans", sans-serif;
       }
-
-	.reservation-box {
-  		border: 1px solid #ddd;
-  		padding: 10px 15px;
-  		margin: 10px 0;
-  		border-radius: 5px;
-  		background-color: #fcfcfc;
-  		font-size: 0.95em;
-	}
 
       .toggle-link {
         text-align: center;
@@ -55,7 +50,14 @@
         text-decoration: underline;
         border: none;
         background: none;
-        font-family: inherit;
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      .room-list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        font-family: "IBM Plex Sans", sans-serif;
       }
     </style>
   </h:head>
@@ -67,12 +69,12 @@
 
     <h:form>
       <div class="lookup-container">
-        <h2>Reservation Lookup</h2>
+        <h2 style="font-family: 'Old Standard TT', serif;">Reservation Lookup</h2>
 
         <h:panelGrid columns="3" cellpadding="8" style="margin: 0 auto;">
-          <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" />
-          <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" />
-          <h:commandButton value="Search" action="#{reservationLookupBean.search}" />
+          <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" style="font-family: 'IBM Plex Sans', sans-serif;" />
+          <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" style="font-family: 'IBM Plex Sans', sans-serif;" />
+          <h:commandButton value="Search" action="#{reservationLookupBean.search}" style="font-family: 'IBM Plex Sans', sans-serif;" />
         </h:panelGrid>
 
         <h:outputText value="No results found."
@@ -82,30 +84,49 @@
         <ui:repeat value="#{reservationLookupBean.reservationResults}" var="res">
           <h:panelGroup layout="block" styleClass="reservation-box">
 
-			<div style="display: flex; justify-content: space-between; align-items: center;">
-  			<h3 style="margin: 0;">Reservation ID: #{res.res_id} — #{res.ownerName}</h3>
-			<h:commandLink value="#{reservationLookupBean.toggleLabel(res.res_id)}"
-               action="#{reservationLookupBean.toggleExpand(res.res_id)}"
-               immediate="true"
-               styleClass="toggle-link" />
-			</div>
-
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="margin: 0; font-family: 'Old Standard TT', serif;">Reservation ID: #{res.res_id} — #{res.ownerName}</h3>
+              <h:commandLink value="#{reservationLookupBean.toggleLabel(res.res_id)}"
+                             action="#{reservationLookupBean.toggleExpand(res.res_id)}"
+                             immediate="true"
+                             styleClass="toggle-link" />
+            </div>
 
             <h:panelGroup rendered="#{reservationLookupBean.expandedMap[res.res_id]}">
               <h:panelGrid columns="2" cellpadding="6">
-                <h:outputLabel value="Room Type:" />
-                <h:outputText value="#{res.readableRoomType}" />
 
-                <h:outputLabel value="Guests:" />
-                <h:outputText value="#{res.guestCount}" />
+                <h:outputLabel value="Guests:" style="font-family: 'IBM Plex Sans', sans-serif;" />
+                <h:outputText value="#{res.guestCount}" style="font-family: 'IBM Plex Sans', sans-serif;" />
 
-                <h:outputLabel value="Check-In:" />
-                <h:outputText value="#{res.checkinDate}" />
+                <h:outputLabel value="Check-In:" style="font-family: 'IBM Plex Sans', sans-serif;" />
+                <h:outputText value="#{res.checkinDate}" style="font-family: 'IBM Plex Sans', sans-serif;" />
 
-                <h:outputLabel value="Check-Out:" />
-                <h:outputText value="#{res.checkoutDate}" />
+                <h:outputLabel value="Check-Out:" style="font-family: 'IBM Plex Sans', sans-serif;" />
+                <h:outputText value="#{res.checkoutDate}" style="font-family: 'IBM Plex Sans', sans-serif;" />
+
+                <h:outputLabel value="Room Selection:" style="font-family: 'IBM Plex Sans', sans-serif;" />
+                <h:outputLabel value="#{res.full2 + res.queen1 + res.queen2 + res.king1}" 
+                               style="vertical-align: top; font-family: 'IBM Plex Sans', sans-serif;" />
+
+                <h:panelGroup layout="block" style="padding-left: 5px; vertical-align: top;">
+                  <ul class="room-list">
+                    <ui:fragment rendered="#{res.full2 > 0}">
+                      <li>Two Full Beds: #{res.full2}</li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{res.queen1 > 0}">
+                      <li>One Queen Bed: #{res.queen1}</li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{res.queen2 > 0}">
+                      <li>Two Queen Beds: #{res.queen2}</li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{res.king1 > 0}">
+                      <li>One King Bed: #{res.king1}</li>
+                    </ui:fragment>
+                  </ul>
+                </h:panelGroup>
               </h:panelGrid>
             </h:panelGroup>
+
           </h:panelGroup>
         </ui:repeat>
       </div>
@@ -121,6 +142,3 @@
   </h:body>
 </f:view>
 </html>
-
-
-
