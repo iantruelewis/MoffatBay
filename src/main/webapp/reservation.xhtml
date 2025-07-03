@@ -16,6 +16,11 @@
 
 </h:head>
 
+<!-- redirects to login if the user is not logged in -->
+<f:metadata>
+    <f:viewAction action="#{userBean.checkLogin()}" />
+</f:metadata>
+
 <h:body>
 	<f:view>
 

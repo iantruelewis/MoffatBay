@@ -74,4 +74,11 @@ public class User implements Serializable{
 		this.initial = initial;
 	}
 	
+	public String checkLogin() {
+		if (uid <= 0) {
+			return "login";
+		}
+		
+		return null;
+	}
 }
