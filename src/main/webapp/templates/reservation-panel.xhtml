@@ -30,18 +30,34 @@
         .datepicker({
           defaultDate: "+1w",
           changeMonth: true,
-          numberOfMonths: 1
+          changeYear: true,
+          numberOfMonths: 1,
+          minDate: +1
         })
         .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
+        	
+    	   var date = getDate( this );
+           if (date) {
+                 date.setDate(date.getDate() + 1);
+           }
+               
+          to.datepicker( "option", "minDate", date );
         }),
       to = $( "#reservation-form\\:checkout" ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 1
+        changeYear: true,
+        numberOfMonths: 1,
+        minDate: +2
       })
       .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
+    	  
+   	   var date = getDate( this );
+       if (date) {
+             date.setDate(date.getDate() - 1);
+       }
+       
+        from.datepicker( "option", "maxDate", date );
       });
  
     function getDate( element ) {
@@ -71,7 +87,7 @@
 				<h:inputText id="checkin" styleClass="res-date"
 					style="width: 400px;" value="#{reservationBean.checkinDate}" converterMessage="Date Must Match mm/dd/yyyy">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-					<f:ajax event="blur"
+					<f:ajax event="change"
 						render="checkin checkout for-checkout for-checkin guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
@@ -89,7 +105,7 @@
 				<h:inputText id="checkout" styleClass="res-date"
 					value="#{reservationBean.checkoutDate}" converterMessage="Date Must Match mm/dd/yyyy">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-					<f:ajax event="blur"
+					<f:ajax event="change"
 						render="checkin for-checkout for-checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
@@ -135,7 +151,7 @@
 
 			<div class="innercontainer" style="width: 100%">
 				<h:commandButton value="Check Availability" styleClass="solidbutton"
-					action="reservation">
+					action="reservation?faces-redirect=true">
 				</h:commandButton>
 			</div>
 		</div>
