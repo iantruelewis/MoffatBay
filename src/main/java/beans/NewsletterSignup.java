@@ -19,13 +19,24 @@ public class NewsletterSignup implements Serializable {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		
+		// preset boolean
+		boolean saveEmail = false;
+		
+		// set Email
+		this.email = email.trim().toLowerCase();
+		
+		// If not blank store it
+		if (this.email != null && this.email != "") {
 
-		DataManager dm = new DataManager();
-		boolean saveEmail = dm.newsletterSignup(email);
+			// Save the email in the database
+			DataManager dm = new DataManager();
+			saveEmail = dm.newsletterSignup(email);
+		}
 
+		// on success deliver message
 		if (saveEmail) {
-			this.message = "Welcome! " + email + " has been added to the our mailing list.";
+			this.message = "Welcome! " + email;
 		}
 	}
 

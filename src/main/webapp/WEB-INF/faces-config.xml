@@ -8,7 +8,7 @@
 	<managed-bean eager="true">
 		<managed-bean-name>reservationManagerBean</managed-bean-name>
 		<managed-bean-class>beans.ReservationManager</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 
 		<managed-property>
 			<property-name>userBean</property-name>
@@ -40,13 +40,13 @@
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
 		<managed-bean-class>beans.Login</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>registerBean</managed-bean-name>
 		<managed-bean-class>beans.Register</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>
@@ -59,12 +59,7 @@
 	<managed-bean>
 		<managed-bean-name>newsletterSignupBean</managed-bean-name>
 		<managed-bean-class>beans.NewsletterSignup</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>email</property-name>
-			<property-class>java.lang.String</property-class>
-			<null-value />
-		</managed-property>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>
