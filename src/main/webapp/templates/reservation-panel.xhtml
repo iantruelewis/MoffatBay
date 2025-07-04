@@ -86,7 +86,7 @@
 				<h:inputText id="checkin" styleClass="res-date"
 					style="width: 400px;" value="#{reservationBean.checkinDate}" converterMessage="Date Must Match mm/dd/yyyy">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-					<f:ajax event="blur"
+					<f:ajax event="change"
 						render="checkin checkout for-checkout for-checkin guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
@@ -104,7 +104,7 @@
 				<h:inputText id="checkout" styleClass="res-date"
 					value="#{reservationBean.checkoutDate}" converterMessage="Date Must Match mm/dd/yyyy">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-					<f:ajax event="blur"
+					<f:ajax event="change"
 						render="checkin for-checkout for-checkin checkout guestCount full2 max-full2 queen1 max-queen1 queen2 max-queen2 king1 max-king1" />
 				</h:inputText>
 				<br />
