@@ -16,11 +16,6 @@
 
 </h:head>
 
-<!-- redirects to login if the user is not logged in -->
-<f:metadata>
-    <f:viewAction action="#{userBean.checkLogin()}" />
-</f:metadata>
-
 <h:body>
 	<f:view>
 
@@ -95,7 +90,7 @@
 						<br />
 
 						<h:commandButton
-							action="reservation-summary"
+							action="reservation-summary?faces-redirect=true"
 							value="Reserve Now" styleClass="solidbutton" />
 					</div>
 				</div>
@@ -151,7 +146,7 @@
 						<br />
 
 						<h:commandButton
-							action="reservation-summary"
+							action="reservation-summary?faces-redirect=true"
 							value="Reserve Now" styleClass="solidbutton" />
 					</div>
 				</div>
@@ -207,7 +202,7 @@
 						<br />
 
 						<h:commandButton
-							action="reservation-summary"
+							action="reservation-summary?faces-redirect=true"
 							value="Reserve Now" styleClass="solidbutton" />
 					</div>
 				</div>
@@ -263,7 +258,7 @@
 						<br />
 
 						<h:commandButton
-							action="reservation-summary"
+							action="reservation-summary?faces-redirect=true"
 							value="Reserve Now" styleClass="solidbutton" />
 
 					</div>
