@@ -26,7 +26,7 @@ public class Reservation implements Serializable {
 
 	public Reservation() {
 		checkinDate = new Date();
-		checkoutDate = new Date();
+		checkoutDate = new Date(new Date().getTime() + 86400000);
 		updateRoomAvailability();
 	}
 
@@ -65,7 +65,7 @@ public class Reservation implements Serializable {
 		
 		// initialize date if null
 		if (checkoutDate == null) {
-			this.checkoutDate = new Date();
+			this.checkoutDate = new Date(new Date().getTime() + 86400000);
 		}
 		
 		// set date 

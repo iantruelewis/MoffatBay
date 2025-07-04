@@ -30,18 +30,33 @@
         .datepicker({
           defaultDate: "+1w",
           changeMonth: true,
-          numberOfMonths: 1
+          changeYear: true,
+          numberOfMonths: 1,
+          minDate: +1
         })
         .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
+        	
+    	   var date = getDate( this );
+           if (date) {
+                 date.setDate(date.getDate() + 1);
+           }
+               
+          to.datepicker( "option", "minDate", date );
         }),
       to = $( "#reservation-form\\:checkout" ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 1
+        numberOfMonths: 1,
+        minDate: +2
       })
       .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
+    	  
+   	   var date = getDate( this );
+       if (date) {
+             date.setDate(date.getDate() - 1);
+       }
+       
+        from.datepicker( "option", "maxDate", date );
       });
  
     function getDate( element ) {
