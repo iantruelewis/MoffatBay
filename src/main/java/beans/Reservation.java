@@ -22,6 +22,7 @@ public class Reservation implements Serializable {
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
 	private String roomType;
 	private String ownerName;
+	
 
 
 	public Reservation() {
@@ -159,6 +160,10 @@ public class Reservation implements Serializable {
 		else {
 			this.full2 = full2;
 		}
+	}
+
+	public int getRoomCount() {
+		return king1 + queen1 + queen2 + full2;
 	}
 
 	public String getComment() {

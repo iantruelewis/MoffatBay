@@ -57,6 +57,11 @@
 	          </p>
 	          
           </ui:fragment>
+          
+          <!--  NO ROOOM ERROR -->
+          <ui:fragment rendered="#{reservationBean.roomCount == 0}">
+          	<span style="color:red; size: 1.2em" class="sans">You must add a room selection to your reservation.</span>
+          </ui:fragment>
 
           <hr style="margin: 40px 0;" />
           
@@ -106,12 +111,12 @@
 					<!-- Reserve and cancel buttons If reservation has not been saved to the database -->
 					<ui:fragment rendered="#{reservationBean.res_id == 0}">
 					
-						<div style="display: flex; justify-content: center; gap: 30px;">
+						<div style="display: flex; justify-content: center; gap: 30px; margin-top: 50px;">
 							<h:commandButton action="reservation.jsf" value="Cancel"
 								styleClass="blackoutlinebutton" />
 
-
-							<h:commandButton
+					<!--  Hide confirm button if no rooms are included -->
+							<h:commandButton rendered="#{reservationBean.roomCount != 0}"
 								action="#{reservationManagerBean.saveReservation()}"
 								value="Confirm Reservation" styleClass="blackoutlinebutton" />
 						</div>
@@ -122,7 +127,7 @@
 					<ui:fragment rendered="#{reservationBean.res_id != 0}">
 					
 						<h:commandButton action="#{reservationBean.resetBean()}"
-							value="Explore More" styleClass="blackoutlinebutton" />
+							value="Done" styleClass="blackoutlinebutton" />
 							
 					</ui:fragment>
 					
