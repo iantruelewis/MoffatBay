@@ -7,8 +7,8 @@ public class NewsletterSignup implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	String email;
-	String message;
+	private String email;
+	private String message;
 
 	public NewsletterSignup() {
 		message = "Join Our Newsletter";
