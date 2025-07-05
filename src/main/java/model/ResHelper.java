@@ -16,7 +16,6 @@ public class ResHelper implements Serializable {
 	private int queen2 = 0;
 	private int full2 = 0;
 	private String comment;
-	private String roomType;
 	private String ownerName;
 
 	public int getRes_id() {
@@ -89,26 +88,6 @@ public class ResHelper implements Serializable {
 
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-
-	public String getRoomType() {
-		return roomType;
-	}
-
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
-	}
-
-	public String getReadableRoomType() {
-		if (roomType == null)
-			return "";
-		return switch (roomType) {
-		case "1king" -> "King (1 bed)";
-		case "1queen" -> "Queen (1 bed)";
-		case "2queen" -> "Queen (2 beds)";
-		case "2full" -> "Full (2 beds)";
-		default -> roomType;
-		};
 	}
 
 	public String getOwnerName() {
