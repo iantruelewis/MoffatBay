@@ -574,8 +574,8 @@ public class DataManager {
 //	}
 	
 	
-	public List<Reservation> findReservationById(int resId) {
-	    List<Reservation> list = new ArrayList<>();
+	public List<ResHelper> findReservationById(int resId) {
+	    List<ResHelper> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
 	        String sql = """
 	            SELECT
@@ -599,7 +599,7 @@ public class DataManager {
 	        stmt.setInt(1, resId);
 	        ResultSet rs = stmt.executeQuery();
 	        while (rs.next()) {
-	            Reservation r = new Reservation();
+	            ResHelper r = new ResHelper();
 	            r.setRes_id(rs.getInt("res_id"));
 	            r.setCheckinDate(rs.getDate("checkin"));
 	            r.setCheckoutDate(rs.getDate("checkout"));
@@ -617,8 +617,8 @@ public class DataManager {
 	    return list;
 	}
 
-	public List<Reservation> findReservationsByEmail(String email) {
-	    List<Reservation> list = new ArrayList<>();
+	public List<ResHelper> findReservationsByEmail(String email) {
+	    List<ResHelper> list = new ArrayList<>();
 	    try (Connection conn = getConnection()) {
 	        String sql = """
 	            SELECT
@@ -642,7 +642,7 @@ public class DataManager {
 	        stmt.setString(1, email);
 	        ResultSet rs = stmt.executeQuery();
 	        while (rs.next()) {
-	            Reservation r = new Reservation();
+	            ResHelper r = new ResHelper();
 	            r.setRes_id(rs.getInt("res_id"));
 	            r.setCheckinDate(rs.getDate("checkin"));
 	            r.setCheckoutDate(rs.getDate("checkout"));

@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import model.DataManager;
+import model.ResHelper;
 
 public class ReservationLookup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private String searchInput;
-    private List<Reservation> reservationResults = new ArrayList<>();
+    private List<ResHelper> reservationResults = new ArrayList<>();
     private boolean searched = false;
 
 
@@ -27,15 +28,15 @@ public class ReservationLookup implements Serializable {
         this.searchInput = searchInput;
     }
 
-    public List<Reservation> getReservationResults() {
-        return reservationResults;
-    }
+    public List<ResHelper> getReservationResults() {
+		return reservationResults;
+	}
 
-    public void setReservationResults(List<Reservation> reservationResults) {
-        this.reservationResults = reservationResults;
-    }
+	public void setReservationResults(List<ResHelper> reservationResults) {
+		this.reservationResults = reservationResults;
+	}
 
-    public boolean isSearched() {
+	public boolean isSearched() {
         return searched;
     }
 
@@ -48,13 +49,13 @@ public class ReservationLookup implements Serializable {
         searched = true;
 
         if (searchInput != null && searchInput.contains("@")) {
-            reservationResults = dm.findReservationsByEmail(searchInput.trim());
+            setReservationResults(dm.findReservationsByEmail(searchInput.trim()));
         } else {
             try {
                 int resId = Integer.parseInt(searchInput.trim());
-                reservationResults = dm.findReservationById(resId);
+                setReservationResults(dm.findReservationById(resId));
             } catch (NumberFormatException e) {
-                reservationResults = new ArrayList<>();
+                setReservationResults(new ArrayList<>());
             }
         }
 
