@@ -28,6 +28,10 @@ body {
 	color: #ffffff;
 }
 
+.greybg {
+	background-color: #F9F7F5;
+}
+
 /* reservation panel specific settings */
 .rescontainer {
 	background-color: #FFFFFF;
