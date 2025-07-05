@@ -84,7 +84,7 @@
 							</h:commandLink>
 
 						</p>
-						<h:inputText styleClass="room-count" id="full2"
+						<h:inputText styleClass="room-count greybg" id="full2"
 							value="#{reservationBean.full2}"
 							validatorMessage="#{reservationBean.roomAvailability['2full']} rooms available for your selected dates">
 							<f:convertNumber maxIntegerDigits="2" integerOnly="true" />
@@ -204,7 +204,7 @@
 								
 						</h:inputText>
 						<h:outputText id="max-queen2"
-							value="#{reservationBean.roomAvailability['2queen']} Availavle" />
+							value="#{reservationBean.roomAvailability['2queen']} Available" />
 						<br />
 
 						<h:message for="queen2" styleClass="message" />
