@@ -292,14 +292,7 @@ public class Reservation implements Serializable {
 	}
 	
 
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
+	// reset the reservation bean after a reservation has been completed
 	public String resetBean() {
 		res_id = 0;
 		guestCount = 1;
@@ -307,7 +300,6 @@ public class Reservation implements Serializable {
 		queen1 = 0;
 		queen2 = 0;
 		full2 = 0;
-		
 		return "home";
 	}
 
