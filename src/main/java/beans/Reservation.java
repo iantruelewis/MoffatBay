@@ -20,10 +20,7 @@ public class Reservation implements Serializable {
 	private int full2 = 0;
 	private String comment;
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
-	private String roomType;
-	private String ownerName;
 	
-
 
 	public Reservation() {
 		checkinDate = new Date();
@@ -270,36 +267,8 @@ public class Reservation implements Serializable {
 		}
 		return null;
 	}
-	
 
-	public String getRoomType() {
-    return roomType;
-	}
-
-	public void setRoomType(String roomType) {
-	this.roomType = roomType;
-	}
-	
-	public String getReadableRoomType() {
-	    if (roomType == null) return "";
-	    return switch (roomType) {
-	        case "1king" -> "King (1 bed)";
-	        case "1queen" -> "Queen (1 bed)";
-	        case "2queen" -> "Queen (2 beds)";
-	        case "2full" -> "Full (2 beds)";
-	        default -> roomType;
-	    };
-	}
-	
-
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
+	// reset the reservation bean after a reservation has been completed
 	public String resetBean() {
 		res_id = 0;
 		guestCount = 1;
@@ -307,10 +276,7 @@ public class Reservation implements Serializable {
 		queen1 = 0;
 		queen2 = 0;
 		full2 = 0;
-		
 		return "home";
 	}
-
-
 	
 }
