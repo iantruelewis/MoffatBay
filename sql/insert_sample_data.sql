@@ -47,8 +47,3 @@ INSERT INTO newsletter (email, active) VALUES
   ('gmitchell@example.com', TRUE),
   ('sclementine@example.com', FALSE);
 
--- Contact Form
-INSERT INTO contact_form (name, email, message, is_read) VALUES
-  ('Janet Fritz', 'jfritz@example.com', 'Interested in marina.', FALSE),
-  ('Alice Dermitt', 'adermitt@example.com', 'Do you allow pets?', TRUE),
-  ('Maria Lopez', 'mlopez@example.com', 'Special dietary requests for lodge meals.', FALSE);

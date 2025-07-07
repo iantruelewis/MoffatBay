@@ -49,8 +49,8 @@ CREATE TABLE newsletter (
 -- Contact Messages table (updated)
 CREATE TABLE contact_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    firstName VARCHAR(50),
-    lastName VARCHAR(50),
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
     email VARCHAR(100) NOT NULL,
     message TEXT NOT NULL,
     timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
