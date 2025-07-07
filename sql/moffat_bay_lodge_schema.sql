@@ -46,12 +46,13 @@ CREATE TABLE newsletter (
     active BOOLEAN NOT NULL
 );
 
--- ContactForm table
-CREATE TABLE contact_form (
+-- Contact Messages table (updated)
+CREATE TABLE contact_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    message TEXT,
+    firstName VARCHAR(50),
+    lastName VARCHAR(50),
+    email VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
     timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     is_read BOOLEAN NOT NULL DEFAULT FALSE
 );

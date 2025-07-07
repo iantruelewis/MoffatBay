@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <title><ui:insert name="title">Contact Us</ui:insert></title>
+
+    <!-- Import Project Styles -->
+    <h:outputStylesheet name="styles.css" library="css" />
+</h:head>
+
+<h:body>
+<f:view>
+
+    <!-- Header -->
+    <ui:insert name="header">
+        <ui:include src="/templates/header.xhtml" />
+    </ui:insert>
+
+    <!-- Page Content -->
+    <h:form>
+        <div class="row">
+            <div class="twocol" id="regform">
+                <div id="regforminner">
+
+                    <h:outputText styleClass="title" value="Contact Us" />
+                    <br />
+                    <h:outputText styleClass="subtext sans"
+                                  value="Have a question, request, or comment? We’d love to hear from you." />
+                    <br />
+
+                    <h:panelGrid columns="1" style="width: 100%">
+
+                        <h:inputText id="firstName" pt:placeholder="First Name..."
+                                     value="#{contact.firstName}" required="true"
+                                     requiredMessage="First name is required"
+                                     styleClass="reg-form-field" />
+
+                        <h:inputText id="lastName" pt:placeholder="Last Name..."
+                                     value="#{contact.lastName}" required="true"
+                                     requiredMessage="Last name is required"
+                                     styleClass="reg-form-field" />
+
+                        <h:inputText id="email" pt:placeholder="Email..."
+                                     value="#{contact.email}" required="true"
+                                     requiredMessage="Email is required"
+                                     validatorMessage="Enter a valid email"
+                                     styleClass="reg-form-field">
+                            <f:validateRegex pattern="[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z0-9.]+" />
+                        </h:inputText>
+
+                        <h:inputTextarea id="message" pt:placeholder="Your message..."
+                                         value="#{contact.message}" required="true"
+                                         requiredMessage="Message cannot be empty"
+                                         styleClass="reg-form-field" rows="5" />
+
+                    </h:panelGrid>
+                    <br />
+
+                    <h:commandButton value="Submit"
+                                     action="#{contact.submit}"
+                                     styleClass="solidbutton" />
+
+                    <h:messages globalOnly="true" styleClass="message" />
+                    <h:messages for="firstName" styleClass="message" />
+                    <h:messages for="lastName" styleClass="message" />
+                    <h:messages for="email" styleClass="message" />
+                    <h:messages for="message" styleClass="message" />
+
+                </div>
+            </div>
+
+            <div class="twocol">
+                <h:graphicImage library="images" name="MBL_contact.jpg"
+                                class="center-image"
+                                alt="Sail Board on The Marina"/>
+            </div>
+        </div>
+    </h:form>
+
+    <!-- Newsletter & Footer -->
+    <ui:insert name="newsletter">
+        <ui:include src="/templates/newsletter.xhtml" />
+    </ui:insert>
+
+    <ui:insert name="footer">
+        <ui:include src="/templates/footer.xhtml" />
+    </ui:insert>
+
+</f:view>
+</h:body>
+</html>
