@@ -20,6 +20,7 @@ public class Reservation implements Serializable {
 	private int full2 = 0;
 	private String comment;
 	private HashMap<String, Integer> roomAvailability = new HashMap<String, Integer>();
+	private String forwardTo = "reservation";	// default to the reservation page
 	
 
 	public Reservation() {
@@ -177,6 +178,14 @@ public class Reservation implements Serializable {
 
 	public void setRoomAvailability(HashMap<String, Integer> roomAvailability) {
 		this.roomAvailability = roomAvailability;
+	}
+
+	public String getForwardTo() {
+		return forwardTo;
+	}
+
+	public void setForwardTo(String forwardTo) {
+		this.forwardTo = forwardTo;
 	}
 
 	public String updateRoomAvailability() {
