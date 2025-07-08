@@ -858,6 +858,7 @@ body {
 
 /* User Circle */
 .circle {
+	vertical-align: middle;
 	display: inline-block;
 	background-color: #00000000;
 	border: 2px solid white;
