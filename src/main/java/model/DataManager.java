@@ -1,9 +1,6 @@
 package model;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +15,6 @@ import java.util.TimeZone;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
@@ -32,9 +27,6 @@ import beans.User;
 
 public class DataManager {
 
-	private final int passKeyLength = 512;
-	private final int passIterations = 100000;
-	private final String hashAlg = "PBKDF2WithHmacSHA256";
 
 	/// Get and return database connection
 	public Connection getConnection() {
@@ -132,7 +124,7 @@ public class DataManager {
 		String email = user.getEmail(); // store email for later retrieval
 
 		// get the password and hash it with a random salt
-		String passwordHash = hashPassword(user.getPassword());
+		String passwordHash = SecurityPeer.hashPassword(user.getPassword());
 
 		if (conn != null) {
 			try {
@@ -234,7 +226,7 @@ public class DataManager {
 					String salt = storedHash.split("-")[0];
 
 					// Hash the input with stored salt
-					String hashedInput = hashPassword(password, salt);
+					String hashedInput = SecurityPeer.hashPassword(password, salt);
 
 					// true if the hashes match.
 					if (hashedInput.equals(storedHash)) {
@@ -262,93 +254,6 @@ public class DataManager {
 		return user;
 	}
 
-	// Return Hex String salt + password string. - separator
-	private String hashPassword(String password) {
-
-		byte[] salt = new byte[16];
-
-		// generate random salt
-		SecureRandom random = new SecureRandom();
-		random.nextBytes(salt);
-
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, passIterations, passKeyLength);
-
-		try {
-
-			SecretKeyFactory factory = SecretKeyFactory.getInstance(hashAlg);
-
-			byte[] hash = factory.generateSecret(spec).getEncoded();
-
-			// return hex string with salt and hashed password
-			return ("" + byteToHex(salt) + "-" + byteToHex(hash));
-
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	// Return Hex String salt + password string. - separator
-	private String hashPassword(String password, String salt) {
-
-		// convert salt to byte array
-		byte[] byteSalt = hexToByte(salt);
-
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), byteSalt, passIterations, passKeyLength);
-
-		// hash the password with supplied salt
-		try {
-
-			SecretKeyFactory factory = SecretKeyFactory.getInstance(hashAlg);
-
-			byte[] hash = factory.generateSecret(spec).getEncoded();
-
-			// return hex string with salt and hashed password
-			return ("" + salt + "-" + byteToHex(hash));
-
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			e.printStackTrace();
-		}
-
-		// if failed, return null
-		return null;
-	}
-
-	// convert byte array to hex string
-	private String byteToHex(byte[] byteArray) {
-		StringBuilder hex = new StringBuilder();
-
-		// Iterating through each byte in the array
-		for (byte i : byteArray) {
-			hex.append(String.format("%02X", i));
-		}
-
-		return hex.toString();
-	}
-
-	// convert hex string to byte array Geeks for Geeks
-	// https://www.geeksforgeeks.org/java/java-program-to-convert-hex-string-to-byte-array/
-	private byte[] hexToByte(String hexString) {
-
-		// Initializing the byte array
-		byte[] byteArray = new byte[hexString.length() / 2];
-
-		// Iterate over each character
-		for (int i = 0; i < byteArray.length; i++) {
-			int index = i * 2;
-
-			// Using parseInt() method of Integer class convert to byte
-			int val = Integer.parseInt(hexString.substring(index, index + 2), 16);
-			byteArray[i] = (byte) val;
-		}
-
-		return byteArray;
-	}
 
 	// Get room availability to avoid over booking
 	public HashMap<String, Integer> getRoomAvailability(Date checkin, Date checkout) {
@@ -556,42 +461,7 @@ public class DataManager {
 
 		return "reservation-summary";
 	}
-//	
-//	
-//	private void getCurrReservation(Reservation reservation, User user) {
-//
-//		Connection conn = getConnection();
-//		
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//
-//		if (conn != null) {
-//
-//			try {
-//				
-//				String sql = "SELECT \n"
-//						+ "    res.res_id, uid, checkin, checkout, room.room_num, inv.type\n"
-//						+ "FROM\n"
-//						+ "    reservation AS res\n"
-//						+ "        INNER JOIN\n"
-//						+ "    room_reservation AS room ON res.res_id = room.res_id\n"
-//						+ "        INNER JOIN\n"
-//						+ "    room_inventory AS inv ON inv.room_num = room.room_num\n"
-//						+ "WHERE\n"
-//						+ "    res.res_id = ?;";
-//				
-//				PreparedStatement ps = conn.prepareStatement(sql);
-//				
-//				ps.setInt(1, reservation.getRes_id());
-//				
-//				ResultSet rs = ps.executeQuery();
-//				
-//				
-//			} catch (SQLException e) {
-//				e.printStackTrace();			
-//				}
-//		}
-//	}
+
 	
 	
 	public List<ResHelper> findReservationById(int resId) {
