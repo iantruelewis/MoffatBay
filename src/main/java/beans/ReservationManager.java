@@ -67,7 +67,7 @@ public class ReservationManager implements Serializable {
 		if (user != null) {
 			setUser(user);
 
-			return "reservation.xhtml?faces-redirect=true";
+			return reservationBean.getForwardTo();
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "*Login Failed*", "Incorrect Email or Password"));
@@ -87,7 +87,7 @@ public class ReservationManager implements Serializable {
 		}
 
 		// Forward to reservation.xhtml
-		return "reservation";
+		return getReservationBean().getForwardTo();
 	}
 
 	// Sets the Managed User Bean based on a provided User object.
@@ -122,6 +122,7 @@ public class ReservationManager implements Serializable {
 	public String updateBean() {
 		return "reservation";
 	}
+	
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -129,6 +130,21 @@ public class ReservationManager implements Serializable {
             session.invalidate();
         }
         return "login?faces-redirect=true";
+    }
+    
+    public String checkLogin(String forwardTo) {
+    	getReservationBean().setForwardTo(forwardTo);
+    	
+    	
+    	if (getUserBean().getUid() <= 0) {
+        	getReservationBean().setForwardTo(forwardTo);
+    		return "login";
+    	}
+    	else {
+        	getReservationBean().setForwardTo("reservation");
+    	}
+    	
+    	return null;
     }
 
 }
