@@ -1,14 +1,5 @@
 package model;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-
-
 /*
  * This static class handles all encryption and hashing.
  * 
@@ -19,6 +10,14 @@ import javax.crypto.spec.PBEKeySpec;
  * Kevin Ramirez
  * 
  */
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 
 public class SecurityPeer {
