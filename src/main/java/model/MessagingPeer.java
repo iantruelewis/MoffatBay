@@ -1,5 +1,16 @@
 package model;
 
+/*
+ * This static class handles the newsletter sign-ups and contact messages.
+ * 
+ * CSD 460 Team 3
+ * 
+ * Ian Lewis
+ * Robert Minkler
+ * Kevin Ramirez
+ * 
+ */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
