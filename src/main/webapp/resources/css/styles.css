@@ -442,7 +442,7 @@ body {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 100px;
         flex-direction: column;
         background-color: rgba(0, 0, 0, 0.95);
         width: 100%;
@@ -858,6 +858,7 @@ body {
 
 /* User Circle */
 .circle {
+	vertical-align: middle;
 	display: inline-block;
 	background-color: #00000000;
 	border: 2px solid white;
