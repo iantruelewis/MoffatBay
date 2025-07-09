@@ -76,7 +76,7 @@
         <h:panelGrid columns="3" cellpadding="8" style="margin: 0 auto;">
           <h:outputLabel for="searchInput" value="Search by Reservation ID or Email:" style="font-family: 'IBM Plex Sans', sans-serif;" />
           <h:inputText id="searchInput" value="#{reservationLookupBean.searchInput}" style="font-family: 'IBM Plex Sans', sans-serif;" />
-          <h:commandButton value="Search" action="#{reservationLookupBean.search}" style="font-family: 'IBM Plex Sans', sans-serif;" />
+          <h:commandButton value="Search" action="#{reservationLookupBean.search}" style="font-family: 'IBM Plex Sans', sans-serif;" styleClass="solidbutton" />
         </h:panelGrid>
 
         <h:outputText value="No results found."
