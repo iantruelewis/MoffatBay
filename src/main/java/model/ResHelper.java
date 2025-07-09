@@ -1,5 +1,16 @@
 package model;
 
+/*
+ * Store reservation data for reservation lookup
+ * 
+ * CSD 460 Team 3
+ * 
+ * Ian Lewis
+ * Robert Minkler
+ * Kevin Ramirez
+ * 
+ */
+
 import java.io.Serializable;
 import java.util.Date;
 

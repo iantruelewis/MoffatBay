@@ -1,5 +1,16 @@
 package validators;
 
+/*
+ * Registration page. Passwords match and meet all requirements.
+ * 
+ * CSD 460 Team 3
+ * 
+ * Ian Lewis
+ * Robert Minkler
+ * Kevin Ramirez
+ * 
+ */
+
 // Dual Password field comparison from
 // https://mkyong.com/jsf2/multi-components-validator-in-jsf-2-0/
 

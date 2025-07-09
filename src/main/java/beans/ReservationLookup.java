@@ -1,5 +1,16 @@
 package beans;
 
+/*
+ * Reservation Lookup form
+ * 
+ * CSD 460 Team 3
+ * 
+ * Ian Lewis
+ * Robert Minkler
+ * Kevin Ramirez
+ * 
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
