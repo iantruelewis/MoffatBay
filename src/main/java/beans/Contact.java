@@ -1,5 +1,16 @@
 package beans;
 
+/*
+ * Contact Form Bean
+ * 
+ * CSD 460 Team 3
+ * 
+ * Ian Lewis
+ * Robert Minkler
+ * Kevin Ramirez
+ * 
+ */
+
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
